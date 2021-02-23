@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  nextcloud:
+    image: nextcloud
+    restart: always
+    ports:
+      - 9000:80
+    environment:
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=password
+
+  freeipa:
+    container_name: my-freeipa-container
+    image: freeipa/freeipa-server:centos-8-4.8.7
+    restart: always
+    ports:
+      - 80:80
+      - 433:433
+      - 389:389
+    hostname: ipa.now.test
+    command: ["ipa-server-install", "--realm=NOW.TEST", "-U", "--no-ntp", "./wait-for-it.sh"]
+    volumes:
+      - /var/lib/ipa-data:/data:Z
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      - PASSWORD=Secret123
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0

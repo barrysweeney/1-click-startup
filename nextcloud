@@ -1,0 +1,28 @@
+Host:172.17.0.1
+Port: 80
+User DN: uid=admin,cn=users,cn=accounts,dc=example,dc=test
+Password: Secret123
+Base DN: dc=example,dc=test
+
+USERS:
+(objectclass=*)
+
+LOGIN:
+(&(objectclass=*)(uid=%uid))
+
+GROUPS:
+(|(cn=ipausers))
+
+
+ADVANCED:
+Config active: checked
+base user tree:
+cn=users,cn=accounts,dc=example,dc=test
+base group tree:
+cn=groups,cn=accounts,dc=example,dc=test
+
+group memeber assosciate:
+uniquemeneber
+
+email field: mail
+folderrule: cn

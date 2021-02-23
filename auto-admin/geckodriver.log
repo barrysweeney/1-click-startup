@@ -1,0 +1,25 @@
+1613056130005	geckodriver	INFO	Listening on 127.0.0.1:34379
+1613056130008	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilesJ5tW4"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613056133107	Marionette	INFO	Listening on port 40743
+1613056133141	Marionette	WARN	TLS certificate errors will be ignored for this session
+1613056133153	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+JavaScript error: http://localhost:9000/core/js/dist/install.js?v=ba222ded25d957b900c03bef914333cd, line 1: TypeError: l.attr(...).tooltip is not a function
+1613056141935	Marionette	INFO	Stopped listening on port 40743

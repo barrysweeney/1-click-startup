@@ -1,0 +1,31 @@
+<style>
+
+  .toolbar {
+    display: grid;
+    padding: 10px;
+    grid-template-areas: "logo . call-to-action";
+    text-align: center;
+  }
+
+  .logo{
+    grid-area: logo;
+  }
+
+  .call-to-action{
+    grid-area: call-to-action;
+  }
+
+
+</style>
+
+<div class="container">
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <div  class="logo"> 📈
+    <span>1 Click Manager</span></div>
+  <div class="call-to-action"><button>Get Started</button></div>
+
+</div>
+</div>
+
+<router-outlet></router-outlet>
