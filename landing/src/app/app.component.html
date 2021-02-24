@@ -1,31 +1,184 @@
 <style>
 
-  .toolbar {
-    display: grid;
-    padding: 10px;
-    grid-template-areas: "logo . call-to-action";
-    text-align: center;
-  }
+    .toolbar {
+        display: grid;
+        padding: 10px;
+        grid-template-areas: "logo . call-to-action";
+        text-align: center;
+    }
 
-  .logo{
-    grid-area: logo;
-  }
+    .logo {
+        grid-area: logo;
+    }
 
-  .call-to-action{
-    grid-area: call-to-action;
-  }
+    .call-to-action {
+        grid-area: call-to-action;
+    }
 
+    .tagline {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .introduction {
+        display: grid;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .introduction > p {
+        color: rgba(56, 57, 55, 0.53);
+    }
+
+    .features {
+        display: grid;
+        gap: 10px;
+    }
+
+    .feature {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .sign-up {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 70% 30%;
+    }
+
+    .button-container {
+        text-align: center;
+    }
+
+    .the-footer {
+        display: grid;
+        gap: 10px;
+        grid-template-areas: "about one-cs support social"
+                             "copyright copyright copyright copyright";
+    }
+
+    .about {
+        grid-area: about;
+    }
+
+    .one-cs {
+        grid-area: one-cs;
+    }
+
+    .support {
+        grid-area: support;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .social {
+        grid-area: social;
+    }
+
+    .copyright {
+        grid-area: copyright;
+    }
+
+    @media (max-width: 400px) {
+        .feature {
+            grid-template-columns: 100%;
+        }
+
+        .sign-up {
+            grid-template-columns: 100%;
+        }
+
+        .the-footer {
+            grid-template-areas: "about"
+                                 "one-cs"
+                                 "support"
+                                 "social"
+                                 "copyright";
+        }
+
+    }
 
 </style>
 
 <div class="container">
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <div  class="logo"> 📈
-    <span>1 Click Manager</span></div>
-  <div class="call-to-action"><button>Get Started</button></div>
+    <!-- Toolbar -->
+    <div class="toolbar" role="banner">
+        <div class="logo"> 📈
+            <span>1 Click Manager</span></div>
+        <div class="call-to-action">
+            <button>Get Started</button>
+        </div>
+    </div>
+    <div class="introduction">
+        <div class="tagline">Make your Work-Flow Better</div>
+        <p>1 Click Manager sets up your entire business infrastructure. It gives your employees a streamlined platform
+            for productivity, and gives you a dashboard to monitor engagement.</p>
+        <img src="" alt="Dashboard Screenshot"/>
+    </div>
+    <div class="features">
+        <div class="feature">
+            <img src="" alt="Share files screenshot"/>
+            <div>
+                <h2>Share Files</h2>
+                <p>Save time and energy with smooth file sharing and automated backups.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <div>
+                <h2>Single sign on</h2>
+                <p>Share and manage passwords across different services,</p>
+            </div>
+            <img src="" alt="Share files screenshot"/>
+        </div>
+        <div class="feature">
+            <img src="" alt="Logos like slack screenshot"/>
+            <div>
+                <h2>Work along with your favourite apps</h2>
+                <p>Out of the box integration with common applications like Slack</p>
+            </div>
+        </div>
+    </div>
+    <div class="sign-up">
+        <div>
+            <h2>Sign up</h2>
+            <p>Sign up and start enhancing employee engagement and enterprise efficiency.</p>
+        </div>
+        <div class="button-container">
+            <button class="call-to-action">Get Started</button>
+        </div>
 
-</div>
+
+    </div>
+    <footer class="the-footer">
+        <div class="about">
+            <div> 📈<span>1 Click Manager</span></div>
+            <p>1 click startup was created to help remove pain points resulting from overly complicated work-flows.</p>
+        </div>
+        <div class="one-cs">
+            <h3>1CS</h3>
+            <ul>
+                <li><a href="#">Integrations</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </div>
+        <div class="support">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms Of Use</a></li>
+            </ul>
+        </div>
+        <div class="social"><a>SOCIAL ICON</a><a>SOCIAL ICON</a><a>SOCIAL ICON</a></div>
+        <div class="copyright"><p>1 Click Startup, 2021</p></div>
+    </footer>
+
 </div>
 
 <router-outlet></router-outlet>
