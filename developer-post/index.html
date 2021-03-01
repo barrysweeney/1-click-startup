@@ -22,10 +22,12 @@
 
     <div class="product-vision">
         <h2>Product Vision</h2>
-        <p>The end product is a system targeted at a business owner which will setup the basic services such a file
-            sharing and identity management needed for their business.
+        <p>The end product is a system targeted at a business owner which will provide them and their employees with an
+            interface to perform their business functions.</p>
         <p>Employees of the business can use the product to fill in a series of digital forms which log important
             information about the processes they complete in their work.</p>
+        <p>The manager can use the product to complete managerial specific forms relating to accounting and stock
+            orders.</p>
         <p>This data will be piped through a process mining application and the results will be forwarded to the
             manager's dashboard.</p>
         <p>This dashboard, exclusive to the manager, will allow them to track key
@@ -40,218 +42,187 @@
         <p>In addition to this, we also want to provide a testing framework with simulated users and managers using a
             tool such as PySelenium.</p>
     </div>
-    <div class="ux">
-        <h2>User Experience</h2>
-        <p>We know the what and the how, but our picture is incomplete without understanding who we're developing our
-            product for.</p>
-        <p>We begin with research to discover our target users and then analyze the gathered data to help define the
-            vision of our product. We then take a user-centric approach to design which we then validate.</p>
-        <p>Without further ado, let's dive into each of these to see where this missing puzzle piece fits in with
-            regards to the project. </p>
-        <div class="research">
-            <h3>Research</h3>
-            <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that we
-                need to define our user and figure out more specific details regarding their current work-flows,
-                including the services and platforms they use. We'll also take a look at the approaches being employed
-                by others with similarities to our product.</p>
-            <h4>Competitor Analysis</h4>
-            <!--            todo: https://www.shopify.co.uk/blog/competitive-analysis-->
-            <blockquote>
-                “Does it better” will always beat “did it first.” – Aaron Levie, CEO at Box
-            </blockquote>
-            <h4>User Interviews</h4>
-            <p>Research methods can be categorised as either qualitative (open ended questions) or quantitative (close
-                ended questions).</p>
-            <p>In depth interviews fall on the qualitative side of the line and tend to garner information regarding
-                users' attitudes.</p>
-            <p>For confidentiality purposes the interview transcript has been omitted.</p>
-            <h4>Surveys</h4>
-            <p>In contrast to in-depth interviews, surveys, especially those with no follow-up questions, provide
-                quantitative data from which we can analyze responses to recognize patterns.</p>
-            <p>You can find a report of the survey by opening <a href="assets/usability-report.pdf">this PDF file</a>.
-            </p>
-        </div>
-        <div class="analyze">
-            <h3>Analyze</h3>
-            <p>We can take the raw data we gathered from our research to define our target user's behaviour and
-                attitudes.</p>
-            <h4>Use Cases</h4>
-            <p>Use cases can be defined with a jobs to be done (JTBD) template that follows a situation, motivation,
-                expected outcome format</p>
-            <h5>Manager Use Cases</h5>
-            <table>
-                <tr>
-                    <th>Situation (When)</th>
-                    <th>Motivation (I want to)</th>
-                    <th>Expected Outcome (So I can)</th>
-                </tr>
-                <tr>
-                    <td>Stock is low</td>
-                    <td>Order Stock</td>
-                    <td>Be prepared for orders</td>
-                </tr>
-                <tr>
-                    <td>Employee joins</td>
-                    <td>Train employee</td>
-                    <td>Confidently put them on a shift</td>
-                </tr>
-                <tr>
-                    <td>Employee leaves</td>
-                    <td>Hire employee</td>
-                    <td>Have sufficient staff</td>
-                </tr>
-                <tr>
-                    <td>Customer complains</td>
-                    <td>Communicate with customer</td>
-                    <td>Apologize and find problem source</td>
-                </tr>
-                <tr>
-                    <td>Quality decreases</td>
-                    <td>Communicate with staff</td>
-                    <td>Get standards back to where they should be</td>
-                </tr>
-                <tr>
-                    <td>Shift ends</td>
-                    <td>Record sales</td>
-                    <td>Update accounts and make predictions</td>
-                </tr>
-                <tr>
-                    <td>Sales decrease</td>
-                    <td>Communicate with staff and investigate other local businesses
-                    </td>
-                    <td>Determine the cause of sales decreasing</td>
-                </tr>
-                <tr>
-                    <td>Product sells out</td>
-                    <td>Inform customers or transfer product from other store
-                    </td>
-                    <td>Stop taking orders or continue taking orders</td>
-                </tr>
-                <tr>
-                    <td>Week is about to begin</td>
-                    <td>Send hours to staff</td>
-                    <td>Make any necessary changes</td>
-                </tr>
-                <tr>
-                    <td>Week is over</td>
-                    <td>Pay staff</td>
-                    <td>Keep their next wage payment separate</td>
-                </tr>
-                <tr>
-                    <td>Problem with customer order app</td>
-                    <td>Communicate with the company who developed the app</td>
-                    <td>Have customer order app working again</td>
-                </tr>
-                <tr>
-                    <td>Employee complains</td>
-                    <td>Communicate with employee</td>
-                    <td>Determine cause of complaint and potential solutions</td>
-                </tr>
-                <tr>
-                    <td>Bill arrives by post</td>
-                    <td>Pay bill</td>
-                    <td>Not accrue additional fees</td>
-                </tr>
-                <tr>
-                    <td>Problem with stock</td>
-                    <td>Contact supplier</td>
-                    <td>Get a refund or replacement</td>
-                </tr>
-            </table>
-            <h5>Employee Use Cases</h5>
-            <table>
-                <tr>
-                    <th>Situation (When)</th>
-                    <th>Motivation (I want to)</th>
-                    <th>Expected Outcome (So I can)</th>
-                </tr>
-                <tr>
-                    <td>Phone rings</td>
-                    <td>Answer</td>
-                    <td>Take order or answer customer query</td>
-                </tr>
-                <tr>
-                    <td>Order comes through app</td>
-                    <td>Read order</td>
-                    <td>Prepare order</td>
-                </tr>
-                <tr>
-                    <td>Shift begins</td>
-                    <td>Turn on equipment
-                    </td>
-                    <td>Prepare orders later</td>
-                </tr>
-                <tr>
-                    <td>Shift ends</td>
-                    <td>Turn off equipment</td>
-                    <td>Prevent fire risk and electricity cost</td>
-                </tr>
-                <tr>
-                    <td>There are no orders to be made</td>
-                    <td>Clean or prepare for future orders</td>
-                    <td>Be prepared for future orders</td>
-                </tr>
-                <tr>
-                    <td>Shift needs changed</td>
-                    <td>Communicate with management and colleagues</td>
-                    <td>Have colleague cover shift and hours updated</td>
-                </tr>
-                <tr>
-                    <td>Shift ends</td>
-                    <td>Lock shop</td>
-                    <td>Keep equipment and cash inside safe</td>
-                </tr>
-                <tr>
-                    <td>Shift ends</td>
-                    <td>Count cash
-                    </td>
-                    <td>Send sales details to manager</td>
-                </tr>
-                <tr>
-                    <td>Shift ends</td>
-                    <td>Clean and prepare equipment for next day</td>
-                    <td>Not be reprimanded</td>
-                </tr>
-                <tr>
-                    <td>Customer enters shop</td>
-                    <td>Approach customer</td>
-                    <td>Take their order</td>
-                </tr>
-                <tr>
-                    <td>Customer order ready</td>
-                    <td>Give it to the customer and take their payment</td>
-                    <td>Complete the order</td>
-                </tr>
-            </table>
-            <h4>User Personas</h4>
-            <p>We capture the the common behaviours that meaningfully characterize each user into a persona. In our case
-                we'll have a persona for both a manager and an employee since their needs will be very different.</p>
-            <h5>Manager Persona</h5>
-            <img src="assets/manager-persona.png" alt="User persona for a small business owner"/>
-            <h5>User Persona</h5>
-            <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."/>
-        </div>
-        <div class="design">
-            <h3>Design</h3>
-            <p>When a clear product direction has been established we can begin designs that take into account visual
-                aspects but also maintain consistency and prioritize functionality.</p>
-            <h4>Sitemaps</h4>
-            <h4>Wireframes</h4>
-            <h4>Prototypes</h4>
-        </div>
-        <div class="validate">
-            <p>At this point we can get feedback from the user about our designs. We want our user to have a successful
-                interaction and get value from our product. If issues do however arise, we can iterate and make
-                improvements by following through the 4 stages of our UX design process.</p>
-            <h3>Usability Tests</h3>
-            <h4>Review Metrics</h4>
-        </div>
+    <div class="prototype">
+        <h2>Prototype</h2>
+        <p>User experience design details are listed below but for now I feel like it's worth introducing the prototypal
+            application.</p>
     </div>
     <div class="process-mining">
         <h2>Process Mining</h2>
     </div>
-    <div class="resources">
-        <h2>Useful guides I stumbled across and how to get up and running with existing code</h2>
+    <div class="quickstart">
+        <h2>QuickStart</h2>
+    </div>
+    <div class="User Experience">
+        <h2>User Experience (UX) Design</h2>
+        <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that we
+            need to define our user and figure out more specific details regarding their current work-flows,
+            including the services and platforms they use. We'll also take a look at the approaches being employed
+            by others with similarities to our product.</p>
+        <h3>Research</h3>
+        <h4>Surveys</h4>
+        <p>Surveys, especially those with no follow-up questions, provide
+            quantitative data from which we can analyze responses to recognize patterns.</p>
+        <p>You can find a report of the survey by opening <a href="assets/usability-report.pdf">this PDF file</a>.
+        </p>
+        <h3>Analyze</h3>
+        <p>We can take the raw data we gathered from our interview (transcript omitted for confidentiality) and surveys to define our target user's behaviour and
+            attitudes.</p>
+        <h4>Use Cases</h4>
+        <p>Use cases can be defined with a jobs to be done (JTBD) template that follows a situation, motivation,
+            expected outcome format</p>
+        <h5>Manager Use Cases</h5>
+        <table>
+            <tr>
+                <th>Situation (When)</th>
+                <th>Motivation (I want to)</th>
+                <th>Expected Outcome (So I can)</th>
+            </tr>
+            <tr>
+                <td>Stock is low</td>
+                <td>Order Stock</td>
+                <td>Be prepared for orders</td>
+            </tr>
+            <tr>
+                <td>Employee joins</td>
+                <td>Train employee</td>
+                <td>Confidently put them on a shift</td>
+            </tr>
+            <tr>
+                <td>Employee leaves</td>
+                <td>Hire employee</td>
+                <td>Have sufficient staff</td>
+            </tr>
+            <tr>
+                <td>Customer complains</td>
+                <td>Communicate with customer</td>
+                <td>Apologize and find problem source</td>
+            </tr>
+            <tr>
+                <td>Quality decreases</td>
+                <td>Communicate with staff</td>
+                <td>Get standards back to where they should be</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Record sales</td>
+                <td>Update accounts and make predictions</td>
+            </tr>
+            <tr>
+                <td>Sales decrease</td>
+                <td>Communicate with staff and investigate other local businesses
+                </td>
+                <td>Determine the cause of sales decreasing</td>
+            </tr>
+            <tr>
+                <td>Product sells out</td>
+                <td>Inform customers or transfer product from other store
+                </td>
+                <td>Stop taking orders or continue taking orders</td>
+            </tr>
+            <tr>
+                <td>Week is about to begin</td>
+                <td>Send hours to staff</td>
+                <td>Make any necessary changes</td>
+            </tr>
+            <tr>
+                <td>Week is over</td>
+                <td>Pay staff</td>
+                <td>Keep their next wage payment separate</td>
+            </tr>
+            <tr>
+                <td>Problem with customer order app</td>
+                <td>Communicate with the company who developed the app</td>
+                <td>Have customer order app working again</td>
+            </tr>
+            <tr>
+                <td>Employee complains</td>
+                <td>Communicate with employee</td>
+                <td>Determine cause of complaint and potential solutions</td>
+            </tr>
+            <tr>
+                <td>Bill arrives by post</td>
+                <td>Pay bill</td>
+                <td>Not accrue additional fees</td>
+            </tr>
+            <tr>
+                <td>Problem with stock</td>
+                <td>Contact supplier</td>
+                <td>Get a refund or replacement</td>
+            </tr>
+        </table>
+        <h5>Employee Use Cases</h5>
+        <table>
+            <tr>
+                <th>Situation (When)</th>
+                <th>Motivation (I want to)</th>
+                <th>Expected Outcome (So I can)</th>
+            </tr>
+            <tr>
+                <td>Phone rings</td>
+                <td>Answer</td>
+                <td>Take order or answer customer query</td>
+            </tr>
+            <tr>
+                <td>Order comes through app</td>
+                <td>Read order</td>
+                <td>Prepare order</td>
+            </tr>
+            <tr>
+                <td>Shift begins</td>
+                <td>Turn on equipment
+                </td>
+                <td>Prepare orders later</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Turn off equipment</td>
+                <td>Prevent fire risk and electricity cost</td>
+            </tr>
+            <tr>
+                <td>There are no orders to be made</td>
+                <td>Clean or prepare for future orders</td>
+                <td>Be prepared for future orders</td>
+            </tr>
+            <tr>
+                <td>Shift needs changed</td>
+                <td>Communicate with management and colleagues</td>
+                <td>Have colleague cover shift and hours updated</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Lock shop</td>
+                <td>Keep equipment and cash inside safe</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Count cash
+                </td>
+                <td>Send sales details to manager</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Clean and prepare equipment for next day</td>
+                <td>Not be reprimanded</td>
+            </tr>
+            <tr>
+                <td>Customer enters shop</td>
+                <td>Approach customer</td>
+                <td>Take their order</td>
+            </tr>
+            <tr>
+                <td>Customer order ready</td>
+                <td>Give it to the customer and take their payment</td>
+                <td>Complete the order</td>
+            </tr>
+        </table>
+        <h4>User Personas</h4>
+        <p>We capture the the common behaviours that meaningfully characterize each user into a persona. In our case
+            we'll have a persona for both a manager and an employee since their needs will be very different.</p>
+        <h5>Manager Persona</h5>
+        <img src="assets/manager-persona.png" alt="User persona for a small business owner"/>
+        <h5>User Persona</h5>
+        <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."/>
     </div>
 </div>
 </body>
