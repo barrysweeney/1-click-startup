@@ -10,9 +10,76 @@ client = ClientMeta('ipa.example.test')
 client.login('admin', 'Secret123')
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+# Authentication
+
+
+@app.route('/sign-up', methods=['POST'])
+def sign_up():
+    return 'Not yet implemented'
+
+
+@app.route('/log-in', methods=['POST'])
+def sign_up():
+    return 'Not yet implemented'
+
+
+# Manager and Employee Routes
+
+
+@app.route('/checklist/update', methods=['post'])
+def update_checklist():
+    return 'Not yet implemented'
+
+
+@app.route('/customer/order/new', methods=['post'])
+def customer_order():
+    return 'Not yet implemented'
+
+
+@app.route('/stock/record', methods=['post'])
+def record_stock():
+    return 'Not yet implemented'
+
+
+@app.route('/temperatures/record', methods=['post'])
+def record_temperature():
+    return 'Not yet implemented'
+
+
+# Employee Exclusive Routes
+
+
+@app.route('/manager/contact', methods=['post'])
+def contact_manager():
+    return 'Not yet implemented'
+
+
+# Manager Exclusive Routes
+
+
+@app.route('/supplier/contact', methods=['post'])
+def contact_supplier():
+    return 'Not yet implemented'
+
+
+@app.route('/stock/order', methods=['post'])
+def order_stock():
+    return 'Not yet implemented'
+
+
+@app.route('/employee/contact/<id>', methods=['post'])
+def contact_employee(id):
+    return 'Not yet implemented'
+
+
+@app.route('/employee/contact/all', methods=['post'])
+def contact_all_employees():
+    return 'Not yet implemented'
+
+
+@app.route('/sales/record/', methods=['post'])
+def record_sales():
+    return 'Not yet implemented'
 
 
 @app.route("/users/<id>")
