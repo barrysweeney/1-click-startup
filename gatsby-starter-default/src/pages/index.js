@@ -3,8 +3,26 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+// TODO: populate by a GET request to $BACKEND_URI$/checklist
+const tasks = [
+  "Turn on equipment",
+  "Turn on customer order app",
+  "Record Temperatures",
+  "Defrost dough",
+  "Defrost meat",
+  "Dishes",
+  "Empty bins",
+  "Turn off customer order app",
+  "Turn off equipment",
+  "Ensure fridges and freezers are closed",
+  "Lock freezer",
+  "Lock back door",
+  "Clean floor",
+  "Record sales",
+  "Lock front door"
+]
+
 const IndexPage = () => {
-  const tasks = ["Empty bins", "Defrost meat", "Defrost dough", "Record sales", "Record Temperatures", "Turn on equipment", "Turn off equipment", "Turn on customer order app", "Turn off customer order app", "Dishes", "Clean floor", "Lock freezer", "Lock back door", "Lock front door", "Ensure fridges and freezers are closed"]
   return (
     <Layout>
       <SEO title="Home" />
@@ -15,7 +33,7 @@ const IndexPage = () => {
             tasks.map(task =>
               <li>
                 <input type="checkbox" />
-                <label>{task}</label>
+                <label style={{ padding: `10px` }}>{task}</label>
               </li>
             )
           }

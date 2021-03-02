@@ -1,14 +1,9 @@
 from flask import Flask
 from python_freeipa import ClientMeta
 
-from nextcloud import NextCloud
-
-NEXTCLOUD_URL = "http://localhost"
-
 app = Flask(__name__)
 client = ClientMeta('ipa.example.test')
 client.login('admin', 'Secret123')
-
 
 # Authentication
 
@@ -24,6 +19,10 @@ def sign_up():
 
 
 # Manager and Employee Routes
+
+@app.route('/checklist/',)
+def get_checklist():
+    return 'Not yet implemented'
 
 
 @app.route('/checklist/update', methods=['post'])
@@ -43,6 +42,11 @@ def record_stock():
 
 @app.route('/temperatures/record', methods=['post'])
 def record_temperature():
+    return 'Not yet implemented'
+
+
+@app.route('/employee/contact/<id>', methods=['post'])
+def contact_employee(id):
     return 'Not yet implemented'
 
 
@@ -67,39 +71,64 @@ def order_stock():
     return 'Not yet implemented'
 
 
-@app.route('/employee/contact/<id>', methods=['post'])
-def contact_employee(id):
-    return 'Not yet implemented'
-
-
 @app.route('/employee/contact/all', methods=['post'])
 def contact_all_employees():
     return 'Not yet implemented'
 
 
-@app.route('/sales/record/', methods=['post'])
+@app.route('/sales/record', methods=['post'])
 def record_sales():
     return 'Not yet implemented'
 
 
-@app.route("/users/<id>")
-def get_user(id):
+@app.route("/employee/<id>")
+def get_employee(id):
     return 'Not yet implemented'
 
 
-@app.route("/users/update/<id>")
+@app.route("/employee/update/<id>", methods=['post'])
 def update_user(id):
     return 'Not yet implemented'
 
 
-@app.route("/users/new/<uid>/<forename>/<surname>")
-def create_user(uid, forename, surname):
+@app.route("/employee/new/", methods=['post'])
+def update_user():
+    uid = "-1"
+    forename = "John"
+    surname = "Doe"
+    # FreeIPA Interaction
     user = client.user_add(uid, forename, surname, forename + " " + surname, o_preferredlanguage='EN')
     return 'Not yet implemented'
 
 
-@app.route("/users/delete/<id>")
-def delete_user(id):
+@app.route("/employee/delete/<id>")
+def delete_employee(id):
+    return 'Not yet implemented'
+
+
+@app.route('/employee/pay/<id>')
+def pay_employee(id):
+    return 'Not yet implemented'
+
+
+@app.route('/employee/pay/all')
+def pay_all_employees():
+    return 'Not yet implemented'
+
+
+@app.route('/checklist/add', methods=['post'])
+def add_to_checklist():
+    return 'Not yet implemented'
+
+
+@app.route('/checklist/remove')
+def remove_from_checklist():
+    return 'Not yet implemented'
+
+
+@app.route("/dashboard")
+def get_dashboard(id):
+    # interacts with process mining application to provide information to the managers frontend dashboard
     return 'Not yet implemented'
 
 
