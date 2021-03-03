@@ -20,7 +20,7 @@ def sign_up():
 
 # Manager and Employee Routes
 
-@app.route('/checklist/',)
+@app.route('/checklist',)
 def get_checklist():
     return 'Not yet implemented'
 
@@ -45,6 +45,7 @@ def record_temperature():
     return 'Not yet implemented'
 
 
+# TODO: integrate email service
 @app.route('/employee/contact/<id>', methods=['post'])
 def contact_employee(id):
     return 'Not yet implemented'
@@ -52,7 +53,7 @@ def contact_employee(id):
 
 # Employee Exclusive Routes
 
-
+# TODO: integrate email service
 @app.route('/manager/contact', methods=['post'])
 def contact_manager():
     return 'Not yet implemented'
@@ -61,8 +62,24 @@ def contact_manager():
 # Manager Exclusive Routes
 
 
+# TODO: integrate email service
 @app.route('/supplier/contact', methods=['post'])
 def contact_supplier():
+    return 'Not yet implemented'
+
+
+@app.route('/supplier/update', methods=['post'])
+def update_supplier():
+    return 'Not yet implemented'
+
+
+@app.route('/supplier/new', methods=['post'])
+def add_new_supplier():
+    return 'Not yet implemented'
+
+
+@app.route('/supplier/delete', methods=['post'])
+def delete_supplier():
     return 'Not yet implemented'
 
 
@@ -71,6 +88,7 @@ def order_stock():
     return 'Not yet implemented'
 
 
+# TODO: integrate email service
 @app.route('/employee/contact/all', methods=['post'])
 def contact_all_employees():
     return 'Not yet implemented'
@@ -91,7 +109,7 @@ def update_user(id):
     return 'Not yet implemented'
 
 
-@app.route("/employee/new/", methods=['post'])
+@app.route("/employee/new", methods=['post'])
 def update_user():
     uid = "-1"
     forename = "John"

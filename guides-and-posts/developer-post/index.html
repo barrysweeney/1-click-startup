@@ -11,67 +11,113 @@
             crossorigin="anonymous"
     />
     <link rel="shortcut icon" type="image/png" href="/assets/bs-logo.png"/>
-
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 <div class="container">
-    <header>
-        <h1>Developer Guide</h1>
-    </header>
-
-    <div class="product-vision">
-        <h2>Product Vision</h2>
-        <p>The end product is a system targeted at a business owner which will provide them and their employees with an
-            interface to perform their business functions.</p>
-        <p>Employees of the business can use the product to fill in a series of digital forms which log important
-            information about the processes they complete in their work.</p>
-        <p>The manager can use the product to complete managerial specific forms relating to accounting and stock
-            orders.</p>
-        <p>This data will be piped through a process mining application and the results will be forwarded to the
-            manager's dashboard.</p>
-        <p>This dashboard, exclusive to the manager, will allow them to track key
-            productivity metrics and highlight employee engagement, as well as visualize the business processes to
-            identify bottlenecks.</p>
-        <p>In this manner, we are digitising the bureaucracy of an organization.</p>
+    <div class="toolbar" role="banner">
+        <span class="logo"> 📈 </span>
+        <span>1 Click Startup</span>
     </div>
-    <div class="project-vision">
-        <h2>Project Vision</h2>
-        <p>The end project will be the technical implication of the product (as described in the vision) using tools
+    <hr/>
+    <div class="toolbar" role="banner">
+        <span class="logo"> 📊 💬 📄 </span>
+    </div>
+    <div class="introduction">
+        <span class="tagline">
+            Level up your work-flow
+        </span>
+        <p>
+            1 Click Startup is a free and open source project that lets small business' have integrated control of their
+            daily work-flow
+        </p>
+        <div>
+            <button type="button" class="btn btn-primary">
+                license <span class="badge badge-light">MIT</span>
+            </button>
+            <button type="button" class="btn btn-success">
+                PRs <span class="badge badge-light">welcome</span>
+            </button>
+        </div>
+        <div>
+            <a href="#">Quickstart</a>
+            <span> . </span>
+            <a href="#">Landing Page</a>
+        </div>
+        <p>
+            1 Click Startup is a modern approach to small business work-flows.
+        </p>
+    </div>
+    <div>
+        <ul>
+            <li><strong>Manager Interface.</strong> The manager interface streamlines communication between employees
+                and suppliers.
+            </li>
+            <li><strong>Employee Interface.</strong> Employees fill in a series of digital forms which log important
+                information about the processes they complete in their work.
+            </li>
+            <li><strong>Process Mining.</strong> Data will be piped through a process mining application and the results
+                will be forwarded to the
+                manager's dashboard.
+            </li>
+            <li><strong>Manager Dashboard.</strong> An exclusive manager dashboard will allow them to track key
+                productivity metrics and highlight employee engagement, as well as visualize the business processes to
+                identify bottlenecks.
+            </li>
+        </ul>
+        <p>The end project will be the technical implication of the product (as described above) using tools
             such as Docker, shell scripts, and a Flask REST API webserver.</p>
         <p>In addition to this, we also want to provide a testing framework with simulated users and managers using a
             tool such as PySelenium.</p>
     </div>
-    <div class="prototype">
-        <h2>Prototype</h2>
-        <p>User experience design details are listed below but for now I feel like it's worth introducing the prototypal
-            application.</p>
-    </div>
-    <div class="process-mining">
-        <h2>Process Mining</h2>
+    <div class="toc">
+        <h2>What's In This Document</h2>
+        <hr/>
+        <ul>
+            <li><a href="#">Get Up and Running with Local Development</a></li>
+            <li><a href="#">Prototype Demo</a></li>
+            <li><a href="#">Process Mining Introduction</a></li>
+            <li><a href="#">User Experience Research and Analysis</a></li>
+            <li><a href="#">How to Contribute</a></li>
+            <li><a href="#">License</a></li>
+        </ul>
     </div>
     <div class="quickstart">
-        <h2>QuickStart</h2>
+        <h3>🛫 Get Up and Running with Local Development</h3>
+        <hr/>
     </div>
+    <div class="prototype">
+        <h3>🤖 Prototype</h3>
+        <hr/>
+        <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to introduce the prototypal
+            application and work backwards from there.</p>
+    </div>
+    <div class="process-mining">
+        <h3>⛏ Process Mining</h3>
+        <hr/>
+    </div>
+
     <div class="User Experience">
-        <h2>User Experience (UX) Design</h2>
+        <h3>👤 User Experience (UX) Design</h3>
+        <hr/>
         <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that we
             need to define our user and figure out more specific details regarding their current work-flows,
             including the services and platforms they use. We'll also take a look at the approaches being employed
             by others with similarities to our product.</p>
-        <h3>Research</h3>
-        <h4>Surveys</h4>
+        <h4>Research</h4>
+        <h5>Surveys</h5>
         <p>Surveys, especially those with no follow-up questions, provide
             quantitative data from which we can analyze responses to recognize patterns.</p>
         <p>You can find a report of the survey by opening <a href="assets/usability-report.pdf">this PDF file</a>.
         </p>
-        <h3>Analyze</h3>
-        <p>We can take the raw data we gathered from our interview (transcript omitted for confidentiality) and surveys to define our target user's behaviour and
+        <h4>Analyze</h4>
+        <p>We can take the raw data we gathered from our interview (transcript omitted for confidentiality) and surveys
+            to define our target user's behaviour and
             attitudes.</p>
-        <h4>Use Cases</h4>
+        <h5>Use Cases</h5>
         <p>Use cases can be defined with a jobs to be done (JTBD) template that follows a situation, motivation,
             expected outcome format</p>
-        <h5>Manager Use Cases</h5>
+        <h6>Manager Use Cases</h6>
         <table>
             <tr>
                 <th>Situation (When)</th>
@@ -151,7 +197,7 @@
                 <td>Get a refund or replacement</td>
             </tr>
         </table>
-        <h5>Employee Use Cases</h5>
+        <h6>Employee Use Cases</h6>
         <table>
             <tr>
                 <th>Situation (When)</th>
@@ -216,13 +262,24 @@
                 <td>Complete the order</td>
             </tr>
         </table>
-        <h4>User Personas</h4>
+        <h5>Personas</h5>
         <p>We capture the the common behaviours that meaningfully characterize each user into a persona. In our case
             we'll have a persona for both a manager and an employee since their needs will be very different.</p>
-        <h5>Manager Persona</h5>
+        <h6>Manager Persona</h6>
         <img src="assets/manager-persona.png" alt="User persona for a small business owner"/>
-        <h5>User Persona</h5>
+        <h6>User Persona</h6>
         <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."/>
+    </div>
+    <div class="contribute">
+        <h3>🛠 How to Contribute</h3>
+        <hr/>
+        <p>Any help or feedback to the project is welcome.</p>
+        <p>Check out the <a href="CONTRIBUTING.md">Contributing Guide</a> </p>
+    </div>
+    <div class="license">
+        <h3>📝 License</h3>
+        <hr/>
+        <p>Licensed under the <a href="LICENSE">MIT License</a>.</p>
     </div>
 </div>
 </body>
