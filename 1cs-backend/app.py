@@ -1,9 +1,25 @@
-from flask import Flask
+from flask import Flask, request, Response
+import sqlite3
+
 from python_freeipa import ClientMeta
 
 app = Flask(__name__)
 # client = ClientMeta('ipa.example.test')
 # client.login('admin', 'Secret123')
+
+conn = sqlite3.connect('test.db')
+print('opened database successfully')
+
+c = conn.cursor()
+
+c.execute("""CREATE TABLE IF NOT EXISTS CUSTOMER_ORDER(
+CONTACT_NUMBER TEXT,
+CUSTOMER_NAME TEXT,
+CUSTOMER_ORDER TEXT
+)""")
+
+conn.commit()
+
 
 # Authentication
 
@@ -20,7 +36,7 @@ def log_in():
 
 # Manager and Employee Routes
 
-@app.route('/checklist',)
+@app.route('/checklist', )
 def get_checklist():
     return 'Not yet implemented'
 
@@ -32,7 +48,19 @@ def update_checklist():
 
 @app.route('/customer/order/new', methods=['post'])
 def customer_order():
-    return 'Not yet implemented'
+    name = request.form['customer-name']
+    contact_number = request.form['customer-contact-number']
+    order = request.form['customer-order']
+    c.execute("INSERT INTO CUSTOMER_ORDER(CUSTOMER_NAME,CONTACT_NUMBER,CUSTOMER_ORDER) \
+     VALUES (?,?,?)", (name, contact_number, order,))
+    conn.commit()
+    return 'OK'
+
+
+@app.route('/customer/orders/')
+def get_customer_orders():
+    orders = c.execute("SELECT * FROM CUSTOMER_ORDER")
+    return orders
 
 
 @app.route('/stock/record', methods=['post'])

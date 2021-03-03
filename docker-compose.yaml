@@ -3,6 +3,8 @@ version: "3.7"
 services:
   frontend:
     build: ./1cs-frontend
+    depends_on:
+      - backend
     volumes:
       - ./1cs-frontend/src:/app/src
     ports:
@@ -28,6 +30,9 @@ services:
       
   pyselenium:
     build: ./pyselenium-user
+    depends_on:
+      - firefox
+      - frontend
     volumes:
       - ./pyselenium/src:/app/src
       

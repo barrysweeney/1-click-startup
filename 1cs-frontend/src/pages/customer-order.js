@@ -8,7 +8,7 @@ const CustomerOrder = () => (
   <Layout>
     <SEO title="Customer Order" />
     <h1>Customer Order</h1>
-    <form method="post" action="http://172.17.0.1:5000/customer-order" style={{display: `grid`, gap: `10px`}}>
+    <form method="post" action="http://172.17.0.1:5000/customer/order/new" style={{display: `grid`, gap: `10px`}}>
       <label style={{display: `grid`, gap: `10px`}}>
         Name
         <input type="text" name="name" id="customer-name" />

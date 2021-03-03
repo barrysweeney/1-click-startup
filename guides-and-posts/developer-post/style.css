@@ -24,6 +24,33 @@ table, th, td {
 
 .tagline {
     font-weight: 700;
-    font-size: 20px;
+}
+
+pre, code {
+    font-family: monospace, monospace;
+}
+pre {
+    overflow: auto;
+}
+pre > code {
+    display: block;
+    padding: 1rem;
+    word-wrap: normal;
+}
+
+.red-code {
+    color: #922525;
+}
+
+.green-code {
+    color: #346f34;
+}
+
+.yellow-code {
+    color: #d5bc3c;
+}
+
+.orange-code {
+    color: #ee9244;
 }
 
