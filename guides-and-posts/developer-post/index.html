@@ -29,7 +29,7 @@
         </span>
         <p>
             1 Click Startup is a free and open source project that lets small business' have integrated control of their
-            daily work-flow
+            daily work-flows
         </p>
         <div>
             <button type="button" class="btn btn-primary">
@@ -40,7 +40,7 @@
             </button>
         </div>
         <div>
-            <a href="#">Quickstart</a>
+            <a href="#quickstart">Quickstart</a>
             <span> . </span>
             <a href="#">Landing Page</a>
         </div>
@@ -82,7 +82,7 @@
             <li><a href="#">License</a></li>
         </ul>
     </div>
-    <div class="quickstart">
+    <div class="quickstart" id="quickstart">
         <h3>🛫 Get Up and Running with Local Development</h3>
         <hr/>
         <p>There are a few steps that will help you get everything you need running on your local machine.</p>
@@ -90,21 +90,35 @@
             <li>1. Clone this repository<br>
                 <code>git clone https://github.com/barrysweeney/1-click-startup.git</code>
             </li>
-            <li>2. Run the local development startup script from inside the cloned directory<br><code>cd 1-click-startup<br>sh develop.sh</code>
+            <li>2. Run the local development containers<br><code>cd 1-click-startup<br>sudo docker-compose up</code>
             </li>
-            <li>3. Access the relevant ports on the browser</li>
+            <li>3. The relevant ports are now exposed and can be accessed on your local machine<br>
+                <ul style="list-style: none">
+                    <li><strong>Frontend Interface</strong> <a href="http://localhost:8000">http://localhost:8000</a>
+                    </li>
+                    <li><strong>Backend Webserver</strong> <a href="http://localhost:5000">http://localhost:5000</a>
+                    </li>
+                    <li><strong>Landing Page</strong> <a href="http://localhost:4200">http://localhost:2000</a></li>
+                </ul>
+            </li>
             <li>4. Open backend, frontend, or landing page folders in your IDE of choice and start coding.</li>
         </ul>
     </div>
     <div class="prototype">
         <h3>🤖 Prototype</h3>
         <hr/>
-        <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to introduce the prototypal
+        <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to
+            introduce the prototypal
             application and work backwards from there.</p>
+        <p>We'll have PySelenium interact with our user interface to populate and submit a form to our backend Flask
+            webserver which will then store data in a MongoDB database. We can then query our database to verify our
+            automated user has been successful.</p>
     </div>
     <div class="process-mining">
         <h3>⛏ Process Mining</h3>
         <hr/>
+        <p>As users of 1 Click Startup perform various tasks they leave a log of data which we can mine to analyze
+            processes and workflows. We can pip the results of our process mining to the manager's dashboard.</p>
     </div>
 
     <div class="User Experience">
@@ -283,7 +297,8 @@
     <div class="contribute">
         <h3>🛠 How to Contribute</h3>
         <hr/>
-        <p>Any help or feedback to the project is welcome in any form, whether it be tutorials, code for new features, bug fixes, or design ideas.</p>
+        <p>Any help or feedback to the project is welcome in any form, whether it be tutorials, code for new features,
+            bug fixes, or design ideas.</p>
         <p>Check out the <a href="CONTRIBUTING.md">Contributing Guide</a>.</p>
     </div>
     <div class="license">
