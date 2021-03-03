@@ -1,0 +1,27 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: ./1cs-frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./1cs-frontend/src:/app/src # Links the source files to the running container
+    ports:
+      - "8000:8000"
+  backend:
+    build:
+      context: ./1cs-backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./1cs-backend/src:/app/src # Links the source files to the
+    ports:
+      - "5000:5000"
+  landing:
+    build:
+      context: ./landing
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./landing/src:/app/src # Links the source files to the
+    ports:
+      - "4200:4200"
+  

@@ -2,8 +2,8 @@ from flask import Flask
 from python_freeipa import ClientMeta
 
 app = Flask(__name__)
-client = ClientMeta('ipa.example.test')
-client.login('admin', 'Secret123')
+# client = ClientMeta('ipa.example.test')
+# client.login('admin', 'Secret123')
 
 # Authentication
 
@@ -14,7 +14,7 @@ def sign_up():
 
 
 @app.route('/log-in', methods=['POST'])
-def sign_up():
+def log_in():
     return 'Not yet implemented'
 
 
@@ -105,17 +105,17 @@ def get_employee(id):
 
 
 @app.route("/employee/update/<id>", methods=['post'])
-def update_user(id):
+def update_employee(id):
     return 'Not yet implemented'
 
 
 @app.route("/employee/new", methods=['post'])
-def update_user():
+def add_employee():
     uid = "-1"
     forename = "John"
     surname = "Doe"
     # FreeIPA Interaction
-    user = client.user_add(uid, forename, surname, forename + " " + surname, o_preferredlanguage='EN')
+    # user = client.user_add(uid, forename, surname, forename + " " + surname, o_preferredlanguage='EN')
     return 'Not yet implemented'
 
 
