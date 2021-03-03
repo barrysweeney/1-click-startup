@@ -75,7 +75,7 @@
         <hr/>
         <ul>
             <li><a href="#">Get Up and Running with Local Development</a></li>
-            <li><a href="#">Prototype Demo</a></li>
+            <li><a href="#">Automated Employee Demo</a></li>
             <li><a href="#">Process Mining Introduction</a></li>
             <li><a href="#">User Experience Research and Analysis</a></li>
             <li><a href="#">How to Contribute</a></li>
@@ -115,10 +115,14 @@
             of the tasks that have been automated. </p>
         <p>We'll have PySelenium interact with our user interface to populate and submit a form to our backend Flask
             webserver which will then store data in a sqlite3 database.</p>
+        <p></p><span aria-label="stop sign emoji">🛑</span> Hold Up <span aria-label="hand up for stop emoji">✋ </span>Before we go any further I'd like to mention that it isn't essential to understand concepts like containers and Docker networks at this point. When a new concept pops up I'll make sure to link to it's documentation for future reference. For now feel free to gloss over it and just get a feel for the overall flow of data and how our different services communicate.</p>
+        <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as rooms in our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our hotel reception (or lobby if you are (a) American, or (b) watched a lot of Suite Life of Zach and Cody).</p>
         <p>When we run <code>sudo docker-compose up</code> we're starting different containers relating to our
             application.</p>
-        <p>Our automated user lives in one of these containers. With the following line of code, they can get the
+        <p>We're getting our rooms ready and letting our guests into them.</p>
+        <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get the
             webdriver for Selenium which allows them to access the web.</p>
+        <p>They walk down the corridor to the Webdriver room to get the key for the door to the Web Browser room.</p>
         <pre>
         <code>driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
             <span class="red-code">command_executor</span>=<span
@@ -126,7 +130,7 @@
         <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
                 class="green-code">http://localhost</span>
             since we're communicating from within one container to a different container (on port 4444 of the same
-            Docker network)</p>
+            Docker network... same hallway)</p>
         <p>With the next line of code our automated employee can access the customer order page of the frontend user
             interface which is in a different container accessible at port 8000 on our Docker network.</p>
         <pre><code>driver.get(<span class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
@@ -141,12 +145,12 @@
                 class="green-code">Bottle Water"</span>)
     driver.find_element_by_id(<span class="green-code">"submit-customer-order"</span>).click()
         </code></pre>
-        <p>If we look at the code for this form we can see that it is sending a post request to our backend Flask
-            webserver running on port 5000 of our Docker network.</p>
+        <p>If we look at the code for this form we can see that it is sending a POST request to our backend Flask
+            webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room to Flask's room).</p>
         <pre><code><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
                 class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
                 class="yellow-code">&gt;</span>...</code></pre>
-        <p>Let's look at what's happening over on the server side by visiting out Flask webserver.</p>
+        <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
         <pre><code>
 <span class="yellow-code">@app.route</span>(<span class="green-code">'/customer/order/new'</span><span
                 class="orange-code">,</span> <span class="red-code">methods</span>=[<span
@@ -164,7 +168,8 @@
     <span class="orange-code">return</span> <span class="green-code">'OK'</span>
         </code></pre>
         <p>We're extracting the data from the form that was posted and inserting it as an new record into our customer order table.</p>
-        <p>Although this is only a single use case, that of an employee taking a customer order, it highlights the flow of data through some of our integrated services.</p>
+        <p>We can see that Flask and sqlite3 share the same room, if it start's getting too crowded we might want to prepare a new room for sqlite3</p>
+        <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer order, it highlights the flow of data through some of our integrated services.</p>
     </div>
     <div class="process-mining">
         <h3>⛏ Process Mining</h3>
@@ -190,7 +195,7 @@
         <p>We can take the raw data we gathered from our interview (transcript omitted for confidentiality) and surveys
             to define our target user's behaviour and
             attitudes.</p>
-        <h5>Use Cases</h5>
+        <h5 id="use-cases">Use Cases</h5>
         <p>Use cases can be defined with a jobs to be done (JTBD) template that follows a situation, motivation,
             expected outcome format</p>
         <h6>Manager Use Cases</h6>
