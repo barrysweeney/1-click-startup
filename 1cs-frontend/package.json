@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "1cs-frontend",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "1 CLick Startup frontend",
+  "version": "1.0.0",
+  "author": "Barry Sweeney <barrysweeney172@live.co.uk>",
   "dependencies": {
     "gatsby": "^2.32.8",
     "gatsby-image": "^2.11.0",
@@ -17,7 +17,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "ts-node": "^9.1.1"
   },
   "devDependencies": {
     "prettier": "2.2.1"
@@ -28,7 +29,7 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop -H 0.0.0.0",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
