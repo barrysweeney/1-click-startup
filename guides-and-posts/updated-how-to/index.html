@@ -139,7 +139,8 @@ day_of_month = '1'
 released_date_to_search = '%s %s' % (month_name_short, day_of_month)</code></pre>
     <p>Why this date? Because it's your birthday (there's a &cong;1.42857142857e-10 chance it is. My favourite album was
         released this day actually).</p>
-    <p>We can tell our driver to head over to the release page for all the albums released in the month we
+    <p>We can tell our driver to head over to <a href="https://www.albumoftheyear.org">Album of The Year</a> and to the
+        release page for all the albums released in the month we
         hardcoded.</p>
     <pre><code class="language-python">driver.get("https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month_name, month_code))</code></pre>
     <p>Next we'll code our PySelenium bot to keep clicking the button to load more albums.</p>
@@ -204,7 +205,7 @@ os.system(
         command</p>
     <pre><code>python3 main.py</code></pre>
     <p>If you've followed along and used <code>sudo</code> in the docker run command you'll be prompted for your
-        password and then the results will begin to pour in.</p>
+        password and then the results will begin to pour in...</p>
     <pre><code>&lt; Selenium Container ID &gt;
 Enema of the State - Blink-182
 Play - Moby
@@ -254,6 +255,20 @@ The Ultimate Collection - Delbert McClinton
 Race for the Prize - The Flaming Lips
 Deep and Warm - Twisted Science
 my-selenium-container</code></pre>
+    <h2>What's Next?</h2>
+    <p>Remember you can <a
+            href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">grab
+        the source code</a> so you can take this and run with it adapting it however you like, read on to find out what
+        my plans are for this project and ideas about where this could go next.</p>
+    <p>I was motivated to create this project because I couldn't find a site that could be used to search for albums by
+        a specific release date. I'll be designing the frontend for this program in an upcoming post and showing how you
+        can deploy it so you can
+        use and share it with others.</p>
+    <p>Of course you can feel free to</p>
+    <p>We'll be designing with our users in mind with an interface integrating the album covers and feedback messages if
+        no albums are
+        found, maybe showing all albums for the month instead, we could even add filtering by genre.</p>
+    <p>Stay tuned to <a href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
 </div>
 
 </div>
