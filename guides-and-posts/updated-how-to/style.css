@@ -1,27 +1,20 @@
-.bash {
-  padding: 5px;
-  background: black;
-  color: green;
-}
-
-.bordered {
-  border: 2px solid black;
-}
-
 img {
-  padding: 2px;
-  margin: 15px 0;
+    width: -moz-available;
 }
 
-p,
-h2 {
-  margin: 8px 0;
+blockquote {
+    padding-left: 0.90625rem;
+    border-left: 0.54375rem solid #42af29;
 }
 
-li {
-  margin-top: 10px;
+a {
+    color: #42af29;
+    text-decoration: underline;
 }
 
-footer > ul {
-  list-style-type: none;
+a:hover, a:active {
+    text-shadow: none;
+    background-image: none;
+    color: #42af29;
+    text-decoration: none;
 }
