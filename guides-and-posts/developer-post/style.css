@@ -54,3 +54,18 @@ pre > code {
     color: #ee9244;
 }
 
+.persona {
+    border: 2px solid black;
+}
+table {
+    margin: 15px 0;
+}
+
+h6 {
+    padding-top: 10px;
+}
+
+.contribute {
+    padding-top: 15px;
+}
+
