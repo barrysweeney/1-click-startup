@@ -222,8 +222,10 @@
                     class="green-code">"http://172.17.0.1:4444/wd/hub"</span>)</code></pre>
         <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
                 class="green-code">http://localhost</span>
-            since we're communicating from within one container to a different container (on port 4444 of the same
-            Docker network... same hallway)</p>
+            since we're communicating from within one container to a different container, for more information about
+            this bridge between networks using the host machine you can refer to <a
+                    href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
+        </p>
         <p>With the next line of code our automated employee can access the customer order page of the frontend user
             interface which is in a different container accessible at port 8000 on our Docker network.</p>
         <pre><code>driver.get(<span class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
