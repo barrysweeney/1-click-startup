@@ -64,6 +64,7 @@
         <li><a href="#coding">Coding our PySelenium album searching bot</a></li>
         <li><a href="#results">Results from our PySelenium bot</a></li>
         <li><a href="#whats-next">What's Next?</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
     <h2 id="selenium-container">Containerized Selenium webdriver?</h2>
     <figure>
@@ -184,10 +185,12 @@ while not all_albums_loaded:
         driver.execute_script("arguments[0].click();",
                               show_more_button_container.find_element_by_class_name('largeButton'))
         time.sleep(1)</code></pre>
-    <p>Note we're using the <code>execute_script</code> method as opposed to the <code>click</code> method of the <code>WebElement</code>
-        object returned by <code>find_element_by_id</code><br>We do this because another element is covering the show
+    <p>Note we're using the <code class="language-python">execute_script</code> method as opposed to the <code
+            class="language-python">click()</code> method of the <code>WebElement</code>
+        object returned by <code class="language-python">find_element_by_id</code><br>We do this because another element
+        is covering the show
         more button. You can see <a href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
-            user RemcoW</a> for more details and an explanation of <code>arguments[0]</code></p>
+            user RemcoW</a> for more details and an explanation of <code class="language-python">arguments[0]</code></p>
     <p>We're not quite finished with this while loop just yet, we need to do two things:</p>
     <ul>
         <li><strong>except StaleElementReferenceException</strong> - our WebElement can be destroyed and re-rendered in
@@ -200,7 +203,7 @@ while not all_albums_loaded:
         </li>
     </ul>
     <p>For completeness, this is our complete while loop</p>
-    <pre><code class="language-python">while not all_albums_loaded:
+    <pre><code class="language-python" id="stale-element">while not all_albums_loaded:
     try:
         show_more_button_container = driver.find_element_by_class_name('showMore')
         time.sleep(3)
@@ -321,6 +324,23 @@ my-selenium-container</code></pre>
                 Career Karma</a>. It may be as simple as changing <code>pip</code> to <code>pip3</code> or you may need
             to actually install pip3, for example with apt-get <code>sudo apt-get -y install python3-pip</code>
         </li>
+        <li><code class="language-python">StaleElementReferenceException</code> - our WebElement can be destroyed and
+            re-rendered in
+            the DOM so we'll need to retry by using <code>continue</code> if our reference becomes stale. <a
+                    href="https://stackoverflow.com/a/16244739/9472445">This StackOverflow answer by user Ardesco</a>
+            describes the situation more clearly. We can catch this exception in an <code
+                    class="language-python">except</code> block and tell our code to retry a certain operation until the
+            exception doesn't occur. You can see <a href="#stale-element">the example we've used in this guide</a> where
+            our solution was to use the
+            <code class="language-python">continue</code> keyword inside a <code class="language-python">while</code>
+            loop.
+        </li>
+        <li><code class="language-shell">Element is not clickable at point (x,y) because another element obscures
+            it</code> - You can see <a href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
+            user RemcoW</a> for more details and an explanation of our solution in this guide which was to use <code
+                class="language-python">driver.execute_script("arguments[0].click();", element)</code> as opposed to the
+            <code class="language-python">click()</code> method of the <code>WebElement</code>
+            object returned by <code class="language-python">find_element_by_id</code></li>
     </ul>
 
 </div>
