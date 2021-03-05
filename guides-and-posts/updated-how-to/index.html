@@ -44,7 +44,9 @@
         </li>
         <li>If you're a student or are learning to code and searching for a project to talk about in interviews to help
             get
-            your foot through theGit and GitHub are useful for teams because they can merge code together. A developer can work on one part of the code while a second developer works on another part. They can then use Git and GitHub to easily combine their changes.
+            your foot through theGit and GitHub are useful for teams because they can merge code together. A developer
+            can work on one part of the code while a second developer works on another part. They can then use Git and
+            GitHub to easily combine their changes.
             door.
         </li>
     </ul>
@@ -313,7 +315,6 @@ my-selenium-container</code></pre>
         a specific release date. I'll be designing the frontend for this program in an upcoming post and showing how you
         can deploy it so you can
         use and share it with others.</p>
-    <p>Of course you can feel free to</p>
     <p>We'll be designing with our users in mind with an interface integrating the album covers and feedback messages if
         no albums are
         found, maybe showing all albums for the month instead, we could even add filtering by genre.</p>
@@ -356,6 +357,14 @@ my-selenium-container</code></pre>
                 class="language-python">driver.execute_script("arguments[0].click();", element)</code> as opposed to the
             <code class="language-python">click()</code> method of the <code>WebElement</code>
             object returned by <code class="language-python">find_element_by_id</code></li>
+        <li><code class="language-shell">Failed to connect to localhost port 4444: Connection refused</code> - If you're
+            planning
+            to access the Selenium webdriver endpoint from within a different Docker container you can change
+            <code>http://localhost:4444/wd/hub</code> to <code>http://172.17.0.1:4444/wd/hub</code> or
+            <code>http://host.docker.internal:4444/wd/hub</code>. The
+            rationale behind this is provided in <a href="https://stackoverflow.com/a/48547074/9472445">this
+                StackOverflow answer by user devnev</a>.
+        </li>
     </ul>
 
 </div>
