@@ -21,15 +21,33 @@
     <a href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
         for post's source code</a>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/iiGJq8bLqzU" frameborder="0"
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S6gee91Q5gc" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
     </div>
-    <p>In this tutorial you will learn how to find out which albums were released on a specific day.</p>
+    <p>In this tutorial you will learn how to find out which albums were released on a specific day. But you'll learn so
+        much more along the way...</p>
     <img src="images/company-logos.png" alt="logos for Album Of The Year, Python, Selenium, and Docker"/>
     <p>You might be wondering</p>
     <blockquote><em>"Can I find out which albums were released on my birthday?"</em></blockquote>
     <p>You sure can, <strong>just read on to find out how.</strong></p>
+    <p>Also if you can relate to any of these then this guide is <em>definitely</em> for you.</p>
+    <ul>
+        <li>If you want to learn some Docker and Selenium basics in a fun project before moving on to more complex
+            Docker
+            Compose and automated testing application.
+        </li>
+        <li>If you're a new developer stuck in <a href="https://www.freecodecamp.org/news/escape-tutorial-purgatory/">tutorial
+            purgatory</a> who wants to wrap their head around more challenging concepts then you can go deeper down the
+            rabbit
+            hole by following the links throughout the guide.
+        </li>
+        <li>If you're a student or are learning to code and searching for a project to talk about in interviews to help
+            get
+            your foot through the
+            door.
+        </li>
+    </ul>
     <p>Looking for source code? <br> <a
             href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Jump to
         the Github Repo <i class="fab fa-github"></i></a></p>
@@ -39,7 +57,15 @@
     <p>Next we'll tell our Python code how to access our driver.</p>
     <p>Then we'll use the Python Selenium package to interact with the Album of the Year website.</p>
     <p>We'll wrap up with a discussion of our results and how we could take this further with a frontend interface.</p>
-    <h2>How can we use a containerized Selenium webdriver?</h2>
+    <ul>
+        <li><a href="#selenium-container">Containerized Selenium Container</a></li>
+        <li><a href="#dev-env">Configuring your development environment</a></li>
+        <li><a href="#project_structure">Project Structure</a></li>
+        <li><a href="#coding">Coding our PySelenium album searching bot</a></li>
+        <li><a href="#results">Results from our PySelenium bot</a></li>
+        <li><a href="#whats-next">What's Next?</a></li>
+    </ul>
+    <h2 id="selenium-container">Containerized Selenium webdriver?</h2>
     <figure>
         <img src="images/nilantha-ilangamuwa-containers.jpg">
         <figcaption><span>Photo by <a
@@ -54,7 +80,7 @@
     <p>Of course we could <a href="https://www.selenium.dev/documentation/en/remote_webdriver/remote_webdriver_server/">run
         a remote WebDriver server from the command line with a jar file</a>, but we can also use <a
             href="https://github.com/SeleniumHQ/docker-selenium">Docker Selenium</a>.</p>
-    <h2>Configuring your development environment</h2>
+    <h2 id="dev-env">Configuring your development environment</h2>
     <p>If you want to follow along to the tutorial you can take some time to setup your environment by installing Docker
         using either of these guides</p>
     <ul>
@@ -63,17 +89,18 @@
         <li><a href="https://docs.docker.com/docker-for-windows/install/">Install Docker Desktop on Windows</a></li>
     </ul>
     <p>Either will help you setup the required software for this tutorial.</p>
-    <h2>Project Structure</h2>
+    <h2 id="project-structure">Project Structure</h2>
     <p>Let's review our directory structure before we go any further. You can always refer to the <a
             href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">source
         code</a> too.</p>
     <p>Now let's look at the project:</p>
-    <img src="images/folder-structure.png" alt="Folder structure showing app folder with main.py and venv folder" class="folder-structure-image"/>
+    <img src="images/folder-structure.png" alt="Folder structure showing app folder with main.py and venv folder"
+         class="folder-structure-image"/>
     <p>As we can see, we're not dealing with anything too complicated here so it should be a nice project to get up and
         running with if you're new to PySelenium (or just really want to know what albums were released on your
         birthday).</p>
     <p>Let's get to work.</p>
-    <h2>Programming our PySelenium album searching bot </h2>
+    <h2 id="coding">Programming our PySelenium album searching bot </h2>
     <p>We can now move on to programming our PySelenium bot to interact with the Album of The Year site via a Dockerized
         Selenium WebDriver.</p>
     <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
@@ -85,17 +112,20 @@
         </code>
     </pre>
     <p>For more info you can check out the <a href="https://docs.python.org/3/library/venv.html">official Python
-        documentation on venv</a></p>
-    <p>We'll start by installing selenium</p>
+        documentation on venv </a></p>
+    <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
+        installed.</p>
+    <p>We'll start by installing selenium and requests</p>
     <pre>
-        <code>pip install selenium</code>
+        <code>pip3 install selenium
+pip3 install requests
+        </code>
     </pre>
-    <p>Note that you may need to change <code>pip</code> to <code>pip3</code> depending on which version you have
+    <p>Note that you may need to change <code>pip3</code> to <code>pip</code> depending on which version you have
         installed.</p>
     <p>Now we can import our required packages.</p>
     <pre><code class="language-python">from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException, \
-    ElementClickInterceptedException, StaleElementReferenceException
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 import time
 import os
 import requests</code></pre>
@@ -114,6 +144,7 @@ import requests</code></pre>
     <p>Excuse the following wall of code but it's actually very important. When we start our container we need to wait
         for it to be in a state where it's ready to provide the services we need to use it as our remote webdriver.</p>
     <pre><code class="language-python">ready = False
+time.sleep(5)
 while not ready:
     try:
         r = requests.get('http://localhost:4444/wd/hub/status', timeout=1)
@@ -136,7 +167,7 @@ month_code = '06'
 month_name_short = 'Jun'
 year = '1999'
 day_of_month = '1'
-released_date_to_search = '%s %s' % (month_name_short, day_of_month)</code></pre>
+release_date_to_search = '%s %s' % (month_name_short, day_of_month)</code></pre>
     <p>Why this date? Because it's your birthday (there's a &cong;1.42857142857e-10 chance it is. My favourite album was
         released this day actually).</p>
     <p>We can tell our driver to head over to <a href="https://www.albumoftheyear.org">Album of The Year</a> and to the
@@ -200,7 +231,7 @@ while not all_albums_loaded:
 os.system(
     'sudo docker rm -f my-selenium-container')</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
-    <h2>Results of our PySelenium AOTY searching bot</h2>
+    <h2 id="results">Results of our PySelenium AOTY searching bot</h2>
     <p>Let's open a terminal in our project directory (for me that's album-of-the-day/app) and enter the following
         command</p>
     <pre><code>python3 main.py</code></pre>
@@ -255,7 +286,7 @@ The Ultimate Collection - Delbert McClinton
 Race for the Prize - The Flaming Lips
 Deep and Warm - Twisted Science
 my-selenium-container</code></pre>
-    <h2>What's Next?</h2>
+    <h2 id="whats-next">What's Next?</h2>
     <p>Remember you can <a
             href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">grab
         the source code</a> so you can take this and run with it adapting it however you like, read on to find out what
@@ -269,6 +300,29 @@ my-selenium-container</code></pre>
         no albums are
         found, maybe showing all albums for the month instead, we could even add filtering by genre.</p>
     <p>Stay tuned to <a href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
+    <h2 id="troubleshooting">Bonus: Troubleshooting</h2>
+    <p>Here's some resources for resolving common errors you might run into along the way in this guide or in your own
+        explorations.</p>
+    <ul>
+        <li><code class="language-python">requests.exceptions.ConnectionError: ('Connection aborted.',
+            ConnectionResetError(104, 'Connection reset
+            by peer'))</code> - this is a common error coined <a
+                href="http://www.itmaybeahack.com/homepage/iblog/architecture/C551260341/E20081031204203/index.html">The
+            Python "Connection Rest By Peer" Problem</a>. You can
+            read more about it in <a href="https://stackoverflow.com/a/383816/9472445">this StackOverflow post by user
+                S.Lott</a>. In our case it will likely arise from trying to access the status endpoint of the Selenium
+            container before the container is ready. You can use <code class="language-python">time.sleep(1)</code>
+            before making a request to <code>http://localhost:4444/wd/hub/status</code> and adjusting the time to fit
+            your needs.
+        </li>
+        <li><code class="language-shell">pip: command not found</code> - this is likely a problem relating to your
+            environment as described (along with solutions) in <a
+                    href="https://careerkarma.com/blog/python-pip-command-not-found/">this post by James Gallagher on
+                Career Karma</a>. It may be as simple as changing <code>pip</code> to <code>pip3</code> or you may need
+            to actually install pip3, for example with apt-get <code>sudo apt-get -y install python3-pip</code>
+        </li>
+    </ul>
+
 </div>
 
 </div>
