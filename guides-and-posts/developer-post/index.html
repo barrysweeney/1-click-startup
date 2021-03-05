@@ -10,7 +10,7 @@
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
             crossorigin="anonymous"
     />
-    <link rel="shortcut icon" type="image/png" href="/assets/bs-logo.png"/>
+    <link rel="shortcut icon" type="image/png" href="assets/bs-logo.png"/>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -66,7 +66,8 @@
             </li>
         </ul>
         <p>The end project will be the technical implication of the product (as described above) using tools
-            such as Docker and a <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> REST API webserver.</p>
+            such as <a href="https://www.docker.com/">Docker</a> and a <a
+                    href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> REST API webserver.</p>
         <p>In addition to this, we also want to provide a testing framework with simulated users and managers using a
             tool such as <a href="https://selenium-python.readthedocs.io/">PySelenium</a>.</p>
     </div>
@@ -85,7 +86,74 @@
     <div class="quickstart" id="quickstart">
         <h3>🛫 Get Up and Running with Local Development</h3>
         <hr/>
-        <p>There are a few steps that will help you get everything you need running on your local machine.</p>
+        <p>Before we dive in to the short steps to get up and running we'll briefly mention the prerequisite tools.</p>
+        <p id="prereq">It may seem like a lot of initial setup if you're new to the tools but it'll be well worth it.
+            Getting
+            familiar with these tools will put you in good stead to take your ability as a software engineer to the next
+            level and will set you apart from others interviewing for entry-level software engineering jobs.</p>
+        <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
+        <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
+            environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the
+            de
+            facto standard to build and share containerized apps - from desktop, to the cloud."
+        </blockquote>
+        <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
+        <blockquote>"Selenium automates browsers. That's it!
+            What you do with that power is entirely up to you.
+
+            Primarily it is for automating web applications for testing purposes, but is certainly not limited to just
+            that.
+
+            Boring web-based administration tasks can (and should) also be automated as well."
+        </blockquote>
+        <p>From <a href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask Python?</a>:</p>
+        <blockquote>"Flask is a web application framework written in Python.
+
+            A Web Application Framework or a simply a
+            Web Framework represents a collection of libraries and
+            modules that enable web application developers to write applications without worrying about low-level
+            details such as protocol, thread management, and so on."
+        </blockquote>
+        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
+            Project - Introduction to Git</a>:</p>
+        <blockquote>"Git is like a really epic save button for your files and directories. Officially, Git is a version
+            control system.
+
+            Git is useful for creating snapshots of your work. If you realize halfway through that you've messed up,
+            it's much easier to reset.
+
+            Git and GitHub are useful for teams because they can merge code together. A developer can work on one part
+            of the code while a second developer works on another part. They can then use Git and GitHub to easily
+            combine their changes.
+            "
+        </blockquote>
+        <ul>
+            <li><a href="https://docs.docker.com/engine/install/">Docker - Install Docker Engine on Linux</a></li>
+            <li><a href="https://docs.docker.com/docker-for-mac/install/">Docker - Install Docker Desktop on Mac</a>
+            </li>
+            <li><a href="https://docs.docker.com/docker-for-windows/install/">Docker - Install Docker Desktop on
+                Windows</a></li>
+            <li><a href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
+                -Configure Git (Linux or Mac) and Github
+                (all operating systems)</a></li>
+            <li><a href="https://github.com/git-guides/install-git">Github - Install Git on any OS</a></li>
+        </ul>
+        <p>To get started with Git I recommend <a href="https://www.youtube.com/watch?v=HVsySz-h9r4">this video by Cory
+            Schafer</a> and <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
+            lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
+            soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong></p>
+        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">The Odin
+            Project - Git Basics</a>:</p>
+        <blockquote>"In this lesson, we’ll cover common Git commands used to manage your projects and to upload your
+            work onto GitHub. We refer to these commands as the basic Git workflow. When you’re using Git, these are the
+            commands
+            that you’ll use 70-80% of the time, so if you can get these down, you’ll be more than halfway done mastering
+            Git!
+            "
+        </blockquote>
+        <p id="steps">Once you've <a href="#prereq">installed the prerequisites</a>, there are a few steps that will
+            help you get everything you need running on your local
+            machine.</p>
         <ul>
             <li>1. Clone this repository (feel free to check out <a
                     href="https://help.github.com/articles/fork-a-repo/"> this guide</a> if you're new to cloning
@@ -372,7 +440,8 @@
         <h6>Manager Persona</h6>
         <img src="assets/manager-persona.png" alt="User persona for a small business owner" class="persona"/>
         <h6>User Persona</h6>
-        <img src="assets/employee-persona.png" alt="User persona for the employee of a small business." class="persona"/>
+        <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."
+             class="persona"/>
     </div>
     <div class="contribute">
         <h3>🛠 How to Contribute</h3>
