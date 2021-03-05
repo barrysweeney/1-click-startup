@@ -149,7 +149,7 @@ import requests</code></pre>
         <li><strong>selenium.common.exceptions</strong> - we can catch these exceptions to retry actions in the UI</li>
         <li><strong>os</strong> - we can use this to initiate our <code>docker run</code> command</li>
     </ul>
-    <p>Let's move on to starting out Selenium webdriver container</p>
+    <p>Let's move on to starting our Selenium webdriver container</p>
     <pre><code class="language-python">os.system(
     'sudo docker run --name my-selenium-container -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-beta-1-prerelease-20210210')</code></pre>
     <p>This command starts a standalone Firefox container. For other browsers and a description of why <code>-v
