@@ -1,73 +1,100 @@
+import json
+import time
 from flask import Flask, request, Response
 import mysql.connector
-import json
+from passlib.hash import sha256_crypt
+from flask_cors import CORS, cross_origin
 
 from python_freeipa import ClientMeta
 
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 # client = ClientMeta('ipa.example.test')
 # client.login('admin', 'Secret123')
 
-@app.route('/widgets')
-def get_widgets() :
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1",
-    database="inventory"
-  )
-  cursor = mydb.cursor()
+# @app.route('/widgets')
+# def get_widgets():
+#     mydb = mysql.connector.connect(
+#         host="mysqldb",
+#         user="root",
+#         password="p@ssw0rd1",
+#         database="inventory"
+#     )
+#     cursor = mydb.cursor()
+#     cursor.execute("SELECT * FROM widgets")
+#
+#     row_headers = [x[0] for x in cursor.description]
+#     results = cursor.fetchall()
+#
+#     json_data = []
+#
+#     for result in results:
+#         json_data.append(dict(zip(row_headers, result)))
+#
+#     cursor.close()
+#
+#     return json.dumps(json_data)
 
-
-  cursor.execute("SELECT * FROM widgets")
-
-  row_headers=[x[0] for x in cursor.description]
-
-
-
-  results = cursor.fetchall()
-  json_data=[]
-  for result in results:
-    json_data.append(dict(zip(row_headers,result)))
-
-  cursor.close()
-
-  return json.dumps(json_data)
-
-@app.route('/initdb')
-def db_init():
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1"
-  )
-  cursor = mydb.cursor()
-
-  cursor.execute("DROP DATABASE IF EXISTS inventory")
-  cursor.execute("CREATE DATABASE inventory")
-  cursor.close()
-
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1",
-    database="inventory"
-  )
-  cursor = mydb.cursor()
-
-  cursor.execute("DROP TABLE IF EXISTS widgets")
-  cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
-  cursor.close()
-
-  return 'init database'
+ready = False
+while not ready:
+    try:
+        mydb = mysql.connector.connect(
+            host="mysqldb",
+            user="root",
+            password="p@ssw0rd1"
+        )
+        cursor = mydb.cursor()
+        cursor.execute("DROP DATABASE IF EXISTS startup")
+        cursor.execute("CREATE DATABASE startup")
+        cursor.execute("USE startup")
+        cursor.execute("DROP TABLE IF EXISTS users")
+        cursor.execute(
+            "CREATE TABLE users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
+        cursor.close()
+        ready = True
+    except mysql.connector.errors.InterfaceError:
+        continue
 
 
 # Authentication
 
 
 @app.route('/register', methods=['POST'])
+@cross_origin()
 def register():
-    return 'OK'
+    # get form fields
+    data = request.json
+    name = data['name']
+    email = data['email']
+    password = sha256_crypt.encrypt(data['password'])
+    role = data['role']
+    business = data['business']
+    can_log_in = False
+
+    if role == "manager":
+        can_log_in = True
+
+    # connect to db
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
+
+    # create cursor
+    cursor = mydb.cursor()
+
+    # execute query
+    cursor.execute(
+        "INSERT INTO users(name, email, password, role, business, can_log_in) VALUES(%s, %s, %s, %s, %s, %s)",
+        (name, email, password, role, business, can_log_in))
+
+    # close connection
+    cursor.close()
+
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
 @app.route('/sign-up', methods=['POST'])
@@ -224,4 +251,4 @@ def get_dashboard(id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
