@@ -36,6 +36,7 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=p@ssw0rd1
+      - MYSQL_CURSORCLASS=DictCursor
     ports:
       - "3306:3306"
       

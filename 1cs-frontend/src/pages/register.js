@@ -29,7 +29,7 @@ class Register extends Component {
       body: JSON.stringify(body)
     })
     if (response.status === 200) {
-      navigate("/")
+      navigate("/login")
     }
   }
 

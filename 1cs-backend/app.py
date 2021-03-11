@@ -1,6 +1,6 @@
 import json
 import time
-from flask import Flask, request, Response
+from flask import Flask, request, Response, session
 import mysql.connector
 from passlib.hash import sha256_crypt
 from flask_cors import CORS, cross_origin
@@ -10,6 +10,7 @@ from python_freeipa import ClientMeta
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # client = ClientMeta('ipa.example.test')
 # client.login('admin', 'Secret123')
 
@@ -36,6 +37,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 #
 #     return json.dumps(json_data)
 
+# wait for MYSQL container to be ready
+
 ready = False
 while not ready:
     try:
@@ -50,7 +53,7 @@ while not ready:
         cursor.execute("USE startup")
         cursor.execute("DROP TABLE IF EXISTS users")
         cursor.execute(
-            "CREATE TABLE users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
+            "CREATE TABLE users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
         cursor.close()
         ready = True
     except mysql.connector.errors.InterfaceError:
@@ -59,11 +62,10 @@ while not ready:
 
 # Authentication
 
-
 @app.route('/register', methods=['POST'])
 @cross_origin()
 def register():
-    # get form fields
+    # get values from json request body
     data = request.json
     name = data['name']
     email = data['email']
@@ -97,13 +99,44 @@ def register():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
-@app.route('/sign-up', methods=['POST'])
-def sign_up():
-    return 'Not yet implemented'
-
-
-@app.route('/log-in', methods=['POST'])
+@app.route('/login', methods=['POST'])
+@cross_origin()
 def log_in():
+    # get values from jso request body
+    data = request.json
+    email = data['email']
+    password_candidate = data['password']
+
+    # connect to db
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
+
+    # create cursor
+    cursor = mydb.cursor()
+
+    # get user by email
+    result = cursor.execute("SELECT * FROM users where email = %s", [email])
+
+    if result > 0:
+        # get stored hash
+        result_data = cursor.fetchone()
+        password = result_data['password']
+
+        # compare passwords
+        if sha256_crypt.verify(password_candidate, password):
+            # password matched
+            session['logged_in'] = True
+            session['name'] = result_data['name']
+            return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+
+    else:
+        error = "Email not found"
+        return json.dumps({'success': False}), 404, {'ContentType': 'application/json'}
+
     return 'Not yet implemented'
 
 
