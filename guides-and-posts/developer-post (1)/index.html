@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>1 Click Startup | Developer Guide</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+    />
+    <link rel="shortcut icon" type="image/png" href="assets/bs-logo.png"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="toolbar" role="banner">
+        <span class="logo"> 📈 </span>
+        <span>1 Click Startup</span>
+    </div>
+    <hr/>
+    <div class="toolbar" role="banner">
+        <span class="logo"> 📊 💬 📄 </span>
+    </div>
+    <div class="introduction">
+        <span class="tagline">
+            Level up your work-flow
+        </span>
+        <p>
+            1 Click Startup is a free and open source project that lets small business' have integrated control of their
+            daily work-flows
+        </p>
+        <div>
+            <button type="button" class="btn btn-primary">
+                license <span class="badge badge-light">MIT</span>
+            </button>
+            <button type="button" class="btn btn-success">
+                PRs <span class="badge badge-light">welcome</span>
+            </button>
+        </div>
+        <div>
+            <a href="#quickstart">Quickstart</a>
+            <span> . </span>
+            <a href="#">Landing Page</a>
+        </div>
+        <p>
+            1 Click Startup is a modern approach to small business work-flows.
+        </p>
+    </div>
+    <div>
+        <ul>
+            <li><strong>Manager Interface.</strong> The manager interface streamlines communication between employees
+                and suppliers.
+            </li>
+            <li><strong>Employee Interface.</strong> Employees fill in a series of digital forms which log important
+                information about the processes they complete in their work.
+            </li>
+            <li><strong>Process Mining.</strong> Data will be piped through a process mining application and the results
+                will be forwarded to the
+                manager's dashboard.
+            </li>
+            <li><strong>Manager Dashboard.</strong> An exclusive manager dashboard will allow them to track key
+                productivity metrics and highlight employee engagement, as well as visualize the business processes to
+                identify bottlenecks.
+            </li>
+        </ul>
+        <p>The end project will be the technical implementation of the product (as described above) using tools
+            such as <a href="https://www.docker.com/">Docker</a> and a <a
+                    href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> <a
+                    href="https://www.youtube.com/watch?v=7YcW25PHnAA">REST API</a> webserver.</p>
+        <p>In addition to this, we also want to provide a testing framework with simulated users and managers using a
+            tool such as <a href="https://selenium-python.readthedocs.io/">PySelenium</a>.</p>
+    </div>
+    <div class="toc">
+        <h2>What's In This Document</h2>
+        <hr/>
+        <ul>
+            <li><a href="#up-and-run">Get Up and Running with Local Development</a></li>
+            <li><a href="#automated-employee-demo">Automated Employee Demo</a></li>
+            <li><a href="#process-mining">Process Mining Introduction</a></li>
+            <li><a href="#ux">User Experience Research and Analysis</a></li>
+            <li><a href="#contribute">How to Contribute</a></li>
+            <li><a href="#license">License</a></li>
+        </ul>
+    </div>
+    <div class="quickstart" id="up-and-run">
+        <h3>🛫 Get Up and Running with Local Development</h3>
+        <hr/>
+        <p>Before we dive in to the short steps to get up and running we'll briefly mention the prerequisite tools.</p>
+        <p>Experienced developers can <a href="#quickstart">jump ahead to the quickstart</a>.</p>
+        <p id="prereq">It may seem like a lot of initial setup if you're new to the tools but it'll be well worth it.
+            Getting
+            familiar with these tools will put you in good stead to take your ability as a software engineer to the next
+            level and will set you apart from others interviewing for entry-level software engineering jobs.</p>
+        <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
+        <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
+            environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the
+            de
+            facto standard to build and share containerized apps - from desktop, to the cloud."
+        </blockquote>
+        <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
+        <blockquote>"Selenium automates browsers. That's it!
+            What you do with that power is entirely up to you.
+
+            Primarily it is for automating web applications for testing purposes, but is certainly not limited to just
+            that.
+
+            Boring web-based administration tasks can (and should) also be automated as well."
+        </blockquote>
+        <p>From <a href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask Python?</a>:</p>
+        <blockquote>"Flask is a web application framework written in Python.
+
+            A Web Application Framework or simply a
+            Web Framework represents a collection of libraries and
+            modules that enable web application developers to write applications without worrying about low-level
+            details such as protocol, thread management, and so on."
+        </blockquote>
+        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
+            Project - Introduction to Git</a>:</p>
+        <blockquote>"Git is like a really epic save button for your files and directories. Officially, Git is a version
+            control system.
+
+            Git is useful for creating snapshots of your work. If you realize halfway through that you've messed up,
+            it's much easier to reset.
+
+            Git and GitHub are useful for teams because they can merge code together. A developer can work on one part
+            of the code while a second developer works on another part. They can then use Git and GitHub to easily
+            combine their changes."
+        </blockquote>
+        <ul>
+            <li><a href="https://docs.docker.com/engine/install/">Docker - Install Docker Engine on Linux</a></li>
+            <li><a href="https://docs.docker.com/docker-for-mac/install/">Docker - Install Docker Desktop on Mac</a>
+            </li>
+            <li><a href="https://docs.docker.com/docker-for-windows/install/">Docker - Install Docker Desktop on
+                Windows</a></li>
+            <li><a href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
+                - Configure Git (Linux or Mac) and Github
+                (all operating systems)</a></li>
+            <li><a href="https://github.com/git-guides/install-git">Github - Install Git on any OS</a></li>
+        </ul>
+        <p>To get started with Git I recommend <a href="https://www.youtube.com/watch?v=HVsySz-h9r4">this video by Cory
+            Schafer</a> and <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
+            lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
+            soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong></p>
+        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">The Odin
+            Project - Git Basics</a>:</p>
+        <blockquote>"In this lesson, we’ll cover common Git commands used to manage your projects and to upload your
+            work onto GitHub. We refer to these commands as the basic Git workflow. When you’re using Git, these are the
+            commands
+            that you’ll use 70-80% of the time, so if you can get these down, you’ll be more than halfway done mastering
+            Git! "
+        </blockquote>
+        <p>There's one last thing but it really helps tie the project together and help define how our data will move
+            through our application and integrate with different services...</p>
+        <p>From <a href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
+        <blockquote>"Compose is a tool for defining and running multi-container Docker applications."</blockquote>
+        <ul>
+            <li><a href="https://docs.docker.com/compose/install/">Docker - Install Docker Compose</a></li>
+        </ul>
+        <p id="quickstart">Once you've <a href="#prereq">installed the prerequisites</a>, there are a few steps that
+            will
+            help you get everything you need running on your local
+            machine.</p>
+        <ul>
+            <li>1. Clone this repository (feel free to check out <a
+                    href="https://help.github.com/articles/fork-a-repo/"> this guide</a> if you're new to cloning
+                🛸)<br>
+                <code>git clone https://github.com/barrysweeney/1-click-startup.git</code>
+            </li>
+            <li>2. Run the local development containers<br><code>cd 1-click-startup<br>sudo docker-compose up</code>
+                (check out <a href="https://docs.docker.com/compose/install/">this guide</a> if you need to install
+                Docker Compose 🐳)
+            </li>
+            <li>3. The relevant ports are now exposed and can be accessed on your local machine<br>
+                <ul style="list-style: none">
+                    <li><strong>Frontend Interface</strong> <a href="http://localhost:8000">http://localhost:8000</a>
+                    </li>
+                    <li><strong>Backend Webserver</strong> <a href="http://localhost:5000">http://localhost:5000</a>
+                    </li>
+                    <li><strong>Landing Page</strong> <a href="http://localhost:4200">http://localhost:4200</a></li>
+                    <li><strong>Selenium Web Driver</strong> <a href="http://localhost:4444">http://localhost:4444</a>
+                    </li>
+                </ul>
+            </li>
+            <li>4. Open backend, frontend, or landing page folders in your IDE of choice and start coding.</li>
+        </ul>
+    </div>
+    <div class="automation" id="automated-employee-demo">
+        <h3>🤖 Automation</h3>
+        <hr/>
+        <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to
+            our first glimpse at automating our user, and work backwards from there.</p>
+        <p>As one of the main goals of this project is to create automated users, it's worth exploring an example of one
+            of the tasks that have been automated. </p>
+        <p>We'll have <a href="https://selenium-python.readthedocs.io/">PySelenium</a> interact with our user interface
+            to populate and submit a form to our backend <a
+                    href="https://flask.palletsprojects.com/en/1.1.x/installation/">Flask</a>
+            webserver which will then store data in a sqlite3 database.</p>
+        <p><span aria-label="stop sign emoji">🛑</span> Hold Up <span aria-label="hand up for stop emoji">✋ </span>Before
+            we go any further I'd like to mention that it isn't essential to understand concepts like <a
+                    href="https://www.docker.com/resources/what-container">containers</a> and <a
+                    href="https://docs.docker.com/compose/networking/">Docker
+                compose network</a> at this point. When a new concept pops up I'll make sure to link to it's
+            documentation for future
+            reference. For now feel free to gloss over it and just get a feel for the overall flow of data and how our
+            different services communicate. As an aside, the best resource I've found for learning these concepts was <a
+                    href="https://www.pluralsight.com/courses/docker-kubernetes-big-picture">this course</a> which you
+            can watch on a PluralSight free trial.</p>
+        <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as rooms in
+            our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our
+            hotel reception (or lobby if you prefer).</p>
+        <p>When we run <code>sudo docker-compose up</code> we're starting different containers relating to our
+            application.</p>
+        <p>We're getting our rooms ready and letting our guests into them.</p>
+        <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get the
+            webdriver for Selenium which allows them to access the web.</p>
+        <p>They walk down the corridor to the <a href="https://github.com/SeleniumHQ/docker-selenium">Webdriver</a> room
+            to get the key for the door to the Web Browser room.</p>
+        <pre>
+        <code>driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
+            <span class="red-code">command_executor</span>=<span
+                    class="green-code">"http://172.17.0.1:4444/wd/hub"</span>)</code></pre>
+        <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
+                class="green-code">http://localhost</span>
+            since we're communicating from within one container to a different container, for more information about
+            this bridge between networks using the host machine you can refer to <a
+                    href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
+        </p>
+        <p>With the next line of code our automated employee can access the customer order page of the frontend user
+            interface which is in a different container accessible at port 8000 on our Docker network.</p>
+        <pre><code>driver.get(<span class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
+        <p>This is what our employee now sees:</p>
+        <img src="assets/customer-order.png" alt="Customer Order form"/>
+        <p>They can now fill in and submit the form:</p>
+        <pre><code>
+    driver.find_element_by_id(<span class="green-code">"customer-name"</span>).send_keys(<span class="green-code">"John Doe"</span>)
+    driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys(<span
+                class="green-code">"+44700000010"</span>)
+    driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys("<span
+                class="green-code">Bottle Water"</span>)
+    driver.find_element_by_id(<span class="green-code">"submit-customer-order"</span>).click()
+        </code></pre>
+        <p>If we look at the code for this form we can see that it is sending a <a
+                href="https://en.wikipedia.org/wiki/POST_(HTTP)">POST</a> request to our backend Flask
+            webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room to
+            Flask's room).</p>
+        <pre><code><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
+                class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
+                class="yellow-code">&gt;</span>...</code></pre>
+        <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
+        <pre><code>
+<span class="yellow-code">@app.route</span>(<span class="green-code">'/customer/order/new'</span><span
+                class="orange-code">,</span> <span class="red-code">methods</span>=[<span
+                class="green-code">'post'</span>])
+<span class="orange-code">def</span> <span class="yellow-code">customer_order</span>():
+    name = request.form[<span class="green-code">'customer-name'</span>]
+    contact_number = request.form[<span class="green-code">'customer-contact-number'</span>]
+    order = request.form[<span class="green-code">'customer-order'</span>]
+    c.execute(<span class="green-code">"</span><span class="orange-code">INSERT INTO</span> CUSTOMER_ORDER(CUSTOMER_NAME,CONTACT_NUMBER,CUSTOMER_ORDER) \
+    <span class="orange-code">VALUES</span> (?<span class="orange-code">,</span>?<span
+                class="orange-code">,</span>?)<span class="green-code">"</span><span
+                class="orange-code">,</span> (name<span class="orange-code">,</span> contact_number<span
+                class="orange-code">,</span> order<span class="orange-code">,</span>))
+    conn.commit()
+    <span class="orange-code">return</span> <span class="green-code">'OK'</span>
+        </code></pre>
+        <p>We're extracting the data from the form that was posted and inserting it as an new record into our customer
+            order table.</p>
+        <p>We can see that Flask and sqlite3 share the same room, if it start's getting too crowded we might want to
+            prepare a new room for sqlite3</p>
+        <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
+            order, it highlights the flow of data through some of our integrated services.</p>
+    </div>
+    <div class="process-mining" id="process-mining">
+        <h3>⛏ Process Mining</h3>
+        <hr/>
+        <p>As users of 1 Click Startup perform various tasks they leave a log of data which we can mine to analyze
+            processes and workflows. We can pipe the results of our process mining to the manager's dashboard.</p>
+    </div>
+
+    <div class="User Experience" id="ux">
+        <h3>👤 User Experience (UX) Design</h3>
+        <hr/>
+        <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that we
+            need to define our user and figure out more specific details regarding their current work-flows,
+            including the services and platforms they use. We'll also take a look at the approaches being employed
+            by others with similarities to our product.</p>
+        <h4>Research</h4>
+        <h5>Surveys</h5>
+        <p>Surveys, especially those with no follow-up questions, provide
+            quantitative data from which we can analyze responses to recognize patterns.</p>
+        <p>You can find a report of the survey by opening <a href="assets/usability-report.pdf">this PDF file</a>.
+        </p>
+        <h4>Analyze</h4>
+        <p>We can take the raw data we gathered from our interview (transcript omitted for confidentiality) and surveys
+            to define our target user's behaviour and
+            attitudes.</p>
+        <h5 id="use-cases">Use Cases</h5>
+        <p>Use cases can be defined with a jobs to be done (JTBD) template that follows a situation, motivation,
+            expected outcome format</p>
+        <h6>Manager Use Cases</h6>
+        <table>
+            <tr>
+                <th>Situation (When)</th>
+                <th>Motivation (I want to)</th>
+                <th>Expected Outcome (So I can)</th>
+            </tr>
+            <tr>
+                <td>Stock is low</td>
+                <td>Order Stock</td>
+                <td>Be prepared for orders</td>
+            </tr>
+            <tr>
+                <td>Employee joins</td>
+                <td>Train employee</td>
+                <td>Confidently put them on a shift</td>
+            </tr>
+            <tr>
+                <td>Employee leaves</td>
+                <td>Hire employee</td>
+                <td>Have sufficient staff</td>
+            </tr>
+            <tr>
+                <td>Customer complains</td>
+                <td>Communicate with customer</td>
+                <td>Apologize and find problem source</td>
+            </tr>
+            <tr>
+                <td>Quality decreases</td>
+                <td>Communicate with staff</td>
+                <td>Get standards back to where they should be</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Record sales</td>
+                <td>Update accounts and make predictions</td>
+            </tr>
+            <tr>
+                <td>Sales decrease</td>
+                <td>Communicate with staff and investigate other local businesses
+                </td>
+                <td>Determine the cause of sales decreasing</td>
+            </tr>
+            <tr>
+                <td>Product sells out</td>
+                <td>Inform customers or transfer product from other store
+                </td>
+                <td>Stop taking orders or continue taking orders</td>
+            </tr>
+            <tr>
+                <td>Week is about to begin</td>
+                <td>Send hours to staff</td>
+                <td>Make any necessary changes</td>
+            </tr>
+            <tr>
+                <td>Week is over</td>
+                <td>Pay staff</td>
+                <td>Keep their next wage payment separate</td>
+            </tr>
+            <tr>
+                <td>Problem with customer order app</td>
+                <td>Communicate with the company who developed the app</td>
+                <td>Have customer order app working again</td>
+            </tr>
+            <tr>
+                <td>Employee complains</td>
+                <td>Communicate with employee</td>
+                <td>Determine cause of complaint and potential solutions</td>
+            </tr>
+            <tr>
+                <td>Bill arrives by post</td>
+                <td>Pay bill</td>
+                <td>Not accrue additional fees</td>
+            </tr>
+            <tr>
+                <td>Problem with stock</td>
+                <td>Contact supplier</td>
+                <td>Get a refund or replacement</td>
+            </tr>
+        </table>
+        <h6>Employee Use Cases</h6>
+        <table>
+            <tr>
+                <th>Situation (When)</th>
+                <th>Motivation (I want to)</th>
+                <th>Expected Outcome (So I can)</th>
+            </tr>
+            <tr>
+                <td>Phone rings</td>
+                <td>Answer</td>
+                <td>Take order or answer customer query</td>
+            </tr>
+            <tr>
+                <td>Order comes through app</td>
+                <td>Read order</td>
+                <td>Prepare order</td>
+            </tr>
+            <tr>
+                <td>Shift begins</td>
+                <td>Turn on equipment
+                </td>
+                <td>Prepare orders later</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Turn off equipment</td>
+                <td>Prevent fire risk and electricity cost</td>
+            </tr>
+            <tr>
+                <td>There are no orders to be made</td>
+                <td>Clean or prepare for future orders</td>
+                <td>Be prepared for future orders</td>
+            </tr>
+            <tr>
+                <td>Shift needs changed</td>
+                <td>Communicate with management and colleagues</td>
+                <td>Have colleague cover shift and hours updated</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Lock shop</td>
+                <td>Keep equipment and cash inside safe</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Count cash
+                </td>
+                <td>Send sales details to manager</td>
+            </tr>
+            <tr>
+                <td>Shift ends</td>
+                <td>Clean and prepare equipment for next day</td>
+                <td>Not be reprimanded</td>
+            </tr>
+            <tr>
+                <td>Customer enters shop</td>
+                <td>Approach customer</td>
+                <td>Take their order</td>
+            </tr>
+            <tr>
+                <td>Customer order ready</td>
+                <td>Give it to the customer and take their payment</td>
+                <td>Complete the order</td>
+            </tr>
+        </table>
+        <h5>Personas</h5>
+        <p>We capture the the common behaviours that meaningfully characterize each user into a persona. In our case
+            we'll have a persona for both a manager and an employee since their needs will be very different.</p>
+        <h6>Manager Persona</h6>
+        <img src="assets/manager-persona.png" alt="User persona for a small business owner" class="persona"/>
+        <h6>User Persona</h6>
+        <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."
+             class="persona"/>
+    </div>
+    <div class="contribute" id="contribute">
+        <h3>🛠 How to Contribute</h3>
+        <hr/>
+        <p>Any help or feedback to the project is welcome in any form, whether it be tutorials, code for new features,
+            bug fixes, or design ideas.</p>
+        <p>Check out the <a href="CONTRIBUTING.md">Contributing Guide</a>.</p>
+    </div>
+    <div class="license" id="license">
+        <h3>📝 License</h3>
+        <hr/>
+        <p>Licensed under the <a href="LICENSE">MIT License</a>.</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 from flask import Flask, request, Response
-import sqlite3
+import mysql.connector
+import json
 
 from python_freeipa import ClientMeta
 
@@ -7,21 +8,66 @@ app = Flask(__name__)
 # client = ClientMeta('ipa.example.test')
 # client.login('admin', 'Secret123')
 
-conn = sqlite3.connect('test.db')
-print('opened database successfully')
+@app.route('/widgets')
+def get_widgets() :
+  mydb = mysql.connector.connect(
+    host="mysqldb",
+    user="root",
+    password="p@ssw0rd1",
+    database="inventory"
+  )
+  cursor = mydb.cursor()
 
-c = conn.cursor()
 
-c.execute("""CREATE TABLE IF NOT EXISTS CUSTOMER_ORDER(
-CONTACT_NUMBER TEXT,
-CUSTOMER_NAME TEXT,
-CUSTOMER_ORDER TEXT
-)""")
+  cursor.execute("SELECT * FROM widgets")
 
-conn.commit()
+  row_headers=[x[0] for x in cursor.description]
+
+
+
+  results = cursor.fetchall()
+  json_data=[]
+  for result in results:
+    json_data.append(dict(zip(row_headers,result)))
+
+  cursor.close()
+
+  return json.dumps(json_data)
+
+@app.route('/initdb')
+def db_init():
+  mydb = mysql.connector.connect(
+    host="mysqldb",
+    user="root",
+    password="p@ssw0rd1"
+  )
+  cursor = mydb.cursor()
+
+  cursor.execute("DROP DATABASE IF EXISTS inventory")
+  cursor.execute("CREATE DATABASE inventory")
+  cursor.close()
+
+  mydb = mysql.connector.connect(
+    host="mysqldb",
+    user="root",
+    password="p@ssw0rd1",
+    database="inventory"
+  )
+  cursor = mydb.cursor()
+
+  cursor.execute("DROP TABLE IF EXISTS widgets")
+  cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
+  cursor.close()
+
+  return 'init database'
 
 
 # Authentication
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    return 'OK'
 
 
 @app.route('/sign-up', methods=['POST'])
@@ -51,16 +97,15 @@ def customer_order():
     name = request.form['customer-name']
     contact_number = request.form['customer-contact-number']
     order = request.form['customer-order']
-    c.execute("INSERT INTO CUSTOMER_ORDER(CUSTOMER_NAME,CONTACT_NUMBER,CUSTOMER_ORDER) \
-     VALUES (?,?,?)", (name, contact_number, order,))
-    conn.commit()
+    # c.execute("INSERT INTO CUSTOMER_ORDER(CUSTOMER_NAME,CONTACT_NUMBER,CUSTOMER_ORDER) \
+    #  VALUES (?,?,?)", (name, contact_number, order,))
+    # conn.commit()
     return 'OK'
 
 
 @app.route('/customer/orders/')
 def get_customer_orders():
-    orders = c.execute("SELECT * FROM CUSTOMER_ORDER")
-    return orders
+    return 'Not yet implemented'
 
 
 @app.route('/stock/record', methods=['post'])
@@ -179,4 +224,4 @@ def get_dashboard(id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
