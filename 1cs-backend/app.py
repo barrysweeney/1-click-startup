@@ -10,7 +10,6 @@ from python_freeipa import ClientMeta
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # client = ClientMeta('ipa.example.test')
 # client.login('admin', 'Secret123')
 
@@ -55,6 +54,7 @@ while not ready:
         cursor.execute(
             "CREATE TABLE users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
         cursor.close()
+        mydb.close()
         ready = True
     except mysql.connector.errors.InterfaceError:
         continue
@@ -93,8 +93,12 @@ def register():
         "INSERT INTO users(name, email, password, role, business, can_log_in) VALUES(%s, %s, %s, %s, %s, %s)",
         (name, email, password, role, business, can_log_in))
 
+    # commit data to db
+    mydb.commit()
+
     # close connection
     cursor.close()
+    mydb.close()
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
@@ -102,7 +106,7 @@ def register():
 @app.route('/login', methods=['POST'])
 @cross_origin()
 def log_in():
-    # get values from jso request body
+    # get values from json request body
     data = request.json
     email = data['email']
     password_candidate = data['password']
@@ -116,12 +120,13 @@ def log_in():
     )
 
     # create cursor
-    cursor = mydb.cursor()
+    cursor = mydb.cursor(dictionary=True)
 
     # get user by email
     result = cursor.execute("SELECT * FROM users where email = %s", [email])
+    # return cursor.fetchone()
 
-    if result > 0:
+    try:
         # get stored hash
         result_data = cursor.fetchone()
         password = result_data['password']
@@ -132,8 +137,10 @@ def log_in():
             session['logged_in'] = True
             session['name'] = result_data['name']
             return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+        else:
+            raise Exception
 
-    else:
+    except Exception as Ex:
         error = "Email not found"
         return json.dumps({'success': False}), 404, {'ContentType': 'application/json'}
 
