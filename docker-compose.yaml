@@ -21,6 +21,12 @@ services:
     ports:
       - "5000:5000"
       
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+      
   landing:
     build:
       context: ./landing
@@ -36,7 +42,6 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=p@ssw0rd1
-      - MYSQL_CURSORCLASS=DictCursor
     ports:
       - "3306:3306"
       
