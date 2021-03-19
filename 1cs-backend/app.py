@@ -134,8 +134,6 @@ def log_in():
         # compare passwords
         if sha256_crypt.verify(password_candidate, password):
             # password matched
-            session['logged_in'] = True
-            session['name'] = result_data['name']
             return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
         else:
             raise Exception

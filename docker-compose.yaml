@@ -27,15 +27,6 @@ services:
     ports:
       - 8080:8080
       
-  landing:
-    build:
-      context: ./landing
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./landing/src:/app/src
-    ports:
-      - "4200:4200"
-      
   mysqldb:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
