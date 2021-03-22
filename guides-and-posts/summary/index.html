@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>1 Click Startup | Summary</title>
+    <title>1 Click Startup | Developer Guide</title>
     <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -23,65 +23,52 @@
     <div class="toolbar" role="banner">
         <span class="logo"> 📊 💬 📄 </span>
     </div>
-    <div class="introduction">
-        <span class="tagline">
-            Level up your work-flow
-        </span>
-        <p>
-            1 Click Startup is a free and open source project that lets small business' have integrated control of their
-            daily work-flows
-        </p>
-        <div>
-            <button type="button" class="btn btn-primary">
-                license <span class="badge badge-light">MIT</span>
-            </button>
-            <button type="button" class="btn btn-success">
-                PRs <span class="badge badge-light">welcome</span>
-            </button>
-        </div>
-        <div>
-            <a href="#quickstart">Quickstart</a>
-            <span> . </span>
-            <a href="#">Landing Page</a>
-        </div>
-        <p>
-            1 Click Startup is a modern approach to small business work-flows.
-        </p>
+    <div class="who">
+        <h3>Who is it for?</h3>
+        <hr/>
+        <p>The owner of a small business such as a fast-food restaurant.</p>
     </div>
-    <div>
+    <div class="what">
+        <h3>What does it do?</h3>
+        <hr/>
+        <p>With on click, a full IT system is set up for the business which will allow the business owner and employees
+            to interact with familiar software to make sure the work that needs done for their job gets done.</p>
+    </div>
+    <div class="how">
+        <h3>How does it do this?</h3>
+        <hr/>
+        <p>The end project will make use of open source software running in <a href="https://www.docker.com/">Docker</a>
+            containers and using a <a
+                    href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> <a
+                    href="https://www.youtube.com/watch?v=7YcW25PHnAA">REST API</a> webserver to simplify interactions
+            with the software services.</p>
+        <p>We also provide custom, web user interfaces to help make running the business via these services intuitive.</p>
         <ul>
-            <li><strong>Manager Interface.</strong> The manager interface streamlines communication between employees
-                and suppliers.
+            <li><strong>Manager Interface.</strong> The manager interface streamlines communication between the business
+                entities: manager, employees, and suppliers
             </li>
             <li><strong>Employee Interface.</strong> Employees fill in a series of digital forms which log important
                 information about the processes they complete in their work.
             </li>
-            <li><strong>Process Mining.</strong> Data will be piped through a process mining application and the results
-                will be forwarded to the
-                manager's dashboard.
-            </li>
-            <li><strong>Manager Dashboard.</strong> An exclusive manager dashboard will allow them to track key
-                productivity metrics and highlight employee engagement, as well as visualize the business processes to
-                identify bottlenecks.
-            </li>
         </ul>
-        <p>The end project will be the technical implementation of the product (as described above) using tools
-            such as <a href="https://www.docker.com/">Docker</a> and a <a
-                    href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> <a
-                    href="https://www.youtube.com/watch?v=7YcW25PHnAA">REST API</a> webserver.</p>
-        <p>In addition to this, we also want to provide a testing framework with simulated users and managers using a
+    </div>
+    <div>
+        <h3>How do we test the system?</h3>
+        <hr />
+        <p>We also want to provide a testing framework with simulated users and managers using a
             tool such as <a href="https://selenium-python.readthedocs.io/">PySelenium</a>.</p>
     </div>
     <div class="toc">
         <h2>What's In This Document</h2>
         <hr/>
         <ul>
-            <li><a href="#up-and-run">Get Up and Running with Local Development</a></li>
+            <li><a href="#up-and-run">Understanding a business</a></li>
+            <li><a href="#up-and-run">Getting the current system up and running</a></li>
+            <li><a href="#up-and-run">Custom Webserver</a></li>
             <li><a href="#automated-employee-demo">Automated Employee Demo</a></li>
-            <li><a href="#process-mining">Process Mining Introduction</a></li>
-            <li><a href="#ux">User Experience Research and Analysis</a></li>
-            <li><a href="#contribute">How to Contribute</a></li>
-            <li><a href="#license">License</a></li>
+            <li><a href="#automated-employee-demo">AI Manager Demo</a></li>
+            <li><a href="#process-mining">Adding Problems</a></li>
+            <li><a href="#ux">Work Still to do</a></li>
         </ul>
     </div>
     <div class="quickstart" id="up-and-run">
@@ -452,18 +439,6 @@
         <h6>User Persona</h6>
         <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."
              class="persona"/>
-    </div>
-    <div class="contribute" id="contribute">
-        <h3>🛠 How to Contribute</h3>
-        <hr/>
-        <p>Any help or feedback to the project is welcome in any form, whether it be tutorials, code for new features,
-            bug fixes, or design ideas.</p>
-        <p>Check out the <a href="CONTRIBUTING.md">Contributing Guide</a>.</p>
-    </div>
-    <div class="license" id="license">
-        <h3>📝 License</h3>
-        <hr/>
-        <p>Licensed under the <a href="LICENSE">MIT License</a>.</p>
     </div>
 </div>
 </body>
