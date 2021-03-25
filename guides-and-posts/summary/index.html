@@ -42,7 +42,8 @@
                     href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> <a
                     href="https://www.youtube.com/watch?v=7YcW25PHnAA">REST API</a> webserver to simplify interactions
             with the software services.</p>
-        <p>We also provide custom, web user interfaces to help make running the business via these services intuitive.</p>
+        <p>We also provide custom, web user interfaces to help make running the business via these services
+            intuitive.</p>
         <ul>
             <li><strong>Manager Interface.</strong> The manager interface streamlines communication between the business
                 entities: manager, employees, and suppliers
@@ -54,7 +55,7 @@
     </div>
     <div>
         <h3>How do we test the system?</h3>
-        <hr />
+        <hr/>
         <p>We also want to provide a testing framework with simulated users and managers using a
             tool such as <a href="https://selenium-python.readthedocs.io/">PySelenium</a>.</p>
     </div>
@@ -75,22 +76,12 @@
         <h3>👤 Understanding a business</h3>
         <hr/>
         <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that we
-            need to define our user and figure out more specific details regarding their current work-flows,
-            including the services and platforms they use. We'll also take a look at the approaches being employed
-            by others with similarities to our product.</p>
-        <h4>Research</h4>
-        <h5>Surveys</h5>
-        <p>Surveys, especially those with no follow-up questions, provide
-            quantitative data from which we can analyze responses to recognize patterns.</p>
-        <p>You can find a report of the survey by opening <a href="assets/usability-report.pdf">this PDF file</a>.
-        </p>
-        <h4>Analyze</h4>
-        <p>We can take the raw data we gathered from our interview (transcript omitted for confidentiality) and surveys
-            to define our target user's behaviour and
-            attitudes.</p>
+            need to define our user and figure out more specific details regarding their current work-flows.</p>
+        <p>After conducting a survey with Google forms and an in person interview with a local business owner, the
+            following use cases have been identified. These are jobs we want to incorporate into our product to improve
+            the user's workflow.</p>
         <h5 id="use-cases">Use Cases</h5>
-        <p>Use cases can be defined with a jobs to be done (JTBD) template that follows a situation, motivation,
-            expected outcome format</p>
+
         <h6>Manager Use Cases</h6>
         <table>
             <tr>
@@ -236,24 +227,71 @@
                 <td>Complete the order</td>
             </tr>
         </table>
-        <h5>Personas</h5>
-        <p>We capture the the common behaviours that meaningfully characterize each user into a persona. In our case
-            we'll have a persona for both a manager and an employee since their needs will be very different.</p>
-        <h6>Manager Persona</h6>
-        <img src="assets/manager-persona.png" alt="User persona for a small business owner" class="persona"/>
-        <h6>User Persona</h6>
-        <img src="assets/employee-persona.png" alt="User persona for the employee of a small business."
-             class="persona"/>
+        <p>If we think about think about completing these tasks in terms of webpages we see that for communication or
+            record keeping we can provide forms on the user interface but for tasks which need performed physically such
+            as turning off equipment we can just provide a form to acknowledge that the task has been completed.</p>
+        <p>Open source software can enable us to automate some of the tasks required to run the business. Stock could be
+            automatically re-ordered for example. Open source communication services can also be employed.</p>
     </div>
     <div class="quickstart" id="up-and-run">
-        <h3>🛫 Get Up and Running with Local Development</h3>
+        <h3>🛫 Getting the current system up and running</h3>
         <hr/>
-        <p>Before we dive in to the short steps to get up and running we'll briefly mention the prerequisite tools.</p>
-        <p>Experienced developers can <a href="#quickstart">jump ahead to the quickstart</a>.</p>
         <p id="prereq">It may seem like a lot of initial setup if you're new to the tools but it'll be well worth it.
             Getting
             familiar with these tools will put you in good stead to take your ability as a software engineer to the next
             level and will set you apart from others interviewing for entry-level software engineering jobs.</p>
+        <p>We'll begin by getting the necessary files onto your machine with Git</p>
+        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
+            Project - Introduction to Git</a>:</p>
+        <blockquote>"Git is like a really epic save button for your files and directories. Officially, Git is a version
+            control system.
+        </blockquote>
+        <p>The next few steps have been adapted from <a href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
+            - Configure Git (Linux or Mac) and Github
+            (all operating systems)</a></p>
+        <p>First we open a new terminal with the key combination ctrl+alt+t or alternatively search for "terminal"</p>
+        <img src="assets/open-terminal.png">
+        <p>From there we can run these commands in the terminal to update the Linux system</p>
+        <pre><code>sudo apt update
+sudo apt upgrade</code></pre>
+        <p>And to install git</p>
+        <pre><code>sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
+sudo apt install git</code></pre>
+        <p>Now we can configure Git and Github. Be sure to enter your own information inside the quotes (but include the
+            quotation marks).</p>
+        <pre><code>git config --global user.name "Your Name"
+git config --global user.email "yourname@example.com"</code></pre>
+        <p>We change Git's default branch (don't worry about the Git terminology here) to main to match GitHub's default
+            branch name</p>
+        <pre><code>git config --global init.defaultBranch main</code></pre>
+        <p>Next you can go to <a href="https://github.com/">GitHub.com</a> and create an account if you don't already
+            have one.</p>
+        <p>That completes our Git setup.</p>
+        <p>After getting our project up and running, to get started with Git I recommend <a
+                href="https://www.youtube.com/watch?v=HVsySz-h9r4">this video by Cory
+            Schafer</a> and <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
+            lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
+            soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong></p>
+        <p>Now we can get all the files you need to get up and running on your machine.</p>
+        <p>The next few steps have been adapted from <a
+                href="https://help.github.com/articles/fork-a-repo/"> GitHub Docs - Fork a repo</a></p>
+        <p>On GitHub, we go to the <a href="https://github.com/barrysweeney/1-click-startup">1 Click Startup
+            repository</a></p>
+        <p>We click to fork the repository, essentially creating a new copy that doesn't affect the original</p>
+        <img src="assets/fork.png">
+        <p>Now we can clone the forked repository so you have the files available on your machine as well as on your
+            GitHub account.</p>
+        <p>You can modify the following URL with your GitHub username to find your forked repository: https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</p>
+        <p>We can click the code button above the list of files</p>
+        <img src="assets/code-button.png">
+        <p>Next, to clone the repository with HTTPS you can click the clipboard icon to copy the URL</p>
+        <img src="assets/https-clipboard.png">
+        <p>Now we can go back to our terminal and type git clone and paste the copied URL with ctrl+shift+v</p>
+        <p>It should look something like this</p>
+        <pre><code>git clone https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</code></pre>
+        <p>If we hit enter the local clone should be created and we should have all the files we need.</p>
+
         <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
         <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
             environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the
@@ -277,33 +315,16 @@
             modules that enable web application developers to write applications without worrying about low-level
             details such as protocol, thread management, and so on."
         </blockquote>
-        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
-            Project - Introduction to Git</a>:</p>
-        <blockquote>"Git is like a really epic save button for your files and directories. Officially, Git is a version
-            control system.
-
-            Git is useful for creating snapshots of your work. If you realize halfway through that you've messed up,
-            it's much easier to reset.
-
-            Git and GitHub are useful for teams because they can merge code together. A developer can work on one part
-            of the code while a second developer works on another part. They can then use Git and GitHub to easily
-            combine their changes."
-        </blockquote>
         <ul>
             <li><a href="https://docs.docker.com/engine/install/">Docker - Install Docker Engine on Linux</a></li>
             <li><a href="https://docs.docker.com/docker-for-mac/install/">Docker - Install Docker Desktop on Mac</a>
             </li>
             <li><a href="https://docs.docker.com/docker-for-windows/install/">Docker - Install Docker Desktop on
                 Windows</a></li>
-            <li><a href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
-                - Configure Git (Linux or Mac) and Github
-                (all operating systems)</a></li>
+
             <li><a href="https://github.com/git-guides/install-git">Github - Install Git on any OS</a></li>
         </ul>
-        <p>To get started with Git I recommend <a href="https://www.youtube.com/watch?v=HVsySz-h9r4">this video by Cory
-            Schafer</a> and <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
-            lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
-            soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong></p>
+
         <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">The Odin
             Project - Git Basics</a>:</p>
         <blockquote>"In this lesson, we’ll cover common Git commands used to manage your projects and to upload your
