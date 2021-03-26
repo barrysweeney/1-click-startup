@@ -36,25 +36,9 @@ pre {
 
 pre > code {
     display: block;
-    padding: 1rem;
     word-wrap: normal;
 }
 
-.red-code {
-    color: #922525;
-}
-
-.green-code {
-    color: #346f34;
-}
-
-.yellow-code {
-    color: #d5bc3c;
-}
-
-.orange-code {
-    color: #ee9244;
-}
 
 .persona {
     border: 2px solid black;

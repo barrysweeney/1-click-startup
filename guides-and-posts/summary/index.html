@@ -11,6 +11,7 @@
             crossorigin="anonymous"
     />
     <link rel="shortcut icon" type="image/png" href="assets/bs-logo.png"/>
+    <link href="themes/prism.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -254,19 +255,19 @@
         <p>First we open a new terminal with the key combination ctrl+alt+t or alternatively search for "terminal"</p>
         <img src="assets/open-terminal.png">
         <p>From there we can run these commands in the terminal to update the Linux system</p>
-        <pre><code>sudo apt update
+        <pre><code class="language-bash">sudo apt update
 sudo apt upgrade</code></pre>
         <p>And to install git</p>
-        <pre><code>sudo add-apt-repository ppa:git-core/ppa
+        <pre><code class="language-bash">sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
 sudo apt install git</code></pre>
         <p>Now we can configure Git and GitHub. Be sure to enter your own information inside the quotes (but include the
             quotation marks).</p>
-        <pre><code>git config --global user.name "Your Name"
+        <pre><code class="language-bash">git config --global user.name "Your Name"
 git config --global user.email "yourname@example.com"</code></pre>
         <p>We change Git's default branch (don't worry about the Git terminology here) to main to match GitHub's default
             branch name</p>
-        <pre><code>git config --global init.defaultBranch main</code></pre>
+        <pre><code class="language-bash">git config --global init.defaultBranch main</code></pre>
         <p>Next you can go to <a href="https://github.com/">GitHub.com</a> and create an account if you don't already
             have one.</p>
         <p>That completes our Git setup.</p>
@@ -293,9 +294,10 @@ git config --global user.email "yourname@example.com"</code></pre>
         <img src="assets/https-clipboard.png">
         <p>Now we can go back to our terminal and type git clone and paste the copied URL with ctrl+shift+v</p>
         <p>It should look something like this</p>
-        <pre><code>git clone https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</code></pre>
+        <pre><code class="language-bash">git clone https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</code></pre>
         <p>If we hit enter the local clone should be created and we should have all the files we need.</p>
         <h4>Set up Docker and Docker Compose</h4>
+        <h5>Set up Docker Engine</h5>
         <p>We'll install Docker so we can run our different services (frontend UI, database, etc) in containers to limit
             the number of services we need to install locally.</p>
         <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
@@ -320,20 +322,21 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>The following steps are adapted from <a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker
             Engine on Ubuntu</a></p>
         <p>If you think you may have some older versions of Docker installed tou can uninstall them with</p>
-        <pre><code>sudo apt-get remove docker docker-engine docker.io containerd runc</code></pre>
+        <pre><code class="language-bash">sudo apt-get remove docker docker-engine docker.io containerd runc</code></pre>
         <p>Next we'll set up the Docker repository. First we'll update the apt package index and install the packages
             that allow apt to use a repository over HTTPS.</p>
-        <pre><code>sudo apt-get update
+        <pre><code class="language-bash">sudo apt-get update
 sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agent \ software-properties-common</code></pre>
         <p>Next we'll add the official Docker GPG key:</p>
-        <pre><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</code></pre>
+        <pre><code class="language-bash">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</code></pre>
         <p>And we can set up the stable repository with the following command</p>
-        <pre><code>echo \
+        <pre><code class="language-bash">echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</code></pre>
         <p>We can now install the latest version of Docker Engine and containerd</p>
-        <pre><code>sudo apt-get update
+        <pre><code class="language-bash">sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
+        <h5>Set up Docker Compose</h5>
         <p>Next we'll install Docker Compose</p>
         <p>From <a href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
         <blockquote>"Compose is a tool for defining and running multi-container Docker applications."</blockquote>
@@ -342,9 +345,9 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>This is the command we can use to install Compose on Linux systems, for other systems and alternative install
             options you can use <a href="https://docs.docker.com/compose/install/">Docker - Install Docker Compose</a>
         </p>
-        <pre><code>sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></pre>
+        <pre><code class="language-bash">sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></pre>
         <p>And we can apply executable permissions with</p>
-        <pre><code>sudo chmod +x /usr/local/bin/docker-compose</code></pre>
+        <pre><code class="language-bash">sudo chmod +x /usr/local/bin/docker-compose</code></pre>
         <h4>Set up IDE</h4>
         <p>*******************************************************</p>
         <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
@@ -396,9 +399,9 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
             <li>1. Clone this repository (feel free to check out <a
                     href="https://help.github.com/articles/fork-a-repo/"> this guide</a> if you're new to cloning
                 🛸)<br>
-                <code>git clone https://github.com/barrysweeney/1-click-startup.git</code>
+                <code class="language-bash">git clone https://github.com/barrysweeney/1-click-startup.git</code>
             </li>
-            <li>2. Run the local development containers<br><code>cd 1-click-startup<br>sudo docker-compose up</code>
+            <li>2. Run the local development containers<br><code class="language-bash">cd 1-click-startup<br>sudo docker-compose up</code>
                 (check out <a href="https://docs.docker.com/compose/install/">this guide</a> if you need to install
                 Docker Compose 🐳)
             </li>
@@ -440,7 +443,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as rooms in
             our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our
             hotel reception (or lobby if you prefer).</p>
-        <p>When we run <code>sudo docker-compose up</code> we're starting different containers relating to our
+        <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers relating to our
             application.</p>
         <p>We're getting our rooms ready and letting our guests into them.</p>
         <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get the
@@ -448,7 +451,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>They walk down the corridor to the <a href="https://github.com/SeleniumHQ/docker-selenium">Webdriver</a> room
             to get the key for the door to the Web Browser room.</p>
         <pre>
-        <code>driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
+        <code class="language-bash">driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
             <span class="red-code">command_executor</span>=<span
                     class="green-code">"http://172.17.0.1:4444/wd/hub"</span>)</code></pre>
         <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
@@ -459,11 +462,11 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         </p>
         <p>With the next line of code our automated employee can access the customer order page of the frontend user
             interface which is in a different container accessible at port 8000 on our Docker network.</p>
-        <pre><code>driver.get(<span class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
+        <pre><code class="language-bash">driver.get(<span class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
         <p>This is what our employee now sees:</p>
         <img src="assets/customer-order.png" alt="Customer Order form"/>
         <p>They can now fill in and submit the form:</p>
-        <pre><code>
+        <pre><code class="language-bash">
     driver.find_element_by_id(<span class="green-code">"customer-name"</span>).send_keys(<span class="green-code">"John Doe"</span>)
     driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys(<span
                 class="green-code">"+44700000010"</span>)
@@ -475,11 +478,11 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
                 href="https://en.wikipedia.org/wiki/POST_(HTTP)">POST</a> request to our backend Flask
             webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room to
             Flask's room).</p>
-        <pre><code><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
+        <pre><code class="language-bash"><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
                 class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
                 class="yellow-code">&gt;</span>...</code></pre>
         <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
-        <pre><code>
+        <pre><code class="language-bash">
 <span class="yellow-code">@app.route</span>(<span class="green-code">'/customer/order/new'</span><span
                 class="orange-code">,</span> <span class="red-code">methods</span>=[<span
                 class="green-code">'post'</span>])
@@ -509,5 +512,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
             processes and workflows. We can pipe the results of our process mining to the manager's dashboard.</p>
     </div>
 </div>
+<script src="prism.js"></script>
 </body>
 </html>
