@@ -240,13 +240,15 @@
             Getting
             familiar with these tools will put you in good stead to take your ability as a software engineer to the next
             level and will set you apart from others interviewing for entry-level software engineering jobs.</p>
+        <h4>Set up Git and GitHub</h4>
         <p>We'll begin by getting the necessary files onto your machine with Git</p>
         <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
             Project - Introduction to Git</a>:</p>
         <blockquote>"Git is like a really epic save button for your files and directories. Officially, Git is a version
             control system.
         </blockquote>
-        <p>The next few steps have been adapted from <a href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
+        <p>The next few steps have been adapted from <a
+                href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
             - Configure Git (Linux or Mac) and Github
             (all operating systems)</a></p>
         <p>First we open a new terminal with the key combination ctrl+alt+t or alternatively search for "terminal"</p>
@@ -258,7 +260,7 @@ sudo apt upgrade</code></pre>
         <pre><code>sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
 sudo apt install git</code></pre>
-        <p>Now we can configure Git and Github. Be sure to enter your own information inside the quotes (but include the
+        <p>Now we can configure Git and GitHub. Be sure to enter your own information inside the quotes (but include the
             quotation marks).</p>
         <pre><code>git config --global user.name "Your Name"
 git config --global user.email "yourname@example.com"</code></pre>
@@ -268,7 +270,7 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>Next you can go to <a href="https://github.com/">GitHub.com</a> and create an account if you don't already
             have one.</p>
         <p>That completes our Git setup.</p>
-        <p>After getting our project up and running, to get started with Git I recommend <a
+        <p>After getting our project up and running, to get started with Git I recommend returning <a
                 href="https://www.youtube.com/watch?v=HVsySz-h9r4">this video by Cory
             Schafer</a> and <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
             lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
@@ -282,22 +284,69 @@ git config --global user.email "yourname@example.com"</code></pre>
         <img src="assets/fork.png">
         <p>Now we can clone the forked repository so you have the files available on your machine as well as on your
             GitHub account.</p>
-        <p>You can modify the following URL with your GitHub username to find your forked repository: https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</p>
+        <p>You can modify the following URL with your GitHub username to find your forked repository:
+            https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</p>
         <p>We can click the code button above the list of files</p>
         <img src="assets/code-button.png">
-        <p>Next, to clone the repository with HTTPS you can click the clipboard icon to copy the URL</p>
+        <p>Next, to clone the repository with HTTPS you can click the clipboard icon to copy the URL (note the URL
+            should look like https://github.com/YOUR-GITHUB-USERNAME/1-click-startup )</p>
         <img src="assets/https-clipboard.png">
         <p>Now we can go back to our terminal and type git clone and paste the copied URL with ctrl+shift+v</p>
         <p>It should look something like this</p>
         <pre><code>git clone https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</code></pre>
         <p>If we hit enter the local clone should be created and we should have all the files we need.</p>
-
+        <h4>Set up Docker and Docker Compose</h4>
+        <p>We'll install Docker so we can run our different services (frontend UI, database, etc) in containers to limit
+            the number of services we need to install locally.</p>
         <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
         <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
             environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the
             de
-            facto standard to build and share containerized apps - from desktop, to the cloud."
+            facto standard to build and share containerized apps"
         </blockquote>
+        <p> This guide includes installing Docker engine on Ubuntu. For other operating systems, Linux platforms, and
+            alternative install methods I'll point you to these guides to</p>
+        <ul>
+            <li><a target="_blank" href="https://docs.docker.com/engine/install/"
+            >Install Docker Engine on Linux</a
+            ></li>
+            <li><a target="_blank" href="https://docs.docker.com/docker-for-mac/install/"
+            >Install Docker Desktop on MAC</a
+            ></li>
+            <li><a target="_blank" href="https://docs.docker.com/docker-for-windows/install/"
+            >Install Docker Desktop on Windows</a
+            ></li>
+        </ul>
+        <p>The following steps are adapted from <a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker
+            Engine on Ubuntu</a></p>
+        <p>If you think you may have some older versions of Docker installed tou can uninstall them with</p>
+        <pre><code>sudo apt-get remove docker docker-engine docker.io containerd runc</code></pre>
+        <p>Next we'll set up the Docker repository. First we'll update the apt package index and install the packages
+            that allow apt to use a repository over HTTPS.</p>
+        <pre><code>sudo apt-get update
+sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agent \ software-properties-common</code></pre>
+        <p>Next we'll add the official Docker GPG key:</p>
+        <pre><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</code></pre>
+        <p>And we can set up the stable repository with the following command</p>
+        <pre><code>echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</code></pre>
+        <p>We can now install the latest version of Docker Engine and containerd</p>
+        <pre><code>sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
+        <p>Next we'll install Docker Compose</p>
+        <p>From <a href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
+        <blockquote>"Compose is a tool for defining and running multi-container Docker applications."</blockquote>
+        <p>The following steps are adapted from <a href="https://docs.docker.com/compose/install/">Docker - Install
+            Docker Compose</a></p>
+        <p>This is the command we can use to install Compose on Linux systems, for other systems and alternative install
+            options you can use <a href="https://docs.docker.com/compose/install/">Docker - Install Docker Compose</a>
+        </p>
+        <pre><code>sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></pre>
+        <p>And we can apply executable permissions with</p>
+        <pre><code>sudo chmod +x /usr/local/bin/docker-compose</code></pre>
+        <h4>Set up IDE</h4>
+        <p>*******************************************************</p>
         <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
         <blockquote>"Selenium automates browsers. That's it!
             What you do with that power is entirely up to you.
@@ -335,10 +384,9 @@ git config --global user.email "yourname@example.com"</code></pre>
         </blockquote>
         <p>There's one last thing but it really helps tie the project together and help define how our data will move
             through our application and integrate with different services...</p>
-        <p>From <a href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
-        <blockquote>"Compose is a tool for defining and running multi-container Docker applications."</blockquote>
+
         <ul>
-            <li><a href="https://docs.docker.com/compose/install/">Docker - Install Docker Compose</a></li>
+            <li></li>
         </ul>
         <p id="quickstart">Once you've <a href="#prereq">installed the prerequisites</a>, there are a few steps that
             will
