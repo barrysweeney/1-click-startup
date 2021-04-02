@@ -11,7 +11,7 @@
             crossorigin="anonymous"
     />
     <link rel="shortcut icon" type="image/png" href="assets/bs-logo.png"/>
-    <link href="themes/prism.css" rel="stylesheet" />
+    <link href="themes/prism.css" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -349,6 +349,41 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>And we can apply executable permissions with</p>
         <pre><code class="language-bash">sudo chmod +x /usr/local/bin/docker-compose</code></pre>
         <h4>Set up IDE</h4>
+        <p>We'll be using Visual Studio Code (VS Code) for the purpose of this guide due to it's versatility; allowing
+            us to code JavaScript
+            and Python in the same editor.</p>
+        <p>I think the easiest way is to open up Ubuntu Software which should appear when you start searching for
+            "ubuntu"</p>
+        <img src="assets/usoft.png" alt="Searching Ubuntu desktop for Ubuntu Store">
+        <p>From inside the Software store you can use the 🔎 icon and start searching for "vscode"</p>
+        <img src="assets/vscode-search.png" alt="Searching for Visual Studio Code on the Ubuntu Software store">
+        <p>And we can now click the install button</p>
+        <img src="assets/vscode-install-button.png" alt="Visual Studio Code install button">
+        <p>We can now search for "vscode" and at this point I like to add to favourites so I can access VS Code from the
+            application drawer</p>
+        <img src="assets/vscode-favourite.png"
+             alt="Searching for Visual Studio Code on Ubuntu with the add to favourites option highlighted">
+        <p>THe following section of the tutorial draws from <a
+                href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS
+            Code</a> You can now open a new window of Visual Studio Code</p>
+        <img src="assets/vscode-new-window.png"
+             alt="Searching for Visual Studio Code on Ubuntu with the New Window option highlighted">
+        <p>Now we can navigate to the extensions tab</p>
+        <img src="assets/extensions.png" alt="Visual Studio Code menu with extensions tab highlighted">
+        <p>And download the Python extension</p>
+        <img src="assets/python-extension-vscode.png" alt="Python VS Code extension with install button">
+        <p>As Ubuntu comes with Python3 pre-installed we can move on to installing pip. (For other Operating Systems you
+            can see options like brew for MacOS and WSL for Windows in <a
+                    href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS
+                Code</a> )</p>
+        <p>To install pip...</p>
+        <pre><code class="language-bash">sudo apt install -y python3-pip</code></pre>
+        <p>We can now open our Flask code and select our Python interpreter</p>
+        <p>From <a
+                href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS
+            Code</a></p>
+        <blockquote>"Python is an interpreted language, and in order to run Python code and get Python IntelliSense, you must tell VS Code which interpreter to use."</blockquote>
+        <p>Inside the cloned 1-click-startup repository you'll see a folder "1cs-backend" which you can right click to select open with other application</p>
         <p>*******************************************************</p>
         <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
         <blockquote>"Selenium automates browsers. That's it!
@@ -401,7 +436,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
                 🛸)<br>
                 <code class="language-bash">git clone https://github.com/barrysweeney/1-click-startup.git</code>
             </li>
-            <li>2. Run the local development containers<br><code class="language-bash">cd 1-click-startup<br>sudo docker-compose up</code>
+            <li>2. Run the local development containers<br><code class="language-bash">cd 1-click-startup<br>sudo
+                docker-compose up</code>
                 (check out <a href="https://docs.docker.com/compose/install/">this guide</a> if you need to install
                 Docker Compose 🐳)
             </li>
@@ -443,7 +479,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as rooms in
             our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our
             hotel reception (or lobby if you prefer).</p>
-        <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers relating to our
+        <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers
+            relating to our
             application.</p>
         <p>We're getting our rooms ready and letting our guests into them.</p>
         <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get the
@@ -462,7 +499,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         </p>
         <p>With the next line of code our automated employee can access the customer order page of the frontend user
             interface which is in a different container accessible at port 8000 on our Docker network.</p>
-        <pre><code class="language-bash">driver.get(<span class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
+        <pre><code class="language-bash">driver.get(<span
+                class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
         <p>This is what our employee now sees:</p>
         <img src="assets/customer-order.png" alt="Customer Order form"/>
         <p>They can now fill in and submit the form:</p>
