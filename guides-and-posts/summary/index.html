@@ -382,8 +382,36 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>From <a
                 href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS
             Code</a></p>
-        <blockquote>"Python is an interpreted language, and in order to run Python code and get Python IntelliSense, you must tell VS Code which interpreter to use."</blockquote>
-        <p>Inside the cloned 1-click-startup repository you'll see a folder "1cs-backend" which you can right click to select open with other application</p>
+        <blockquote>"Python is an interpreted language, and in order to run Python code and get Python IntelliSense, you
+            must tell VS Code which interpreter to use."
+        </blockquote>
+        <p>Inside the cloned 1-click-startup repository you'll see a folder "1cs-backend" which you can right click to
+            select open with other application</p>
+        <img src="assets/open-with-vscode.png">
+        <p>We can select VS Code and from here, we can install a virtual environment. Here's what the Visual Studio Code
+            guide referenced above
+            has to say about them:</p>
+        <blockquote>"A best practice among Python developers is to avoid installing packages into a global interpreter
+            environment. You instead use a project-specific virtual environment that contains a copy of a global
+            interpreter. Once you activate that environment, any packages you then install are isolated from other
+            environments. Such isolation reduces many complications that can arise from conflicting package versions."
+        </blockquote>
+        <p>Within VS Code you can use</p>
+        <pre><code>ctrl+alt+`</code></pre>
+        to open a terminal and type the following to setup and activate the virtual environment</p>
+        <pre><code class="language-bash">python3 -m venv .venv
+source .venv/bin/activate</code></pre>
+        <p>We can use
+        <pre><code>ctrl+shift+p</code></pre>
+        to open the command palette and start typing "python:select interpreter"</p>
+        <img src="assets/python-select-interpreter.png">
+        <p>And select our interpreter from the menu (or navigate to the folder on your system)</p>
+        <img src="assets/venv-interpreter.png">
+        <p>We can install the packages required by our backend code by running the following command within our
+            activated virtual environment</p>
+        <pre><code class="language-bash">pip3 install -r requirements.txt</code></pre>
+        <p>That's all the work done to setup our python backend. If you try to run the code now you'll still get errors
+            because we are yet to setup our database etc.</p>
         <p>*******************************************************</p>
         <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
         <blockquote>"Selenium automates browsers. That's it!
