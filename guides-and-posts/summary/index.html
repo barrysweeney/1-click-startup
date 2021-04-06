@@ -66,7 +66,8 @@
         <ul>
             <li><a href="#understand-business">Understanding a business</a></li>
             <li><a href="#up-and-run">Getting the current system up and running</a></li>
-            <li><a href="#up-and-run">Custom Webserver</a></li>
+            <li><a href="#new-service">Adding a new service</a></li>
+            <li><a href="#custom-webserver">Custom Webserver</a></li>
             <li><a href="#automated-employee-demo">Automated Employee Demo</a></li>
             <li><a href="#automated-employee-demo">AI Manager Demo</a></li>
             <li><a href="#process-mining">Adding Problems</a></li>
@@ -369,7 +370,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <img src="assets/vscode-new-window.png"
              alt="Searching for Visual Studio Code on Ubuntu with the New Window option highlighted">
         <p>Now we can navigate to the extensions tab</p>
-        <img src="assets/extensions.png" alt="Visual Studio Code menu with extensions tab highlighted">
+        <img src="assets/extensions.png" alt="Visual Studio Code menu with extensions tab highlighted"
+             class="extensions-img">
         <p>And download the Python extension</p>
         <img src="assets/python-extension-vscode.png" alt="Python VS Code extension with install button">
         <p>As Ubuntu comes with Python3 pre-installed we can move on to installing pip. (For other Operating Systems you
@@ -410,8 +412,38 @@ source .venv/bin/activate</code></pre>
         <p>We can install the packages required by our backend code by running the following command within our
             activated virtual environment</p>
         <pre><code class="language-bash">pip3 install -r requirements.txt</code></pre>
-        <p>That's all the work done to setup our python backend. If you try to run the code now you'll still get errors
+        <p>That's all the work done to set up our python backend. If you try to run the code now you'll still get errors
             because we are yet to setup our database etc.</p>
+        <h4>Run development containers</h4>
+        <p>To run our development containers we'll navigate to where we've cloned the files locally which can be done by
+            opening a terminal with <code>ctrl+alt+t</code></p>
+        <p>From here we can change directory to the cloned repository with</p>
+        <pre><code class="language-bash">cd 1-click-startup</code></pre>
+        <p>Now we can run</p>
+        <pre><code class="language-bash">sudo docker-compose up</code></pre>
+        <p>The relevant ports are now exposed and can be accessed on your local machine</p>
+        <p>The <strong>Frontend Interface</strong> is accessible at <a href="http://localhost:8000">http://localhost:8000</a>
+        </p>
+        <p>This frontend connects to the <strong>Backend Webserver</strong> at <a href="http://localhost:5000">http://localhost:5000</a>
+        </p>
+        <p>Requests are made form the backend to the <strong>MySQL Database</strong> at <a href="http://localhost:3306">http://localhost:3306</a>
+        </p>
+        <p>For more control over the database in development, a database graphical interface - <strong>Adminer</strong>
+            - is accessible at <a href="http://localhost:8080">http://localhost:8080</a></p>
+        <p>To login we enter our server as "mysqldb", username as "root" and password as "p@ssw0rd1"</p>
+        <img src="assets/adminer-login.png">
+        <p>This configuration information as well as other ports exposed for user automation can be found in the
+            <code>docker-compose.yaml</code> file at the root of the cloned directory.</p>
+        <p>Additional ports have been exposed such as</p>
+        <p>We'll dive a little deeper into this file when we move on to adding a service later but for now we can take a
+            quick look so you get the general idea of how we tell our application which services to start and what port
+            to expose them on:</p>
+        <img src="assets/compose-yaml.png">
+        <p>Essentially we either provide a path to a Dockerfile to build the service (as done with the backend service)
+            or we name the image as an existing service we want to use such as with the mysql image (this image is then
+            pulled from )</p>
+        <p>We don't need to worry too much about all of the commands right now as we'll see them again later when we're
+            adding a new service.</p>
         <p>*******************************************************</p>
         <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
         <blockquote>"Selenium automates browsers. That's it!
@@ -469,19 +501,13 @@ source .venv/bin/activate</code></pre>
                 (check out <a href="https://docs.docker.com/compose/install/">this guide</a> if you need to install
                 Docker Compose 🐳)
             </li>
-            <li>3. The relevant ports are now exposed and can be accessed on your local machine<br>
-                <ul style="list-style: none">
-                    <li><strong>Frontend Interface</strong> <a href="http://localhost:8000">http://localhost:8000</a>
-                    </li>
-                    <li><strong>Backend Webserver</strong> <a href="http://localhost:5000">http://localhost:5000</a>
-                    </li>
-                    <li><strong>Landing Page</strong> <a href="http://localhost:4200">http://localhost:4200</a></li>
-                    <li><strong>Selenium Web Driver</strong> <a href="http://localhost:4444">http://localhost:4444</a>
-                    </li>
-                </ul>
-            </li>
+
             <li>4. Open backend, frontend, or landing page folders in your IDE of choice and start coding.</li>
         </ul>
+    </div>
+    <div class="new-service" id="new-service">
+        <h3>Adding a new service</h3>
+        <hr>
     </div>
     <div class="automation" id="automated-employee-demo">
         <h3>🤖 Automation</h3>
