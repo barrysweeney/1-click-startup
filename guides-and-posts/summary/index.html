@@ -129,9 +129,7 @@
             </tr>
             <tr>
                 <td>Product sells out</td>
-                <td>Inform customers or transfer product from other store
-                </td>
-                <td>Stop taking orders or continue taking orders</td>
+                <td>Stop taking orders</td>
             </tr>
             <tr>
                 <td>Week is about to begin</td>
@@ -142,11 +140,6 @@
                 <td>Week is over</td>
                 <td>Pay staff</td>
                 <td>Keep their next wage payment separate</td>
-            </tr>
-            <tr>
-                <td>Problem with customer order app</td>
-                <td>Communicate with the company who developed the app</td>
-                <td>Have customer order app working again</td>
             </tr>
             <tr>
                 <td>Employee complains</td>
@@ -462,55 +455,17 @@ source .venv/bin/activate</code></pre>
             modules that enable web application developers to write applications without worrying about low-level
             details such as protocol, thread management, and so on."
         </blockquote>
-        <ul>
-            <li><a href="https://docs.docker.com/engine/install/">Docker - Install Docker Engine on Linux</a></li>
-            <li><a href="https://docs.docker.com/docker-for-mac/install/">Docker - Install Docker Desktop on Mac</a>
-            </li>
-            <li><a href="https://docs.docker.com/docker-for-windows/install/">Docker - Install Docker Desktop on
-                Windows</a></li>
-
-            <li><a href="https://github.com/git-guides/install-git">Github - Install Git on any OS</a></li>
-        </ul>
-
-        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">The Odin
-            Project - Git Basics</a>:</p>
-        <blockquote>"In this lesson, we’ll cover common Git commands used to manage your projects and to upload your
-            work onto GitHub. We refer to these commands as the basic Git workflow. When you’re using Git, these are the
-            commands
-            that you’ll use 70-80% of the time, so if you can get these down, you’ll be more than halfway done mastering
-            Git! "
-        </blockquote>
-        <p>There's one last thing but it really helps tie the project together and help define how our data will move
-            through our application and integrate with different services...</p>
-
-        <ul>
-            <li></li>
-        </ul>
-        <p id="quickstart">Once you've <a href="#prereq">installed the prerequisites</a>, there are a few steps that
-            will
-            help you get everything you need running on your local
-            machine.</p>
-        <ul>
-            <li>1. Clone this repository (feel free to check out <a
-                    href="https://help.github.com/articles/fork-a-repo/"> this guide</a> if you're new to cloning
-                🛸)<br>
-                <code class="language-bash">git clone https://github.com/barrysweeney/1-click-startup.git</code>
-            </li>
-            <li>2. Run the local development containers<br><code class="language-bash">cd 1-click-startup<br>sudo
-                docker-compose up</code>
-                (check out <a href="https://docs.docker.com/compose/install/">this guide</a> if you need to install
-                Docker Compose 🐳)
-            </li>
-
-            <li>4. Open backend, frontend, or landing page folders in your IDE of choice and start coding.</li>
-        </ul>
     </div>
     <div class="new-service" id="new-service">
-        <h3>Adding a new service</h3>
+        <h3>➕ Adding a new service</h3>
         <hr>
     </div>
-    <div class="automation" id="automated-employee-demo">
-        <h3>🤖 Automation</h3>
+    <div class="custom-webserver" id="custom-webserver">
+        <h3>💽 Custom Webserver</h3>
+        <hr>
+    </div>
+    <div class="automated-employee-demo" id="automated-employee-demo">
+        <h3>🤖 Automated Employee Demo</h3>
         <hr/>
         <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to
             our first glimpse at automating our user, and work backwards from there.</p>
@@ -558,7 +513,7 @@ source .venv/bin/activate</code></pre>
         <p>This is what our employee now sees:</p>
         <img src="assets/customer-order.png" alt="Customer Order form"/>
         <p>They can now fill in and submit the form:</p>
-        <pre><code class="language-bash">
+        <pre><code class="language-python">
     driver.find_element_by_id(<span class="green-code">"customer-name"</span>).send_keys(<span class="green-code">"John Doe"</span>)
     driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys(<span
                 class="green-code">"+44700000010"</span>)
@@ -574,7 +529,7 @@ source .venv/bin/activate</code></pre>
                 class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
                 class="yellow-code">&gt;</span>...</code></pre>
         <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
-        <pre><code class="language-bash">
+        <pre><code class="language-python">
 <span class="yellow-code">@app.route</span>(<span class="green-code">'/customer/order/new'</span><span
                 class="orange-code">,</span> <span class="red-code">methods</span>=[<span
                 class="green-code">'post'</span>])
@@ -597,12 +552,19 @@ source .venv/bin/activate</code></pre>
         <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
             order, it highlights the flow of data through some of our integrated services.</p>
     </div>
-    <div class="process-mining" id="process-mining">
-        <h3>⛏ Process Mining</h3>
-        <hr/>
-        <p>As users of 1 Click Startup perform various tasks they leave a log of data which we can mine to analyze
-            processes and workflows. We can pipe the results of our process mining to the manager's dashboard.</p>
+    <div class="automated-manager-demo" id="automated-manager-demo">
+        <h3>📊 Automated Manager Demo</h3>
+        <hr>
     </div>
+    <div class="adding-problems" id="adding-problems">
+        <h3>⛈ Adding work problems in the application</h3>
+        <hr>
+    </div>
+    <div class="next-steps" id="next-steps">
+        <h3>📋 Next Steps</h3>
+        <hr>
+    </div>
+
 </div>
 <script src="prism.js"></script>
 </body>
