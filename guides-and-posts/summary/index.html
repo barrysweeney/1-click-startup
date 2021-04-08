@@ -246,7 +246,8 @@
                 href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
             - Configure Git (Linux or Mac) and Github
             (all operating systems)</a></p>
-        <p>First we open a new terminal with the key combination <code>ctrl+alt+t</code> or alternatively search for "terminal"</p>
+        <p>First we open a new terminal with the key combination <code>ctrl+alt+t</code> or alternatively search for
+            "terminal"</p>
         <img src="assets/open-terminal.png">
         <p>From there we can run these commands in the terminal to update the Linux system</p>
         <pre><code class="language-bash">sudo apt update
@@ -286,7 +287,8 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>Next, to clone the repository with HTTPS you can click the clipboard icon to copy the URL (note the URL
             should look like https://github.com/YOUR-GITHUB-USERNAME/1-click-startup )</p>
         <img src="assets/https-clipboard.png">
-        <p>Now we can go back to our terminal and type git clone and paste the copied URL with <code>ctrl+shift+v</code></p>
+        <p>Now we can go back to our terminal and type git clone and paste the copied URL with <code>ctrl+shift+v</code>
+        </p>
         <p>It should look something like this</p>
         <pre><code class="language-bash">git clone https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</code></pre>
         <p>If we hit enter the local clone should be created and we should have all the files we need.</p>
@@ -447,14 +449,84 @@ source .venv/bin/activate</code></pre>
 
             Boring web-based administration tasks can (and should) also be automated as well."
         </blockquote>
+    </div>
+    <div class="custom-webserver" id="custom-webserver">
+        <h3>💽 Custom Webserver</h3>
+        <hr>
         <p>From <a href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask Python?</a>:</p>
         <blockquote>"Flask is a web application framework written in Python.
 
             A Web Application Framework or simply a
             Web Framework represents a collection of libraries and
             modules that enable web application developers to write applications without worrying about low-level
-            details such as protocol, thread management, and so on."
+            details"
         </blockquote>
+        <p>When a user submits a form or clicks a button on the font-end user interface in their browser, a request is
+            made to certain endpoint on the "backend" webserver. For example, when a user attempts to login, their email
+            and password is sent to the Flask webserver which then performs the authentication.</p>
+        <p>Let's start running through the code.</p>
+        <p>We start by importing the relevant packages which are either shipped with Python or installed using pip from
+            our <code>requirements.txt</code> file.</p>
+        <pre><code class="language-python"># For handling requests and responses
+import json
+from flask import Flask, request
+# For database connection
+import mysql.connector
+# For password encryption
+from passlib.hash import sha256_crypt
+# To enable requests from the frontend user interface
+from flask_cors import CORS, cross_origin</code></pre>
+        <p>We then create and configure the app</p>
+        <pre><code class="language-python"># Create Flask instance
+app = Flask(__name__)</code></pre>
+        <p>From <a href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask - Application Setup</a>:
+        </p>
+        <blockquote><code>__name__</code> is the name of the current Python module. The app needs to know where it’s
+            located to set up some paths, and <code>__name__</code> is a convenient way to tell it that.
+        </blockquote>
+        <p>Next, we use the <code>flask_cors</code> module to allow communication between our frontend interface and
+            backend webserver.</p>
+        <pre><code class="language-python"># Enable CORS to permit requests from the frontend to the backend (a different origin)
+CORS(app) # Enables CORS for all routes
+# Allow Content-Type header
+app.config['CORS_HEADERS'] = 'Content-Type'</code></pre>
+        <p>From <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:</p>
+        <blockquote><strong>Cross-Origin Resource Sharing</strong> (CORS) is an HTTP-header based mechanism that allows
+            a server to
+            indicate any other origins (domain, scheme, or port) than its own from which a browser should permit loading
+            of resources
+        </blockquote>
+        <p>Although we've created a dependency between the MySQL and Flask server containers in the <code>docker-compose.yaml</code>
+            file using <code>depends_on</code>, we still need to wait for the MySQL server <em>within</em> the container
+            to be ready for connections.</p>
+        <pre><code class="language-python"># Wait for MYSQL container to be ready for connection before allowing requests to database
+ready = False
+while not ready:
+    try:
+        # Connect to db with parameters matching docker-compose.yaml file
+        mydb = mysql.connector.connect(
+            host="mysqldb",
+            user="root",
+            password="p@ssw0rd1"
+        )
+        # Create cursor
+        cursor = mydb.cursor()
+        # Create and use database "startup" if it doesn't exist
+        # TODO: Implement persistent database storage with volume mounting
+        cursor.execute("CREATE DATABASE startup IF NOT EXISTS ")
+        cursor.execute("USE startup")
+        # Create "users" table if it doesn't exist
+        cursor.execute(
+            "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
+        # Close connection
+        cursor.close()
+        mydb.close()
+        # Break out of while loop by setting ready to True
+        ready = True
+    except mysql.connector.errors.InterfaceError:
+        # Try to connect to database again
+        continue</code></pre>
+        <p>Next we'll look at two routes in a little bit more detail</p>
     </div>
     <div class="new-service" id="new-service">
         <h3>➕ Adding a new service</h3>
@@ -462,10 +534,6 @@ source .venv/bin/activate</code></pre>
         <p>We're going to add Quickbooks to our application to help run payroll and send invoices. Setting up the
             Quickbooks service will also allow us to take advantage of it's other features down the line as the business
             grows</p>
-    </div>
-    <div class="custom-webserver" id="custom-webserver">
-        <h3>💽 Custom Webserver</h3>
-        <hr>
     </div>
     <div class="automated-employee-demo" id="automated-employee-demo">
         <h3>🤖 Automated Employee Demo</h3>

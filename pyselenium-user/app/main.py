@@ -29,7 +29,7 @@ WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "custome
 WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "customer-name")))
 driver.find_element_by_id("customer-name").send_keys("John Doe")
 driver.find_element_by_id("customer-contact-number").send_keys("+44700000010")
-driver.find_element_by_id("customer-contact-number").send_keys("Bottle Water")
+driver.find_element_by_id("customer-order").send_keys("Bottle Water")
 driver.find_element_by_id("submit-customer-order").click()
 
 driver.close()
