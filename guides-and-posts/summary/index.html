@@ -129,6 +129,7 @@
             </tr>
             <tr>
                 <td>Product sells out</td>
+                <td>Make product unavailable</td>
                 <td>Stop taking orders</td>
             </tr>
             <tr>
@@ -393,14 +394,12 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
             interpreter. Once you activate that environment, any packages you then install are isolated from other
             environments. Such isolation reduces many complications that can arise from conflicting package versions."
         </blockquote>
-        <p>Within VS Code you can use</p>
-        <pre><code>ctrl+alt+`</code></pre>
-        to open a terminal and type the following to setup and activate the virtual environment</p>
+        <p>Within VS Code you can use <code>ctrl+alt+`</code> to open a terminal and type the following to setup and
+            activate the virtual environment</p>
         <pre><code class="language-bash">python3 -m venv .venv
 source .venv/bin/activate</code></pre>
-        <p>We can use
-        <pre><code>ctrl+shift+p</code></pre>
-        to open the command palette and start typing "python:select interpreter"</p>
+        <p>We can use <code>ctrl+shift+p</code> to open the command palette and start typing "python:select interpreter"
+        </p>
         <img src="assets/python-select-interpreter.png">
         <p>And select our interpreter from the menu (or navigate to the folder on your system)</p>
         <img src="assets/venv-interpreter.png">
@@ -526,18 +525,158 @@ while not ready:
     except mysql.connector.errors.InterfaceError:
         # Try to connect to database again
         continue</code></pre>
-        <p>Next we'll look at two routes in a little bit more detail</p>
-    </div>
-    <div class="custom-webserver" id="custom-webserver">
-        <h3>💽 Custom Webserver</h3>
-        <hr>
+        <p>Next we'll look at two routes in a little bit more detail. We'll first look at user registration as an
+            introduction to our authentication routes.</p>
+        <pre><code class="language-python"># Authentication
+
+# User registration route
+@app.route('/register', methods=['POST'])
+@cross_origin()
+def register():
+    # Get values from json request body
+    data = request.json
+    name = data['name']
+    email = data['email']
+    role = data['role']
+    business = data['business']
+    # Encrypt plain text password
+    password = sha256_crypt.encrypt(data['password'])
+    # Employees can't log in until manager approves
+    can_log_in = False
+    # Managers can log in immediately
+    if role == "manager":
+        can_log_in = True
+
+    # Connect to db with parameters matching docker-compose.yaml file
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
+
+    # Create cursor
+    cursor = mydb.cursor()
+
+    # Execute query to add user to database users table
+    cursor.execute(
+        "INSERT INTO users(name, email, password, role, business, can_log_in) VALUES(?, ?, ?, ?, ?, ?)",
+        (name, email, password, role, business, can_log_in,))
+
+    # Commit data to db
+    mydb.commit()
+
+    # Close connection
+    cursor.close()
+    mydb.close()
+
+    # Return success message
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}</code></pre>
+        <p>Essentially what we have above is that the user will enter their email, password, business, and role, into a
+            form on the frontend. THe data is then sent to the flask server which will store the users details in the
+            database. Managers can log in immediately but employees will need to wait for manager's approval before they
+            log in since their <code>can_log_in</code> flag will initially be false.</p>
+        <p>Next we'll take a look at the route used to complete a customer order.</p>
+        <pre><code class="language-python"># Store new customer order in the database
+# TODO: Restrict route to logged in users
+# TODO: Link order to business
+# TODO: Reduce stock level of ordered items
+@app.route('/customer/order/new', methods=['POST'])
+@cross_origin()
+def customer_order():
+    # get values from json request body
+    data = request.json
+    customer_name = data['name']
+    contact_number = data['number']
+    customer_order = data['order']
+
+    # Connect to db with parameters matching docker-compose.yaml file
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
+
+    # Create cursor
+    cursor = mydb.cursor()
+
+    # insert values from form into new record in CUSTOMER_ORDER table
+    cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
+     VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
+
+    # Commit data to db
+    mydb.commit()
+
+    # Close connection
+    cursor.close()
+    mydb.close()
+
+    # Return success message
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}</code></pre>
+        <p>You'll notice some similarities across the routes as we're typically doing the following steps:</p>
+        <ul>
+            <li>Extract data from request</li>
+            <li>Connect to database</li>
+            <li>Interact with database</li>
+            <li>Close database connection</li>
+            <li>Send response to user</li>
+        </ul>
+        <p>One last thing we'll mention before we move onto adding a new service to the application is the idea of
+            extracting data from the URL. For example:</p>
+        <pre><code class="language-python"># Get an employees details from the database using their id
+@app.route("/employee/&lt;id&gt;")
+def get_employee(id):
+    return 'Not yet implemented'</code></pre>
+        <p>Using the <code>&lt;id&gt;</code> syntax in the route and having the <code>id</code> as a method parameter
+            allows us to
+            use <code>id</code> inside the method which will allow us to search the database by id for example.</p>
     </div>
     <div class="new-service" id="new-service">
         <h3>➕ Adding a new service</h3>
         <hr>
-        <p>We're going to add Quickbooks to our application to help run payroll and send invoices. Setting up the
-            Quickbooks service will also allow us to take advantage of it's other features down the line as the business
-            grows</p>
+        <p>Many small businesses use spreadsheets to manage payroll and sales predictions as opposed to expensive
+            proprietary specialized applications.</p>
+        <p>Let's add LibreOffice which will allow our user to use LibreOffice Calc as an open source alternative to
+            Microsoft Excel.</p>
+        <p>Firstly, we'll need to modify our <code>docker-compose.yml</code> file to add the new service</p>
+        <pre><code class="language-yaml">version: "3.7"
+
+services:
+  frontend:
+    ...
+
+  backend:
+    ...
+
+  adminer:
+    ...
+
+  mysqldb:
+    ...
+
+  pyselenium:
+    ...
+
+  firefox:
+    ...
+
+  selenium-hub:
+    ...
+
+  office:
+    image: libreoffice/online
+    environment:
+      - username=admin
+      - password=admin
+      - DONT_GEN_SSL_CERT=1
+      - extra_params=--o:ssl.enable=false
+    ports:
+      - "9980:9980"</code></pre>
+        <p>We set the image to pull from Docker Hub, set some environment variables, and map the port from within the
+            container to the same port on our local machine.</p>
+        <p>The configuration is further explained in <a
+                href="https://github.com/smehrbrodt/nextcloud-libreoffice-online">this GitHub repository.</a></p>
     </div>
     <div class="automated-employee-demo" id="automated-employee-demo">
         <h3>🤖 Automated Employee Demo</h3>

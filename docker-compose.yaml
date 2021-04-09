@@ -64,5 +64,15 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+      
+  office:
+    image: libreoffice/online
+    environment:
+      - username=admin
+      - password=admin
+      - DONT_GEN_SSL_CERT=1
+      - extra_params=--o:ssl.enable=false
+    ports:
+      - "9980:9980"
   
   

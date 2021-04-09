@@ -152,7 +152,10 @@ def update_checklist():
     return 'Not yet implemented'
 
 
-# store new customer order in the database
+# Store new customer order in the database
+# TODO: Restrict route to logged in users
+# TODO: Link order to business
+# TODO: Reduce stock level of ordered items
 @app.route('/customer/order/new', methods=['POST'])
 @cross_origin()
 def customer_order():
@@ -184,7 +187,7 @@ def customer_order():
     cursor.close()
     mydb.close()
 
-    # return success message
+    # Return success message
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
@@ -267,7 +270,7 @@ def record_sales():
     return 'Not yet implemented'
 
 
-# get an employees details from the database using their id
+# Get an employees details from the database using their id
 @app.route("/employee/<id>")
 def get_employee(id):
     return 'Not yet implemented'
@@ -318,7 +321,7 @@ def remove_from_checklist():
 
 # get dashboard information such as sales, profits, growth etc
 @app.route("/dashboard")
-def get_dashboard(id):
+def get_dashboard():
     return 'Not yet implemented'
 
 
