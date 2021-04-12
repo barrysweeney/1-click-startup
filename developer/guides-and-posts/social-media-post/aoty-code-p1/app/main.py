@@ -1,5 +1,5 @@
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, \
+from selenium.common.exceptions import NoSuchElementException, \
     StaleElementReferenceException
 
 import time
