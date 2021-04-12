@@ -1,0 +1,24 @@
+img {
+    width: -moz-available;
+}
+
+blockquote {
+    padding-left: 0.90625rem;
+    border-left: 0.54375rem solid #42af29;
+}
+
+a {
+    color: #42af29;
+    text-decoration: underline;
+}
+
+a:hover, a:active {
+    text-shadow: none;
+    background-image: none;
+    color: #42af29;
+    text-decoration: none;
+}
+
+.folder-structure-image {
+    width: 300px;
+}
