@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Searching Album of The Year using Python, PySelenium, and Docker</h1>
+    <h1>Searching Album of The Year using Flask, Selenium, Docker, and React - Part 2</h1>
     <a href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
         for post's source code</a>
     <div class="embed-responsive embed-responsive-16by9">
@@ -25,13 +25,15 @@
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
     </div>
-    <p>In this tutorial you will learn how to find out which albums were released on a specific day. But you'll learn so
+    <p>In this tutorial we'll design an app to find out which albums were released on a specific day. But you'll learn
+        so
         much more along the way...</p>
     <img src="images/company-logos.png" alt="logos for Album Of The Year, Python, Selenium, and Docker"/>
-    <p>You might be wondering</p>
+    <p>In <a href="#">part 1</a> we answered the question</p>
     <blockquote><em>"Can I find out which albums were released on my birthday?"</em></blockquote>
     <p>You sure can, <strong>just read on to find out how.</strong></p>
-    <p>Also if you can relate to any of these then this guide is <em>definitely</em> for you.</p>
+    <p>In <a href="#">part 1 of this guide</a> we brought up that if you can relate to any of these then you're <em>definitely</em>
+        in the right place.</p>
     <ul>
         <li>If you want to learn some Docker and Selenium basics in a fun project before moving on to more complex
             Docker
@@ -47,54 +49,42 @@
             your foot through the door.
         </li>
     </ul>
-    <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
-    <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
-        environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the de
-        facto standard to build and share containerized apps - from desktop, to the cloud."
+    <p>In this guide, the same applies, <i>and</i> in addition, this guide is <em>absolutely</em> for you if you're
+        interested in
+        any of these.</p>
+    <ul>
+        <li>Crating a custom frontend with the frontend JavaScript framework React.</li>
+        <li>Adapting a Python console app into a Flask webserver.</li>
+    </ul>
+    <p>From <a href="https://reactjs.org/">ReactJS</a>:</p>
+    <blockquote>
+        A JavaScript library for building user interfaces
     </blockquote>
-    <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
-    <blockquote>"Selenium automates browsers. That's it!
-        What you do with that power is entirely up to you.
+    <p>From <a href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask Python?</a>:</p>
+    <blockquote>"Flask is a web application framework written in Python.
 
-        Primarily it is for automating web applications for testing purposes, but is certainly not limited to just that.
-
-        Boring web-based administration tasks can (and should) also be automated as well."
+        A Web Application Framework or simply a
+        Web Framework represents a collection of libraries and
+        modules that enable web application developers to write applications without worrying about low-level
+        details"
     </blockquote>
     <p>Looking for source code? <br> <a
             href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Jump to
         the Github Repo <i class="fab fa-github"></i></a></p>
-    <h1>Searching Album of The Year using Python, PySelenium, and Docker</h1>
-    <p>Firstly we'll setup our remote Selenium WebDriver with Docker run. This will save us from downloading the driver
-        ourselves and dealing with executable path configurations, or running our own Selenium server locally.</p>
-    <p>Next we'll tell our Python code how to access our driver.</p>
-    <p>Then we'll use the Python Selenium package to interact with the <a href="https://www.albumoftheyear.org/">Album
-        of the Year website</a>.</p>
-    <p>We'll wrap up with a discussion of our results and how we could take this further with a frontend interface.</p>
+    <h1>Searching Album of The Year using Flask, Selenium, Docker, and React</h1>
+    <p>Firstly we'll use create-react-app to generate the template for our frontend</p>
+    <p>Next we'll customize our frontend interface and set up the functions that send requests to our Flask
+        webserver.</p>
+    <p>Then we'll adapt our Python console app into a Flask webserver.</a>.</p>
+    <p>We'll wrap up with a discussion of our results and how we could take this further..</p>
     <ul>
-        <li><a href="#selenium-container">Containerized Selenium Container</a></li>
         <li><a href="#dev-env">Configuring your development environment</a></li>
-        <li><a href="#project-structure">Project Structure</a></li>
-        <li><a href="#coding">Coding our PySelenium album searching bot</a></li>
-        <li><a href="#results">Results from our PySelenium bot</a></li>
+        <li><a href="#coding">React Frontend</a></li>
+        <li><a href="#results">Flask Webserver Backend</a></li>
+        <li><a href="#results">Results</a></li>
         <li><a href="#whats-next">What's Next?</a></li>
         <li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
-    <h2 id="selenium-container">Containerized Selenium webdriver?</h2>
-    <figure>
-        <img src="images/nilantha-ilangamuwa-containers.jpg"
-             alt="shipping containers on boat at docks to represent docker containers">
-        <figcaption><span>Photo by <a
-                href="https://unsplash.com/@ilangamuwa?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Nilantha Ilangamuwa</a> on <a
-                href="https://unsplash.com/s/photos/container?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
-        </figcaption>
-    </figure>
-    <p>We know we can <a href="https://www.selenium.dev/documentation/en/webdriver/driver_requirements/">download the
-        driver binaries</a> and add executables to our PATH to access our webdriver via local host. <br> The question
-        then becomes</p>
-    <blockquote><em>Is there an easier way?</em></blockquote>
-    <p>Of course we could <a href="https://www.selenium.dev/documentation/en/remote_webdriver/remote_webdriver_server/">run
-        a remote WebDriver server from the command line with a jar file</a>, but we can also use <a
-            href="https://github.com/SeleniumHQ/docker-selenium">Docker Selenium</a>.</p>
     <h2 id="dev-env">Configuring your development environment</h2>
     <p>If you want to follow along to the tutorial you can take some time to setup your environment by installing Docker
         using either of these guides</p>
@@ -104,20 +94,253 @@
         <li><a href="https://docs.docker.com/docker-for-windows/install/">Install Docker Desktop on Windows</a></li>
     </ul>
     <p>Either will help you setup the required software for this tutorial.</p>
-    <h2 id="project-structure">Project Structure</h2>
-    <p>Let's review our directory structure before we go any further. You can always refer to the <a
-            href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">source
-        code</a> too.</p>
-    <p>Now let's look at the project:</p>
-    <img src="images/folder-structure.png" alt="Folder structure showing app folder with main.py and venv folder"
-         class="folder-structure-image"/>
-    <p>As we can see, we're not dealing with anything too complicated here so it should be a nice project to get up and
-        running with if you're new to PySelenium (or just really want to know what albums were released on your
-        birthday).</p>
-    <p>Let's get to work.</p>
-    <h2 id="coding">Programming our PySelenium album searching bot </h2>
-    <p>We can now move on to programming our PySelenium bot to interact with the Album of The Year site via a Dockerized
-        Selenium WebDriver.</p>
+    <p>In addition to Docker, you'll also need <a href="https://nodejs.org/en/">NodeJs</a> which you can install with
+        either of these guides</p>
+    <ul>
+        <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04">Install
+            NodeJS on Ubuntu</a></li>
+        <li><a href="https://www.fosstechnix.com/install-node-js-on-mac/">Install NodeJS on Mac</a></li>
+        <li><a href="https://www.fosstechnix.com/how-to-install-node-js-on-windows/">Install NodeJS on Windows</a></li>
+    </ul>
+    <p>You can now move on to creating our React app.</p>
+    <h2 id="coding">React Frontend</h2>
+    <p>First we can start with a generated <a href="https://reactjs.org/docs/glossary.html#single-page-application">single-page
+        application</a> with the help of <code>create-react-app</code></p>
+    <pre><code class="language-bash">npx create-react-app aoty-frontend
+cd aoty-frontend
+npm start</code></pre>
+    <p><code>npx is the package runner tool that comes with npm which is the node package manager installed along with
+        NodeJS.</code></p>
+    <p>The generated app will now be in the folder <code>aoty-frontend</code> which I would now recommend opening with
+        your IDE/text editor of choice.</p>
+    <p>We'll rewrite <code>src/App.js</code> to the following:</p>
+    <pre><code class="language-javascript">import logo from './logo.svg';
+import Container from 'react-bootstrap/Container'
+import './App.css';
+import React, {Component} from "react"
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: [],
+            year: 2000,
+            day: 1,
+            searching: false,
+        };
+    }
+
+    async yearHandler(e) {
+        this.setState({
+            year: e.target.value
+        })
+    }
+
+    async dayHandler(e) {
+        this.setState({
+            day: e.target.value
+        })
+    }
+
+    async submitHandler(e) {
+        e.preventDefault()
+        const date = e.target.date.value.split("-")
+        const year = date[0]
+        const monthCode = date[1]
+        const day = parseInt(date[2], 10)
+
+        const body = {}
+        body.day = day
+        body.month_code = monthCode
+        body.year = year
+
+        this.setState({
+            searching: true,
+        })
+
+        const response = await fetch(`http://localhost:5000/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        if (response.status === 200) {
+            const data = await response.json();
+            this.setState({
+                results: data.results,
+                searching: false,
+            })
+        }
+
+    }
+
+    render() {
+        return (
+            &lt;Container&gt;
+                &lt;div style={{display: `grid`, gap: `20px`}}&gt;
+                    &lt;h1&gt;Album of the Year Searcher&lt;/h1&gt;
+                    &lt;form onSubmit={this.submitHandler.bind(this)} action="#" style={{display: `grid`, gap: `10px`}}&gt;
+                        &lt;label style={{display: `grid`, gap: `10px`}}&gt;
+                            Date
+                            &lt;input type="date" name="date" id="date" min="1950-01-01"/&gt;
+                        &lt;/label&gt;
+                        &lt;button type="submit" id="submit-date"&gt;Search&lt;/button&gt;
+                    &lt;/form&gt;
+                    &lt;div&gt;
+                        {this.state.searching ? &lt;div className="text-center"&gt;
+                            &lt;div className="spinner-border" role="status"&gt;
+                                &lt;span className="sr-only"&gt;Loading...&lt;/span&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt; : null}
+                        {this.state.results.length !== 0 ? (
+                            &lt;ul&gt;{
+                                this.state.results.map((result, i) =&gt;
+                                    &lt;li key={i}&gt;{result}&lt;/li&gt;
+                                )
+                            }&lt;/ul&gt;
+                        ) : null}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/Container&gt;
+        )
+    }
+}
+
+export default App;
+</code></pre>
+    <p>We can now move on to programming our Flask backend.</p>
+    <h2 id="flask">Flask webserver backend</h2>
+    <p>Continuing from <a href="#">part 1</a> of the guide, we'll rewrite <code>app.py</code> to be the following:</p>
+    <pre><code class="language-python">from flask import Flask, request
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException, \
+    StaleElementReferenceException
+import time
+import os
+import requests
+import json
+from flask_cors import CORS, cross_origin
+
+app = Flask(__name__)
+# Enable CORS to permit requests from the frontend to the backend (a different origin)
+CORS(app)  # Enables CORS for all routes
+# Allow Content-Type header
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+# Start Selenium webdriver container
+os.system(
+    'sudo docker run --name my-selenium-container -d -p 4444:4444  -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-beta-1-prerelease-20210210')
+
+# Wait for Selenium webdriver container to be ready
+ready = False
+time.sleep(5)
+while not ready:
+    try:
+        r = requests.get('http://localhost:4444/wd/hub/status', timeout=1)
+        status = r.status_code
+        if status == 200:
+            ready = True
+    except ConnectionResetError or ConnectionError:
+        continue
+
+
+@app.route('/', methods=['POST'])
+@cross_origin()
+def hello_world():
+    data = request.json
+    day = data['day']
+    month_code = data['month_code']
+    year = data['year']
+    month = ''
+    month_name_short = ''
+
+    print(month_code)
+
+    if month_code == '01':
+        month = 'january'
+        month_name_short = 'Jan'
+    elif month_code == '02':
+        month = 'february'
+        month_name_short = 'Feb'
+    elif month_code == '03':
+        month = 'march'
+        month_name_short = 'Mar'
+    elif month_code == '04':
+        month = 'april'
+        month_name_short = 'Apr'
+    elif month_code == '05':
+        month = 'may'
+        month_name_short = 'May'
+    elif month_code == '06':
+        month = 'june'
+        month_name_short = 'Jun'
+    elif month_code == '07':
+        month = 'july'
+        month_name_short = 'Jul'
+    elif month_code == '08':
+        month = 'october'
+        month_name_short = 'Aug'
+    elif month_code == '09':
+        month = 'september'
+        month_name_short = 'Sep'
+    elif month_code == '10':
+        month = 'october'
+        month_name_short = 'Oct'
+    elif month_code == '11':
+        month = 'november'
+        month_name_short = 'Nov'
+    elif month_code == '12':
+        month = 'december'
+        month_name_short = 'Dec'
+
+    release_date_to_search = '%s %s' % (month_name_short, day)
+    driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
+                              command_executor="http://localhost:4444/wd/hub")
+    driver.get(
+        "https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month, month_code))
+
+    all_albums_loaded = False
+
+    while not all_albums_loaded:
+        try:
+            show_more_button_container = driver.find_element_by_class_name('showMore')
+            time.sleep(3)
+            driver.execute_script("arguments[0].click();",
+                                  show_more_button_container.find_element_by_class_name('largeButton'))
+            time.sleep(1)
+        except StaleElementReferenceException:
+            continue
+        except NoSuchElementException:
+            all_albums_loaded = True
+
+    albums = driver.find_elements_by_class_name('albumBlock')
+
+    response = []
+    for album in albums:
+        album_release_date = album.find_element_by_class_name('date').text
+        if album_release_date == release_date_to_search:
+            album_title = album.find_element_by_class_name('albumTitle').text
+            artist_title = album.find_element_by_class_name(
+                'artistTitle').text
+            response.append('%s - %s' % (album_title, artist_title))
+
+    if len(response) == 0:
+        response.append('No albums found')
+
+    driver.close()
+    #
+    # # remove Selenium container
+    # os.system(
+    #     'sudo docker rm -f my-selenium-container')
+
+    return json.dumps({'results': response}), 200, {'ContentType': 'application/json'}
+
+
+if __name__ == '__main__':
+    app.run()
+</code>
+    </pre>
     <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
         text editor you prefer. You can set up your own environment if your editor doesn't automatically configure it
         for you by executing the command <code>venv</code>:</p>
@@ -130,179 +353,23 @@
         documentation on venv </a></p>
     <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
         installed.</p>
-    <p>We'll start by installing selenium and requests</p>
-    <pre>
-        <code>pip3 install selenium
+    <p>We'll start by installing the necessary packages/p>
+    <pre><code>pip3 install selenium
 pip3 install requests
-        </code>
+pip3 install flask_cors</code>
     </pre>
     <p>Note that you may need to change <code>pip3</code> to <code>pip</code> depending on which version you have
         installed.</p>
-    <p>Now we can import our required packages.</p>
-    <pre><code class="language-python">from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
-import time
-import os
-import requests</code></pre>
-    <p>Notable imports include:</p>
-    <ul>
-        <li><strong>selenium.common.exceptions</strong> - we can catch these exceptions to retry actions in the UI</li>
-        <li><strong>os</strong> - we can use this to initiate our <code>docker run</code> command</li>
-    </ul>
-    <p>Let's move on to starting our Selenium webdriver container</p>
-    <pre><code class="language-python">os.system(
-    'sudo docker run --name my-selenium-container -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-beta-1-prerelease-20210210')</code></pre>
-    <p>This command starts a standalone Firefox container. For other browsers and a description of why <code>-v
-        /dev/shm:/dev/shm </code> is necessary you can visit the <a
-            href="https://github.com/SeleniumHQ/docker-selenium#standalone">Docker Selenium Page</a>.</p>
-    <p>We've named the container "my-selenium-container" so we can remove it at the end of our program.</p>
-    <p>Excuse the following wall of code but it's actually very important. When we start our container we need to wait
-        for it to be in a state where it's ready to provide the services we need to use it as our remote webdriver.</p>
-    <pre><code class="language-python">ready = False
-time.sleep(5)
-while not ready:
-    try:
-        r = requests.get('http://localhost:4444/wd/hub/status', timeout=1)
-        status = r.status_code
-        if status == 200:
-            ready = True
-    except ConnectionResetError or ConnectionError:
-        continue</code></pre>
-    <p>Essentially, we keep hitting the status endpoint until it says it's ready and then we can move on with the rest
-        of our Python script.</p>
-    <pre><code class="language-python">driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
-                          command_executor="http://localhost:4444/wd/hub")</code></pre>
-    <p>We can connect to our remote webdriver on localhost since due to the docker run command <code>-p 4444:4444</code>
-        which
-        maps port 4444 of the container to port 4444 of our local machine.</p>
-    <p>Next we'll hard code some searching and filtering parameters, we'll see alternatives to this approach in our
-        concluding discussion.</p>
-    <pre><code class="language-python">month_name = 'june'
-month_code = '06'
-month_name_short = 'Jun'
-year = '1999'
-day_of_month = '1'
-release_date_to_search = '%s %s' % (month_name_short, day_of_month)</code></pre>
-    <p>Why this date? Because it's your birthday (there's a &cong;1.42857142857e-10 chance it is. My favourite album was
-        released this day actually).</p>
-    <p>We can tell our driver to head over to <a href="https://www.albumoftheyear.org">Album of The Year</a> and to the
-        release page for all the albums released in the month we
-        hardcoded.</p>
-    <pre><code class="language-python">driver.get("https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month_name, month_code))</code></pre>
-    <p>Next we'll code our PySelenium bot to keep clicking the button to load more albums.</p>
-    <pre><code class="language-python">all_albums_loaded = False
-
-while not all_albums_loaded:
-    try:
-        show_more_button_container = driver.find_element_by_class_name('showMore')
-        time.sleep(3)
-        driver.execute_script("arguments[0].click();",
-                              show_more_button_container.find_element_by_class_name('largeButton'))
-        time.sleep(1)</code></pre>
-    <p>Note we're using the <code class="language-python">execute_script</code> method as opposed to the <code
-            class="language-python">click()</code> method of the <code>WebElement</code>
-        object returned by <code class="language-python">find_element_by_id</code><br>We do this because another element
-        is covering the show
-        more button. You can see <a href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
-            user RemcoW</a> for more details and an explanation of <code class="language-python">arguments[0]</code></p>
-    <p>We're not quite finished with this while loop just yet, we need to do two things:</p>
-    <ul>
-        <li><strong>except StaleElementReferenceException</strong> - our WebElement can be destroyed and re-rendered in
-            the DOM so we'll need to retry by using <code>continue</code> if our reference becomes stale. <a
-                    href="https://stackoverflow.com/a/16244739/9472445">This StackOverflow answer by user Ardesco</a>
-            describes the situation more clearly.
-        </li>
-        <li><strong>except NoSuchElementException</strong> - tell our bot they can stop trying to click the button now,
-            it isn't being rendered to the UI so all albums are on the page.
-        </li>
-    </ul>
-    <p>For completeness, this is our complete while loop</p>
-    <pre><code class="language-python" id="stale-element">while not all_albums_loaded:
-    try:
-        show_more_button_container = driver.find_element_by_class_name('showMore')
-        time.sleep(3)
-        driver.execute_script("arguments[0].click();",
-                              show_more_button_container.find_element_by_class_name('largeButton'))
-        time.sleep(1)
-    except StaleElementReferenceException:
-        continue
-    except NoSuchElementException:
-        all_albums_loaded = True</code></pre>
-    <p>We can store all albums being displayed in a variable now so we can easily iterate through them.</p>
-    <pre><code class="language-python">albums = driver.find_elements_by_class_name('albumBlock')</code></pre>
-    <p>Let's do just that</p>
-    <pre><code class="language-python">for album in albums:
-    album_release_date = album.find_element_by_class_name('date').text
-    if album_release_date == release_date_to_search:
-        album_title = album.find_element_by_class_name('albumTitle').text
-        artist_title = album.find_element_by_class_name(
-            'artistTitle').text
-        print('%s - %s' % (album_title, artist_title))</code></pre>
-    <p>This is really our main block of code. We iterate through each album and print out it's title and artist if it
-        was
-        released on the day we have specified to search for.</p>
-    <p>Last but not least we can do a little housekeeping by closing our driver's window and removing our Selenium
-        container</p>
-    <pre><code class="language-python">driver.close()
-
-os.system(
-    'sudo docker rm -f my-selenium-container')</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
-    <h2 id="results">Results of our PySelenium AOTY searching bot</h2>
-    <p>Let's open a terminal in our project directory (for me that's album-of-the-day/app) and enter the following
-        command</p>
-    <pre><code>python3 main.py</code></pre>
+    <h2 id="results">Results</h2>
+    <p>Let's try searching for the albums released on a certain date to see our results.</p>
+    <p>Inside the virtual environment, we can run</p>
+    <pre><code>python3 app.py</code></pre>
+    <p>to start our webserver</p>
     <p>If you've followed along and used <code>sudo</code> in the docker run command you'll be prompted for your
-        password and then the results will begin to pour in...</p>
-    <pre><code>&lt; Selenium Container ID &gt;
-Enema of the State - Blink-182
-Play - Moby
-On the 6 - Jennifer Lopez
-No Angel - Dido
-Doors Open At 8am - Merzbow
-Venni Vetti Vecci - Ja Rule
-Very Emergency - The Promise Ring
-Panzer Division - Marduk
-Straight Ahead - Pennywise
-Who Needs Pictures - Brad Paisley
-Last Wave Rockers - Common Rider
-Bad Love - Randy Newman
-The Broken Down Comforter Collection - Grandaddy
-Here Comes the Bride - Spin Doctors
-Door Open at 8 AM - Merzbow
-Criteria for a Black Widow - Annihilator
-Ryo Fukui in New York - Ryo Fukui
-The Mirror Man Sessions - Captain Beefheart
-Épisode sanglant - Les Marmottes Aplaties
-Barefoot on the Beach - Michael Franks
-Failures for Gods - Immolation
-A Tear For The Ghetto - Group Home
-Short Music for Short People - Various Artists
-Sorrow - Baek Jiyoung
-Lauwarm Instrumentals - Scanner
-Lonely Grill - Lonestar
-Calamine - Calamine
-Da Crime Family - TRU
-Shrinking Violet - L.A. Guns
-The Song of Bernadette (Original Soundtrack) - Alfred Newman
-Learning Curve - DJ Rap
-Pictures of the Big Vacation - Mike Errico
-A Night to Remember - Joe Diffie
-In the New Old-Fashioned Way - Fluid Ounces
-Technical Difficulties - Hate Dept.
-Blaque - Blaque
-Metropolis Blue - Jack Lukeman
-The Quiet Table - Three Fish
-Brighter Days - Curtis Stigers
-Pop Loops for Breakfast - B. Fleischmann
-Praises - Shinehead
-Hercules: The Legendary Journeys, Vol. 3 - Joseph LoDuca
-Backs N' Necks - Neek The Exotic & Large Professor
-So Anxious - Ginuwine
-The Ultimate Collection - Delbert McClinton
-Race for the Prize - The Flaming Lips
-Deep and Warm - Twisted Science
-my-selenium-container</code></pre>
+        password and then we can move to our frontend application at <a href="http://localhost:3000">http://localhost:3000</a>
+    </p>
+    <
     <h2 id="whats-next">What's Next?</h2>
     <p>Remember you can <a
             href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">grab
@@ -312,9 +379,8 @@ my-selenium-container</code></pre>
         a specific release date. I'll be designing the frontend for this program in an upcoming post and showing how you
         can deploy it so you can
         use and share it with others.</p>
-    <p>We'll be designing with our users in mind with an interface integrating the album covers and feedback messages if
-        no albums are
-        found, maybe showing all albums for the month instead, we could even add filtering by genre.</p>
+    <p>We can improve our frontend by designing with our users in mind with an interface integrating the album covers
+        and we could even add filtering by genre.</p>
     <p>Stay tuned to <a href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
     <h2 id="troubleshooting">Bonus: Troubleshooting</h2>
     <p>Here's some resources for resolving common errors you might run into along the way in this guide or in your own
