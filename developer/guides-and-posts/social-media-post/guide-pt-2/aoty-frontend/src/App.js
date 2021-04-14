@@ -8,40 +8,33 @@ class App extends Component {
         super(props);
         this.state = {
             results: [],
-            year: 2000,
-            day: 1,
             searching: false,
         };
     }
 
-    async yearHandler(e) {
-        this.setState({
-            year: e.target.value
-        })
-    }
-
-    async dayHandler(e) {
-        this.setState({
-            day: e.target.value
-        })
-    }
 
     async submitHandler(e) {
+        // Prevent browser's default form submission behaviour
         e.preventDefault()
+        // Extract date from form and split into array
         const date = e.target.date.value.split("-")
+        // Store year, month code, and formatted day from date array
         const year = date[0]
         const monthCode = date[1]
-        const day = parseInt(date[2], 10)
+        const day = parseInt(date[2], 10) // 01 becomes 1, etc.
 
+        // Create request body
         const body = {}
         body.day = day
         body.month_code = monthCode
         body.year = year
 
+        // Set searching to true to display loading spinner
         this.setState({
             searching: true,
         })
 
+        // Send POST request to backend and await a response
         const response = await fetch(`http://localhost:5000/`, {
             method: "POST",
             headers: {
@@ -49,6 +42,7 @@ class App extends Component {
             },
             body: JSON.stringify(body)
         })
+        // If the response is OK then set state to display albums
         if (response.status === 200) {
             const data = await response.json();
             this.setState({
@@ -56,7 +50,6 @@ class App extends Component {
                 searching: false,
             })
         }
-
     }
 
     render() {

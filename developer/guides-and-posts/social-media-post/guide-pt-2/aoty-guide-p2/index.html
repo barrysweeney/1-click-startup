@@ -113,8 +113,110 @@ npm start</code></pre>
         NodeJS.</code></p>
     <p>The generated app will now be in the folder <code>aoty-frontend</code> which I would now recommend opening with
         your IDE/text editor of choice.</p>
-    <p>We'll rewrite <code>src/App.js</code> to the following:</p>
-    <pre><code class="language-javascript">import logo from './logo.svg';
+    <p>We'll start be rewriting <code>src/App.js</code>. We can change the <code>App()</code> function to</p>
+    <pre><code class="language-jsx">function App() {
+  return (
+    &lt;div&gt;&lt;/div&gt;
+  );
+}</code></pre>
+    <p>Now we can add a heading and the basic html for the form</p>
+    <pre><code class="language-jsx">&lt;div&gt;
+    &lt;h1&gt;Album of the Year Searcher&lt;/h1&gt;
+    &lt;form action="#"&gt;
+     &lt;label&gt;
+       Date
+       &lt;input type="date" name="date" id="date"/&gt;
+     &lt;/label&gt;
+     &lt;button type="submit" id="submit-date"&gt;Search&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+    <p>Now, under the form we want to add a loading spinner if the app is in the state of searching for albums.</p>
+    <pre><code class="language-jsx">{this.state.searching ?
+        &lt;div className="text-center"&gt;
+          &lt;div className="spinner-border" role="status"&gt;
+            &lt;span className="sr-only"&gt;Loading...&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        : null}</code></pre>
+    <p>The class names are actually Bootstrap specific which is a CSS framework for developing responsive sites.</p>
+    <p>We'll return to Bootstrap later, but for now, we'll want a way to display the that albums our search found. Just
+        under the previous code we can map over the results returned from our search to list items elements.</p>
+    <pre><code class="language-jsx">{this.state.results.length !== 0 ? (
+        &lt;ul&gt;{
+              this.state.results.map((result, i) =&gt;
+                &lt;li key={i}&gt;{result}&lt;/li&gt;
+              )
+            }&lt;/ul&gt;
+    ) : null}</code></pre>
+    <p>We'll want to take the form submission into our own hands next and add a little styling</p>
+    <pre><code class="language-jsx">&lt;form onSubmit={this.submitHandler.bind(this)} action="#" style={{display: `grid`, gap: `10px`}}&gt;</code></pre>
+    <p>We'll change the <code>App</code> function to a class now, here's where we're at now, also note the new import
+    </p>
+    <pre><code class="language-jsx">import React, {Component} from "react"
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: [],
+            searching: false,
+        };
+    }
+
+    render() {
+        return (
+                &lt;div&gt;
+                    ...
+                &lt;/div&gt;
+        )
+    }
+}</code></pre>
+    <p>Now we can add the <code>submitHandler</code> function that is called on form submission</p>
+    <pre><code class="language-jsx">    async submitHandler(e) {
+        // Prevent browser's default form submission behaviour
+        e.preventDefault()
+        // Extract date from form and split into array
+        const date = e.target.date.value.split("-")
+        // Store year, month code, and formatted day from date array
+        const year = date[0]
+        const monthCode = date[1]
+        const day = parseInt(date[2], 10) // 01 becomes 1, etc.
+
+        // Create request body
+        const body = {}
+        body.day = day
+        body.month_code = monthCode
+        body.year = year
+
+        // Set searching to true to display loading spinner
+        this.setState({
+            searching: true,
+        })
+
+        // Send POST request to backend and await a response
+        const response = await fetch(`http://localhost:5000/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        // If the response is OK then set state to display albums
+        if (response.status === 200) {
+            const data = await response.json();
+            this.setState({
+                results: data.results,
+                searching: false,
+            })
+        }
+    }</code></pre>
+    <!--    ************************************************************    -->
+    <p>As we mentioned earlier... From <a href="">w3schools - What is Bootstrap?</a>:</p>
+    <blockquote>"Bootstrap is the most popular CSS Framework for developing responsive and mobile-first websites."
+    </blockquote>
+
+
+    <pre><code class="language-jsx">import logo from './logo.svg';
 import Container from 'react-bootstrap/Container'
 import './App.css';
 import React, {Component} from "react"
