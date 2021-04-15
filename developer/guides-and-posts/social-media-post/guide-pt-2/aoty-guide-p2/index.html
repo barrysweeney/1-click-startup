@@ -210,146 +210,104 @@ class App extends Component {
             })
         }
     }</code></pre>
-    <!--    ************************************************************    -->
+    <p>That's essentially all of the work done on the frontend, we can just add some styling now with Bootstrap</p>
     <p>As we mentioned earlier... From <a href="">w3schools - What is Bootstrap?</a>:</p>
     <blockquote>"Bootstrap is the most popular CSS Framework for developing responsive and mobile-first websites."
     </blockquote>
-
-
-    <pre><code class="language-jsx">import logo from './logo.svg';
-import Container from 'react-bootstrap/Container'
-import './App.css';
-import React, {Component} from "react"
-
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            results: [],
-            year: 2000,
-            day: 1,
-            searching: false,
-        };
-    }
-
-    async yearHandler(e) {
-        this.setState({
-            year: e.target.value
-        })
-    }
-
-    async dayHandler(e) {
-        this.setState({
-            day: e.target.value
-        })
-    }
-
-    async submitHandler(e) {
-        e.preventDefault()
-        const date = e.target.date.value.split("-")
-        const year = date[0]
-        const monthCode = date[1]
-        const day = parseInt(date[2], 10)
-
-        const body = {}
-        body.day = day
-        body.month_code = monthCode
-        body.year = year
-
-        this.setState({
-            searching: true,
-        })
-
-        const response = await fetch(`http://localhost:5000/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        })
-        if (response.status === 200) {
-            const data = await response.json();
-            this.setState({
-                results: data.results,
-                searching: false,
-            })
-        }
-
-    }
-
-    render() {
+    <p>We can open the <code>aoty-frontend</code> folder in the terminal and run <code>npm install bootstrap-react
+        bootstrap</code></p>
+    <p>Inside the <code>&lt;head&gt;</code> tag of <code>public/index.html</code> we can include the Bootstrap CDN link
+    </p>
+    <pre><code class="language-html">&lt;head&gt;
+    ...
+    &lt;link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous"
+    /&gt;
+    ...
+&lt;/head&gt;</code></pre>
+    <p>And in either <code>src/index,js</code> or <code>src/App.js</code> we can include the following line</p>
+    <pre><code class="language-jsx">import 'bootstrap/dist/css/bootstrap.min.css';</code></pre>
+    <p>Now we can head back to <code>src/App.js</code> and at the top of the file add </p>
+    <pre><code class="language-jsx">import Container from 'react-bootstrap/Container'</code></pre>
+    <p>We'll use Bootstrap and CSS Grid to customise what our App renders now</p>
+    <pre><code class="language-jsx">render() {
         return (
             &lt;Container&gt;
                 &lt;div style={{display: `grid`, gap: `20px`}}&gt;
                     &lt;h1&gt;Album of the Year Searcher&lt;/h1&gt;
                     &lt;form onSubmit={this.submitHandler.bind(this)} action="#" style={{display: `grid`, gap: `10px`}}&gt;
-                        &lt;label style={{display: `grid`, gap: `10px`}}&gt;
-                            Date
-                            &lt;input type="date" name="date" id="date" min="1950-01-01"/&gt;
-                        &lt;/label&gt;
-                        &lt;button type="submit" id="submit-date"&gt;Search&lt;/button&gt;
+                        ...
                     &lt;/form&gt;
-                    &lt;div&gt;
-                        {this.state.searching ? &lt;div className="text-center"&gt;
-                            &lt;div className="spinner-border" role="status"&gt;
-                                &lt;span className="sr-only"&gt;Loading...&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt; : null}
-                        {this.state.results.length !== 0 ? (
-                            &lt;ul&gt;{
-                                this.state.results.map((result, i) =&gt;
-                                    &lt;li key={i}&gt;{result}&lt;/li&gt;
-                                )
-                            }&lt;/ul&gt;
-                        ) : null}
-                    &lt;/div&gt;
+                    ...
                 &lt;/div&gt;
             &lt;/Container&gt;
         )
-    }
-}
-
-export default App;
-</code></pre>
+    }</code></pre>
     <p>We can now move on to programming our Flask backend.</p>
     <h2 id="flask">Flask webserver backend</h2>
-    <p>Continuing from <a href="#">part 1</a> of the guide, we'll rewrite <code>app.py</code> to be the following:</p>
-    <pre><code class="language-python">from flask import Flask, request
+    <p>We're essentially rewriting the code from <a href="#">part 1</a> of the guide but I'll go over the code here too
+        so it isn't required you've read our first part.</p>
+    <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
+        text editor you prefer. You can set up your own environment if your editor doesn't automatically configure it
+        for you by executing the <code>venv</code> command from within a new directory which you could name <code>aoty-backend</code>
+        or similar:</p>
+    <pre><code class="language-bash">python3 -m venv /path/to/new/virtual/environment</code></pre>
+    <p>For more info you can check out the <a href="https://docs.python.org/3/library/venv.html">official Python
+        documentation on venv </a></p>
+    <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
+        installed.</p>
+    <p>Next we'll install the necessary packages to get up and running</p>
+    <pre><code class="language-bash">pip3 install requests flask selenium flask_cors</code></pre>
+    <p>NOw we can import the packages</p>
+    <pre><code class="language-python"># For handling requests and responses
+import requests
+import json
+from flask import Flask, request
+# Selenium imports
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, \
     StaleElementReferenceException
 import time
+# To run Docker commands
 import os
-import requests
-import json
-from flask_cors import CORS, cross_origin
-
-app = Flask(__name__)
-# Enable CORS to permit requests from the frontend to the backend (a different origin)
-CORS(app)  # Enables CORS for all routes
+# To enable requests from the frontend user interface
+from flask_cors import CORS, cross_origin</code></pre>
+    <p>We then create and configure the app</p>
+    <pre><code class="language-python"># Create Flask instance
+app = Flask(__name__)</code></pre>
+    <p>From <a href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask - Application Setup</a>:
+    </p>
+    <blockquote><code>__name__</code> is the name of the current Python module. The app needs to know where it’s
+        located to set up some paths, and <code>__name__</code> is a convenient way to tell it that.
+    </blockquote>
+    <p>Next, we use the <code>flask_cors</code> module to allow communication between our frontend interface and
+        backend webserver.</p>
+    <pre><code class="language-python"># Enable CORS to permit requests from the frontend to the backend (a different origin)
+CORS(app) # Enables CORS for all routes
 # Allow Content-Type header
-app.config['CORS_HEADERS'] = 'Content-Type'
-
-# Start Selenium webdriver container
+app.config['CORS_HEADERS'] = 'Content-Type'</code></pre>
+    <p>From <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:</p>
+    <blockquote><strong>Cross-Origin Resource Sharing</strong> (CORS) is an HTTP-header based mechanism that allows
+        a server to
+        indicate any other origins (domain, scheme, or port) than its own from which a browser should permit loading
+        of resources
+    </blockquote>
+    <p>Next we'll start the Selenium Docker container</p>
+    <pre><code class="language-python"># Start Selenium webdriver container
 os.system(
-    'sudo docker run --name my-selenium-container -d -p 4444:4444  -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-beta-1-prerelease-20210210')
-
-# Wait for Selenium webdriver container to be ready
-ready = False
-time.sleep(5)
-while not ready:
-    try:
-        r = requests.get('http://localhost:4444/wd/hub/status', timeout=1)
-        status = r.status_code
-        if status == 200:
-            ready = True
-    except ConnectionResetError or ConnectionError:
-        continue
-
-
-@app.route('/', methods=['POST'])
+    'sudo docker run --name my-selenium-container -d -p 4444:4444  -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-beta-1-prerelease-20210210')</code></pre>
+    <p>This command starts a standalone Firefox container. For other browsers and a description of why <code>-v
+        /dev/shm:/dev/shm </code> is necessary you can visit the <a
+            href="https://github.com/SeleniumHQ/docker-selenium#standalone">Docker Selenium Page</a>.</p>
+    <p>We've named the container "my-selenium-container" so we can remove it at the end of our program.</p>
+    <p>Now we'll work on our one and only route. First we'll just get data from the form and format it</p>
+    <pre><code class="language-python">@app.route('/', methods=['POST'])
 @cross_origin()
-def hello_world():
+def search_albums():
+    # Get data from form
     data = request.json
     day = data['day']
     month_code = data['month_code']
@@ -357,8 +315,7 @@ def hello_world():
     month = ''
     month_name_short = ''
 
-    print(month_code)
-
+    # Set month and month_name_short based on month_code
     if month_code == '01':
         month = 'january'
         month_name_short = 'Jan'
@@ -396,73 +353,107 @@ def hello_world():
         month = 'december'
         month_name_short = 'Dec'
 
-    release_date_to_search = '%s %s' % (month_name_short, day)
+    # Format release date to search for like "Sep 20"
+    release_date_to_search = '%s %s' % (month_name_short, day)</code></pre>
+    <p>This command starts a standalone Firefox container. For other browsers and a description of why <code>-v
+        /dev/shm:/dev/shm </code> is necessary you can visit the <a
+            href="https://github.com/SeleniumHQ/docker-selenium#standalone">Docker Selenium Page</a>.</p>
+    <p>We've named the container "my-selenium-container" so we can remove it at the end of our program.</p>
+    <p>The next piece of code is actually very important. When we start our container we need to wait
+        for it to be in a state where it's ready to provide the services we need to use it as our remote webdriver.</p>
+    <pre><code class="language-python">ready = False
+time.sleep(5)
+while not ready:
+    try:
+        r = requests.get('http://localhost:4444/wd/hub/status', timeout=1)
+        status = r.status_code
+        if status == 200:
+            ready = True
+    except ConnectionResetError or ConnectionError:
+        continue</code></pre>
+    <p>Essentially, we keep hitting the status endpoint until it says it's ready and then we can move on with the rest
+        of our Python script.</p>
+    <pre><code class="language-python">driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
+                          command_executor="http://localhost:4444/wd/hub")</code></pre>
+    <p>We can connect to our remote webdriver on localhost since due to the docker run command <code>-p 4444:4444</code>
+        which
+        maps port 4444 of the container to port 4444 of our local machine.</p>
+    <p>NOw we can connect to the remote Firefox webdriver</p>
+    <pre><code class="language-python">    # Connect to remote Firefox webdriver
     driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
-                              command_executor="http://localhost:4444/wd/hub")
+                              command_executor="http://localhost:4444/wd/hub")</code></pre>
+    <p>And go to the AOTY page for the specified month</p>
+    <pre><code class="language-python"># Go to Album of the Year page for specific month
     driver.get(
-        "https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month, month_code))
+        "https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month, month_code))</code></pre>
+    <p>Next we'll code our PySelenium bot to keep clicking the button to load more albums.</p>
+    <pre><code class="language-python">all_albums_loaded = False
 
-    all_albums_loaded = False
-
-    while not all_albums_loaded:
-        try:
-            show_more_button_container = driver.find_element_by_class_name('showMore')
-            time.sleep(3)
-            driver.execute_script("arguments[0].click();",
-                                  show_more_button_container.find_element_by_class_name('largeButton'))
-            time.sleep(1)
-        except StaleElementReferenceException:
-            continue
-        except NoSuchElementException:
-            all_albums_loaded = True
-
-    albums = driver.find_elements_by_class_name('albumBlock')
-
-    response = []
+while not all_albums_loaded:
+    try:
+        show_more_button_container = driver.find_element_by_class_name('showMore')
+        time.sleep(3)
+        driver.execute_script("arguments[0].click();",
+                              show_more_button_container.find_element_by_class_name('largeButton'))
+        time.sleep(1)</code></pre>
+    <p>Note we're using the <code class="language-python">execute_script</code> method as opposed to the <code
+            class="language-python">click()</code> method of the <code>WebElement</code>
+        object returned by <code class="language-python">find_element_by_id</code><br>We do this because another element
+        is covering the show
+        more button. You can see <a href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
+            user RemcoW</a> for more details and an explanation of <code class="language-python">arguments[0]</code></p>
+    <p>We're not quite finished with this while loop just yet, we need to do two things:</p>
+    <ul>
+        <li><strong>except StaleElementReferenceException</strong> - our WebElement can be destroyed and re-rendered in
+            the DOM so we'll need to retry by using <code>continue</code> if our reference becomes stale. <a
+                    href="https://stackoverflow.com/a/16244739/9472445">This StackOverflow answer by user Ardesco</a>
+            describes the situation more clearly.
+        </li>
+        <li><strong>except NoSuchElementException</strong> - tell our bot they can stop trying to click the button now,
+            it isn't being rendered to the UI so all albums are on the page.
+        </li>
+    </ul>
+    <p>For completeness, this is our complete while loop</p>
+    <pre><code class="language-python" id="stale-element">while not all_albums_loaded:
+    try:
+        show_more_button_container = driver.find_element_by_class_name('showMore')
+        time.sleep(3)
+        driver.execute_script("arguments[0].click();",
+                              show_more_button_container.find_element_by_class_name('largeButton'))
+        time.sleep(1)
+    except StaleElementReferenceException:
+        continue
+    except NoSuchElementException:
+        all_albums_loaded = True</code></pre>
+    <p>We can store all albums being displayed in a variable now so we can easily iterate through them.</p>
+    <pre><code class="language-python">albums = driver.find_elements_by_class_name('albumBlock')</code></pre>
+    <p>Let's do just that</p>
+    <pre><code class="language-python">response = []
+    # For each album, if the release date matches the date to search for then append it to the response array
     for album in albums:
-        album_release_date = album.find_element_by_class_name('date').text
-        if album_release_date == release_date_to_search:
-            album_title = album.find_element_by_class_name('albumTitle').text
-            artist_title = album.find_element_by_class_name(
-                'artistTitle').text
-            response.append('%s - %s' % (album_title, artist_title))
-
+    album_release_date = album.find_element_by_class_name('date').text
+    if album_release_date == release_date_to_search:
+        album_title = album.find_element_by_class_name('albumTitle').text
+        artist_title = album.find_element_by_class_name(
+            'artistTitle').text
+        response.append('%s - %s' % (album_title, artist_title))</code></pre>
+    <p>This is really our main block of code. We iterate through each album and append to our <code>response</code>
+        array it's title and artist if it
+        was released on the day we have specified to search for.</p>
+    <p>We can do a little housekeeping by returning a message if no albums match the release data and closing our driver
+        connection</p>
+    <pre><code class="language-python"># If no albums are found return a message informing the user
     if len(response) == 0:
         response.append('No albums found')
 
-    driver.close()
-    #
-    # # remove Selenium container
-    # os.system(
-    #     'sudo docker rm -f my-selenium-container')
-
-    return json.dumps({'results': response}), 200, {'ContentType': 'application/json'}
-
-
-if __name__ == '__main__':
-    app.run()
-</code>
-    </pre>
-    <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
-        text editor you prefer. You can set up your own environment if your editor doesn't automatically configure it
-        for you by executing the command <code>venv</code>:</p>
-    <pre>
-        <code>
-            python3 -m venv /path/to/new/virtual/environment
-        </code>
-    </pre>
-    <p>For more info you can check out the <a href="https://docs.python.org/3/library/venv.html">official Python
-        documentation on venv </a></p>
-    <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
-        installed.</p>
-    <p>We'll start by installing the necessary packages/p>
-    <pre><code>pip3 install selenium
-pip3 install requests
-pip3 install flask_cors</code>
-    </pre>
-    <p>Note that you may need to change <code>pip3</code> to <code>pip</code> depending on which version you have
-        installed.</p>
+    # Close connection to Firefox webdriver
+    driver.close()</code></pre>
+    <p>Finally, we'll return our response to the user</p>
+    <pre><code class="language-python"># Return response to user
+return json.dumps({'results': response}), 200, {'ContentType': 'application/json'}</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
+    <p>You can find all the source code for this guide <a href="#">here.</a></p>
+    <!--****************8-->
     <h2 id="results">Results</h2>
     <p>Let's try searching for the albums released on a certain date to see our results.</p>
     <p>Inside the virtual environment, we can run</p>
@@ -471,16 +462,17 @@ pip3 install flask_cors</code>
     <p>If you've followed along and used <code>sudo</code> in the docker run command you'll be prompted for your
         password and then we can move to our frontend application at <a href="http://localhost:3000">http://localhost:3000</a>
     </p>
-    <
+    <p>Now we can enter a date and search</p>
+    <img src="images/frontend-loading.png">
+    <p>We can see the requests has been successful on the backend</p>
+    <img src="images/backend-post.png">
+    <p>And the results come back to the user on the frontend</p>
+    <img src="images/frontend-results.png">
     <h2 id="whats-next">What's Next?</h2>
     <p>Remember you can <a
-            href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">grab
+            href="#">grab
         the source code</a> so you can take this and run with it adapting it however you like, read on to find out what
         my plans are for this project and ideas about where this could go next.</p>
-    <p>I was motivated to create this project because I couldn't find a site that could be used to search for albums by
-        a specific release date. I'll be designing the frontend for this program in an upcoming post and showing how you
-        can deploy it so you can
-        use and share it with others.</p>
     <p>We can improve our frontend by designing with our users in mind with an interface integrating the album covers
         and we could even add filtering by genre.</p>
     <p>Stay tuned to <a href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
@@ -531,9 +523,6 @@ pip3 install flask_cors</code>
                 StackOverflow answer by user devnev</a>.
         </li>
     </ul>
-
-</div>
-
 </div>
 <script src="https://kit.fontawesome.com/726e49cea0.js" crossorigin="anonymous"></script>
 <script src="prism.js"></script>
