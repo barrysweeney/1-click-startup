@@ -637,8 +637,7 @@ def get_employee(id):
         <hr>
         <p>Many small businesses use spreadsheets to manage payroll and sales predictions as opposed to expensive
             proprietary specialized applications.</p>
-        <p>Let's add LibreOffice which will allow our user to use LibreOffice Calc as an open source alternative to
-            Microsoft Excel.</p>
+        <p>Let's add NextCLoud which will allow our user to use the integrated Collabora Office Online to manage and edit documents.</p>
         <p>Firstly, we'll need to modify our <code>docker-compose.yml</code> file to add the new service</p>
         <pre><code class="language-yaml">version: "3.7"
 
@@ -652,8 +651,25 @@ services:
   adminer:
     ...
 
-  mysqldb:
+  db:
     ...
+
+  nextcloud:
+    image: nextcloud
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=p@ssw0rd1
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+    depends_on:
+      - db
 
   pyselenium:
     ...
@@ -662,21 +678,10 @@ services:
     ...
 
   selenium-hub:
-    ...
-
-  office:
-    image: libreoffice/online
-    environment:
-      - username=admin
-      - password=admin
-      - DONT_GEN_SSL_CERT=1
-      - extra_params=--o:ssl.enable=false
-    ports:
-      - "9980:9980"</code></pre>
+    ...</code></pre>
         <p>We set the image to pull from Docker Hub, set some environment variables, and map the port from within the
             container to the same port on our local machine.</p>
-        <p>The configuration is further explained in <a
-                href="https://github.com/smehrbrodt/nextcloud-libreoffice-online">this GitHub repository.</a></p>
+        <p>Next we'll link this service to the custom frontend</p>
     </div>
     <div class="automated-employee-demo" id="automated-employee-demo">
         <h3>🤖 Automated Employee Demo</h3>
@@ -777,6 +782,14 @@ services:
     <div class="next-steps" id="next-steps">
         <h3>📋 Next Steps</h3>
         <hr>
+    </div>
+    <div>
+        <h3>Troubleshooting</h3>
+        <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> - to solve
+            this you can find which process is using the port by running <code>sudo lsof -i -P -n | grep 3306</code> and
+            use the id to end the process with <code>sudo kill id</code> for example <br>
+            <img src="assets/lsof.png">
+        </li>
     </div>
 
 </div>

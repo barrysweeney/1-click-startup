@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Container from 'react-bootstrap/Container'
 import './App.css';
 import React, {Component} from "react"

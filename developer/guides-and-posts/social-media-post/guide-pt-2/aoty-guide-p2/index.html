@@ -79,8 +79,8 @@
     <p>We'll wrap up with a discussion of our results and how we could take this further..</p>
     <ul>
         <li><a href="#dev-env">Configuring your development environment</a></li>
-        <li><a href="#coding">React Frontend</a></li>
-        <li><a href="#results">Flask Webserver Backend</a></li>
+        <li><a href="#frontend">React Frontend</a></li>
+        <li><a href="#backend">Flask Webserver Backend</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#whats-next">What's Next?</a></li>
         <li><a href="#troubleshooting">Troubleshooting</a></li>
@@ -103,7 +103,7 @@
         <li><a href="https://www.fosstechnix.com/how-to-install-node-js-on-windows/">Install NodeJS on Windows</a></li>
     </ul>
     <p>You can now move on to creating our React app.</p>
-    <h2 id="coding">React Frontend</h2>
+    <h2 id="frontend">React Frontend</h2>
     <p>First we can start with a generated <a href="https://reactjs.org/docs/glossary.html#single-page-application">single-page
         application</a> with the help of <code>create-react-app</code></p>
     <pre><code class="language-bash">npx create-react-app aoty-frontend
@@ -247,7 +247,7 @@ class App extends Component {
         )
     }</code></pre>
     <p>We can now move on to programming our Flask backend.</p>
-    <h2 id="flask">Flask webserver backend</h2>
+    <h2 id="backend">Flask webserver backend</h2>
     <p>We're essentially rewriting the code from <a href="#">part 1</a> of the guide but I'll go over the code here too
         so it isn't required you've read our first part.</p>
     <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
@@ -261,7 +261,7 @@ class App extends Component {
         installed.</p>
     <p>Next we'll install the necessary packages to get up and running</p>
     <pre><code class="language-bash">pip3 install requests flask selenium flask_cors</code></pre>
-    <p>NOw we can import the packages</p>
+    <p>Now we can import the packages</p>
     <pre><code class="language-python"># For handling requests and responses
 import requests
 import json
@@ -378,13 +378,13 @@ while not ready:
     <p>We can connect to our remote webdriver on localhost since due to the docker run command <code>-p 4444:4444</code>
         which
         maps port 4444 of the container to port 4444 of our local machine.</p>
-    <p>NOw we can connect to the remote Firefox webdriver</p>
-    <pre><code class="language-python">    # Connect to remote Firefox webdriver
-    driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
-                              command_executor="http://localhost:4444/wd/hub")</code></pre>
+    <p>Now we can connect to the remote Firefox webdriver</p>
+    <pre><code class="language-python"># Connect to remote Firefox webdriver
+driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
+                          command_executor="http://localhost:4444/wd/hub")</code></pre>
     <p>And go to the AOTY page for the specified month</p>
     <pre><code class="language-python"># Go to Album of the Year page for specific month
-    driver.get(
+driver.get(
         "https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month, month_code))</code></pre>
     <p>Next we'll code our PySelenium bot to keep clicking the button to load more albums.</p>
     <pre><code class="language-python">all_albums_loaded = False
@@ -429,8 +429,8 @@ while not all_albums_loaded:
     <pre><code class="language-python">albums = driver.find_elements_by_class_name('albumBlock')</code></pre>
     <p>Let's do just that</p>
     <pre><code class="language-python">response = []
-    # For each album, if the release date matches the date to search for then append it to the response array
-    for album in albums:
+# For each album, if the release date matches the date to search for then append it to the response array
+for album in albums:
     album_release_date = album.find_element_by_class_name('date').text
     if album_release_date == release_date_to_search:
         album_title = album.find_element_by_class_name('albumTitle').text
@@ -442,7 +442,7 @@ while not all_albums_loaded:
         was released on the day we have specified to search for.</p>
     <p>We can do a little housekeeping by returning a message if no albums match the release data and closing our driver
         connection</p>
-    <pre><code class="language-python"># If no albums are found return a message informing the user
+    <pre><code class="language-python">    # If no albums are found return a message informing the user
     if len(response) == 0:
         response.append('No albums found')
 
@@ -453,7 +453,6 @@ while not all_albums_loaded:
 return json.dumps({'results': response}), 200, {'ContentType': 'application/json'}</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
     <p>You can find all the source code for this guide <a href="#">here.</a></p>
-    <!--****************8-->
     <h2 id="results">Results</h2>
     <p>Let's try searching for the albums released on a certain date to see our results.</p>
     <p>Inside the virtual environment, we can run</p>
@@ -475,6 +474,8 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
         my plans are for this project and ideas about where this could go next.</p>
     <p>We can improve our frontend by designing with our users in mind with an interface integrating the album covers
         and we could even add filtering by genre.</p>
+    <p>Another possible challenge to take on would be deployment using services such as <a
+            href="https://www.heroku.com/">Heroku</a> and <a href="https://www.netlify.com/">Netlify</a>.</p>
     <p>Stay tuned to <a href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
     <h2 id="troubleshooting">Bonus: Troubleshooting</h2>
     <p>Here's some resources for resolving common errors you might run into along the way in this guide or in your own
@@ -522,6 +523,9 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
             rationale behind this is provided in <a href="https://stackoverflow.com/a/48547074/9472445">this
                 StackOverflow answer by user devnev</a>.
         </li>
+        <li><code class="language-shell">requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost',
+            port=4444): Max retries exceeded with url: /wd/hub/status</code> - to solve this error you should run <code>sudo
+            docker rm -f my-selenium-container</code></li>
     </ul>
 </div>
 <script src="https://kit.fontawesome.com/726e49cea0.js" crossorigin="anonymous"></script>
