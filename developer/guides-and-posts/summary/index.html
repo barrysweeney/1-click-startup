@@ -69,9 +69,9 @@
             <li><a href="#new-service">Adding a new service</a></li>
             <li><a href="#custom-webserver">Custom Webserver</a></li>
             <li><a href="#automated-employee-demo">Automated Employee Demo</a></li>
-            <li><a href="#automated-employee-demo">AI Manager Demo</a></li>
-            <li><a href="#process-mining">Adding Problems</a></li>
-            <li><a href="#ux">Work Still to do</a></li>
+            <li><a href="#automated-manager-demo">AI Manager Demo</a></li>
+            <li><a href="#adding-problems">Adding Problems</a></li>
+            <li><a href="#next-steps">Work Still to do</a></li>
         </ul>
     </div>
     <div id="understand-business">
@@ -637,7 +637,8 @@ def get_employee(id):
         <hr>
         <p>Many small businesses use spreadsheets to manage payroll and sales predictions as opposed to expensive
             proprietary specialized applications.</p>
-        <p>Let's add NextCLoud which will allow our user to use the integrated Collabora Office Online to manage and edit documents.</p>
+        <p>Let's add NextCLoud which will allow our user to use the integrated Collabora Office Online to manage and
+            edit documents.</p>
         <p>Firstly, we'll need to modify our <code>docker-compose.yml</code> file to add the new service</p>
         <pre><code class="language-yaml">version: "3.7"
 
@@ -659,19 +660,8 @@ services:
     restart: always
     ports:
       - 80:80
-    links:
-      - db
-    volumes:
-      - nextcloud:/var/www/html
-    environment:
-      - MYSQL_PASSWORD=p@ssw0rd1
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
-    depends_on:
-      - db
 
-  pyselenium:
+  pyselenium-user:
     ...
 
   firefox:
@@ -679,119 +669,249 @@ services:
 
   selenium-hub:
     ...</code></pre>
-        <p>We set the image to pull from Docker Hub, set some environment variables, and map the port from within the
-            container to the same port on our local machine.</p>
-        <p>Next we'll link this service to the custom frontend</p>
-    </div>
-    <div class="automated-employee-demo" id="automated-employee-demo">
-        <h3>🤖 Automated Employee Demo</h3>
-        <hr/>
-        <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to
-            our first glimpse at automating our user, and work backwards from there.</p>
-        <p>As one of the main goals of this project is to create automated users, it's worth exploring an example of one
-            of the tasks that have been automated. </p>
-        <p>We'll have <a href="https://selenium-python.readthedocs.io/">PySelenium</a> interact with our user interface
-            to populate and submit a form to our backend <a
-                    href="https://flask.palletsprojects.com/en/1.1.x/installation/">Flask</a>
-            webserver which will then store data in a sqlite3 database.</p>
-        <p><span aria-label="stop sign emoji">🛑</span> Hold Up <span aria-label="hand up for stop emoji">✋ </span>Before
-            we go any further I'd like to mention that it isn't essential to understand concepts like <a
-                    href="https://www.docker.com/resources/what-container">containers</a> and <a
-                    href="https://docs.docker.com/compose/networking/">Docker
-                compose network</a> at this point. When a new concept pops up I'll make sure to link to it's
-            documentation for future
-            reference. For now feel free to gloss over it and just get a feel for the overall flow of data and how our
-            different services communicate. As an aside, the best resource I've found for learning these concepts was <a
-                    href="https://www.pluralsight.com/courses/docker-kubernetes-big-picture">this course</a> which you
-            can watch on a PluralSight free trial.</p>
-        <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as rooms in
-            our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our
-            hotel reception (or lobby if you prefer).</p>
-        <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers
-            relating to our
-            application.</p>
-        <p>We're getting our rooms ready and letting our guests into them.</p>
-        <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get the
-            webdriver for Selenium which allows them to access the web.</p>
-        <p>They walk down the corridor to the <a href="https://github.com/SeleniumHQ/docker-selenium">Webdriver</a> room
-            to get the key for the door to the Web Browser room.</p>
-        <pre>
-        <code class="language-bash">driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
-            <span class="red-code">command_executor</span>=<span
-                    class="green-code">"http://172.17.0.1:4444/wd/hub"</span>)</code></pre>
-        <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
-                class="green-code">http://localhost</span>
+        <p>We set the image to pull from Docker Hub and map the port from within the
+            container to <code>port 8080</code> on our local machine.</p>
+        <p>Next, we'll link this service to the custom frontend. We'll want NextCloud to be setup with the apps already
+            installed so we'll create a small python script to do that. This will have the dual effect of locking the
+            route down to only the manager since we could theoretically make the password to only them.</p>
+        <p>We'll create a new folder</p>
+        <img src="assets/pyadmin.png">
+        <p>Which we can then open with our IDE/text editor</p>
+        <img src="assets/open-with-vscode.png">
+        <p>And then open a new terminal within vscode with <code>ctrl+alt+`</code> and run</p>
+        <pre><code class="language-shell">touch app/main.py .gitignore Dockerfile</code></pre>
+        <p>And we'll create ab activate our virtual environment with the following:</p>
+        <pre><code>python3 -m venv .venv
+source .venv/bon/activate</code></pre>
+        <p>And now we can install our required packages with pip</p>
+        <pre><code>pip3 install selenium requests</code></pre>
+        <p>And we can head over to <code>app/main.py</code> and start importing these</p>
+        <pre><code class="language-python">from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+import time
+import requests</code></pre>
+        <p>The selenium webdriver container is started along with the other services like the frontend, backend, and
+            database, but we ned to wait for it to be ready for connections</p>
+        <pre><code class="language-python"># Wait for Selenium webdriver container to be ready
+ready = False
+time.sleep(5)
+while not ready:
+    try:
+        r = requests.get('http://172.17.0.1:4444/wd/hub/status', timeout=1)
+        status = r.status_code
+        if status == 200:
+            ready = True
+    except ConnectionResetError or ConnectionError:
+        continue
+
+driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
+                          command_executor="http://172.17.0.1:4444/wd/hub")</code></pre>
+        <p>We use <code>http://172.17.0.1</code> instead of <code>http://localhost</code>
             since we're communicating from within one container to a different container, for more information about
             this bridge between networks using the host machine you can refer to <a
                     href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
         </p>
-        <p>With the next line of code our automated employee can access the customer order page of the frontend user
-            interface which is in a different container accessible at port 8000 on our Docker network.</p>
-        <pre><code class="language-bash">driver.get(<span
-                class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
-        <p>This is what our employee now sees:</p>
-        <img src="assets/customer-order.png" alt="Customer Order form"/>
-        <p>They can now fill in and submit the form:</p>
-        <pre><code class="language-python">
+        <p>Now we can use this line of code</p>
+        <pre><code class="language-python"># Go to create admin account page
+driver.get("http://172.17.0.1:8080/")</code></pre>
+        <p>Which will take us to this page</p>
+        <img src="assets/create-admin.png">
+        <p>We can now input the username and password before clicking the finish setup button also on the page</p>
+        <pre><code class="language-python"># Input username and password
+WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
+WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "adminpass")))
+driver.find_element_by_id("adminlogin").send_keys("admin")
+driver.find_element_by_id("adminpass").send_keys("password")
+
+# Click "Finish setup" button
+driver.find_element_by_class_name("primary").click()</code></pre>
+        <p>The ids where found by using the browsers inspect element feature</p>
+        <img src="assets/inspect.png" alt="Browser developer tools inspect feature">
+        <p>You can access this by pressing the F12 key when on the page or by right clicking the page and clicking
+            "Inspect" ... Another good tool to use is <code>ctrl+shift_c</code> to pick an element from the page, as
+            shown
+            in the screenshot above.</p>
+        <p>We can now close our connection to the driver</p>
+        <pre><code class="language-python">driver.close()</code></pre>
+        <p>If we move over to our <code>Dockerfile</code> now we can containerize our automated admin</p>
+        <pre><code class="language-docker">FROM python:3.8
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY /app/main.py .
+
+CMD ["python", "main.py"]</code></pre>
+        <p>Of course we'll also need to create the requirements.txt file which we can do from the terminal (<code>ctrl+alt+`</code>)
+        </p>
+        <pre><code> pip3 freeze > requirements.txt</code></pre>
+        <p>Note there is <a
+                href="https://stackoverflow.com/questions/39577984/what-is-pkg-resources-0-0-0-in-output-of-pip-freeze-command">an
+            issue</a> where a line <code>pkg-resources==0.0.0</code> is sometimes generated. If it is, you can safely
+            remove this line from <code>requirements/txt</code></p>
+        <p>Now if we return to our main <code>docker-compose.yaml</code> file at the root of the cloned <code>1-click-startup</code>
+            directory we can add this automated admin service</p>
+        <pre><code class="language-yaml">version: "3.7"
+
+services:
+  frontend:
+    ...
+
+  backend:
+    ...
+
+  adminer:
+    ...
+
+  db:
+    ...
+
+  nextcloud:
+    ...
+
+  pyselenium-admin:
+    build: ./pyselenium-admin
+    depends_on:
+      - nextcloud
+
+  pyselenium-user:
+    ...
+
+  firefox:
+    ...
+
+  selenium-hub:
+    ...
+</code></pre>
+        <p>Now the script will be run on startup to set up the NextCloud admin and the recommended apps (including
+            document editing) ll be installed.</p>
+        <p>To complete adding this service to our application we'll also need a way to link to the NextCLoud document
+            editing page from our custom frontend interface.</p>
+        <div class="automated-employee-demo" id="automated-employee-demo">
+            <h3>🤖 Automated Employee Demo</h3>
+            <hr/>
+            <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to
+                our first glimpse at automating our user, and work backwards from there.</p>
+            <p>As one of the main goals of this project is to create automated users, it's worth exploring an example of
+                one
+                of the tasks that have been automated. </p>
+            <p>We'll have <a href="https://selenium-python.readthedocs.io/">PySelenium</a> interact with our user
+                interface
+                to populate and submit a form to our backend <a
+                        href="https://flask.palletsprojects.com/en/1.1.x/installation/">Flask</a>
+                webserver which will then store data in a sqlite3 database.</p>
+            <p><span aria-label="stop sign emoji">🛑</span> Hold Up <span aria-label="hand up for stop emoji">✋ </span>Before
+                we go any further I'd like to mention that it isn't essential to understand concepts like <a
+                        href="https://www.docker.com/resources/what-container">containers</a> and <a
+                        href="https://docs.docker.com/compose/networking/">Docker
+                    compose network</a> at this point. When a new concept pops up I'll make sure to link to it's
+                documentation for future
+                reference. For now feel free to gloss over it and just get a feel for the overall flow of data and how
+                our
+                different services communicate. As an aside, the best resource I've found for learning these concepts
+                was <a
+                        href="https://www.pluralsight.com/courses/docker-kubernetes-big-picture">this course</a> which
+                you
+                can watch on a PluralSight free trial.</p>
+            <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as
+                rooms in
+                our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our
+                hotel reception (or lobby if you prefer).</p>
+            <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers
+                relating to our
+                application.</p>
+            <p>We're getting our rooms ready and letting our guests into them.</p>
+            <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get
+                the
+                webdriver for Selenium which allows them to access the web.</p>
+            <p>They walk down the corridor to the <a href="https://github.com/SeleniumHQ/docker-selenium">Webdriver</a>
+                room
+                to get the key for the door to the Web Browser room.</p>
+            <pre>
+        <code class="language-bash">driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
+            <span class="red-code">command_executor</span>=<span
+                    class="green-code">"http://172.17.0.1:4444/wd/hub"</span>)</code></pre>
+            <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
+                    class="green-code">http://localhost</span>
+                since we're communicating from within one container to a different container, for more information about
+                this bridge between networks using the host machine you can refer to <a
+                        href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
+            </p>
+            <p>With the next line of code our automated employee can access the customer order page of the frontend user
+                interface which is in a different container accessible at port 8000 on our Docker network.</p>
+            <pre><code class="language-bash">driver.get(<span
+                    class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
+            <p>This is what our employee now sees:</p>
+            <img src="assets/customer-order.png" alt="Customer Order form"/>
+            <p>They can now fill in and submit the form:</p>
+            <pre><code class="language-python">
     driver.find_element_by_id(<span class="green-code">"customer-name"</span>).send_keys(<span class="green-code">"John Doe"</span>)
     driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys(<span
-                class="green-code">"+44700000010"</span>)
+                    class="green-code">"+44700000010"</span>)
     driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys("<span
-                class="green-code">Bottle Water"</span>)
+                    class="green-code">Bottle Water"</span>)
     driver.find_element_by_id(<span class="green-code">"submit-customer-order"</span>).click()
         </code></pre>
-        <p>If we look at the code for this form we can see that it is sending a <a
-                href="https://en.wikipedia.org/wiki/POST_(HTTP)">POST</a> request to our backend Flask
-            webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room to
-            Flask's room).</p>
-        <pre><code class="language-bash"><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
-                class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
-                class="yellow-code">&gt;</span>...</code></pre>
-        <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
-        <pre><code class="language-python">
+            <p>If we look at the code for this form we can see that it is sending a <a
+                    href="https://en.wikipedia.org/wiki/POST_(HTTP)">POST</a> request to our backend Flask
+                webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room
+                to
+                Flask's room).</p>
+            <pre><code class="language-bash"><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
+                    class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
+                    class="yellow-code">&gt;</span>...</code></pre>
+            <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
+            <pre><code class="language-python">
 <span class="yellow-code">@app.route</span>(<span class="green-code">'/customer/order/new'</span><span
-                class="orange-code">,</span> <span class="red-code">methods</span>=[<span
-                class="green-code">'post'</span>])
+                    class="orange-code">,</span> <span class="red-code">methods</span>=[<span
+                    class="green-code">'post'</span>])
 <span class="orange-code">def</span> <span class="yellow-code">customer_order</span>():
     name = request.form[<span class="green-code">'customer-name'</span>]
     contact_number = request.form[<span class="green-code">'customer-contact-number'</span>]
     order = request.form[<span class="green-code">'customer-order'</span>]
     c.execute(<span class="green-code">"</span><span class="orange-code">INSERT INTO</span> CUSTOMER_ORDER(CUSTOMER_NAME,CONTACT_NUMBER,CUSTOMER_ORDER) \
     <span class="orange-code">VALUES</span> (?<span class="orange-code">,</span>?<span
-                class="orange-code">,</span>?)<span class="green-code">"</span><span
-                class="orange-code">,</span> (name<span class="orange-code">,</span> contact_number<span
-                class="orange-code">,</span> order<span class="orange-code">,</span>))
+                    class="orange-code">,</span>?)<span class="green-code">"</span><span
+                    class="orange-code">,</span> (name<span class="orange-code">,</span> contact_number<span
+                    class="orange-code">,</span> order<span class="orange-code">,</span>))
     conn.commit()
     <span class="orange-code">return</span> <span class="green-code">'OK'</span>
         </code></pre>
-        <p>We're extracting the data from the form that was posted and inserting it as an new record into our customer
-            order table.</p>
-        <p>We can see that Flask and sqlite3 share the same room, if it start's getting too crowded we might want to
-            prepare a new room for sqlite3</p>
-        <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
-            order, it highlights the flow of data through some of our integrated services.</p>
+            <p>We're extracting the data from the form that was posted and inserting it as an new record into our
+                customer
+                order table.</p>
+            <p>We can see that Flask and sqlite3 share the same room, if it start's getting too crowded we might want to
+                prepare a new room for sqlite3</p>
+            <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
+                order, it highlights the flow of data through some of our integrated services.</p>
+        </div>
+        <div class="automated-manager-demo" id="automated-manager-demo">
+            <h3>📊 Automated Manager Demo</h3>
+            <hr>
+        </div>
+        <div class="adding-problems" id="adding-problems">
+            <h3>⛈ Adding work problems in the application</h3>
+            <hr>
+        </div>
+        <div class="next-steps" id="next-steps">
+            <h3>📋 Next Steps</h3>
+            <hr>
+        </div>
+        <div>
+            <h3>Troubleshooting</h3>
+            <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> - to
+                solve
+                this you can find which process is using the port by running <code>sudo lsof -i -P -n | grep 3306</code>
+                and
+                use the id to end the process with <code>sudo kill id</code> for example <br>
+                <img src="assets/lsof.png">
+            </li>
+        </div>
     </div>
-    <div class="automated-manager-demo" id="automated-manager-demo">
-        <h3>📊 Automated Manager Demo</h3>
-        <hr>
-    </div>
-    <div class="adding-problems" id="adding-problems">
-        <h3>⛈ Adding work problems in the application</h3>
-        <hr>
-    </div>
-    <div class="next-steps" id="next-steps">
-        <h3>📋 Next Steps</h3>
-        <hr>
-    </div>
-    <div>
-        <h3>Troubleshooting</h3>
-        <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> - to solve
-            this you can find which process is using the port by running <code>sudo lsof -i -P -n | grep 3306</code> and
-            use the id to end the process with <code>sudo kill id</code> for example <br>
-            <img src="assets/lsof.png">
-        </li>
-    </div>
-
 </div>
 <script src="prism.js"></script>
 </body>
