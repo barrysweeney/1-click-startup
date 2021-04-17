@@ -47,17 +47,17 @@ services:
     ports:
       - "8080:80"
 
-#  pyselenium-admin:
-#    build: ./pyselenium-admin
-#    depends_on:
-#      - nextcloud
-#      - firefox
+  pyselenium-admin:
+    build: ./pyselenium-admin
+    depends_on:
+      - nextcloud
+      - firefox
 
-#  pyselenium-employee:
-#    build: ./pyselenium-user
-#    depends_on:
-#      - firefox
-#      - frontend
+  pyselenium-employee:
+    build: ./pyselenium-employee
+    depends_on:
+      - firefox
+      - frontend
 
   firefox:
     image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402

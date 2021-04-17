@@ -815,8 +815,6 @@ services:
         <div class="automated-employee-demo" id="automated-employee-demo">
             <h3>🤖 Automated Employee Demo</h3>
             <hr/>
-            <p>User experience design details are listed below but for now I feel like it's worth skipping ahead to
-                our first glimpse at automating our user, and work backwards from there.</p>
             <p>As one of the main goals of this project is to create automated users, it's worth exploring an example of
                 one
                 of the tasks that have been automated. </p>
@@ -824,59 +822,31 @@ services:
                 interface
                 to populate and submit a form to our backend <a
                         href="https://flask.palletsprojects.com/en/1.1.x/installation/">Flask</a>
-                webserver which will then store data in a sqlite3 database.</p>
-            <p><span aria-label="stop sign emoji">🛑</span> Hold Up <span aria-label="hand up for stop emoji">✋ </span>Before
-                we go any further I'd like to mention that it isn't essential to understand concepts like <a
-                        href="https://www.docker.com/resources/what-container">containers</a> and <a
-                        href="https://docs.docker.com/compose/networking/">Docker
-                    compose network</a> at this point. When a new concept pops up I'll make sure to link to it's
-                documentation for future
-                reference. For now feel free to gloss over it and just get a feel for the overall flow of data and how
-                our
-                different services communicate. As an aside, the best resource I've found for learning these concepts
-                was <a
-                        href="https://www.pluralsight.com/courses/docker-kubernetes-big-picture">this course</a> which
-                you
-                can watch on a PluralSight free trial.</p>
-            <p>In fact before we dive into code, let's set the scene with an analogy: We can think of containers as
-                rooms in
-                our hotel, and our "Docker network" as our hallway that connects all of our rooms. Our localhost is our
-                hotel reception (or lobby if you prefer).</p>
+                webserver which will then store data in a MySQL database.</p>
             <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers
                 relating to our
                 application.</p>
-            <p>We're getting our rooms ready and letting our guests into them.</p>
-            <p>Our automated user lives in one of these containers/rooms. With the following line of code, they can get
+            <p>Our automated employee lives in one of these containers/rooms. With the following line of code, they can
+                get
                 the
                 webdriver for Selenium which allows them to access the web.</p>
-            <p>They walk down the corridor to the <a href="https://github.com/SeleniumHQ/docker-selenium">Webdriver</a>
-                room
-                to get the key for the door to the Web Browser room.</p>
-            <pre>
-        <code class="language-bash">driver = webdriver.Remote(<span class="red-code">desired_capabilities</span>=webdriver.DesiredCapabilities.FIREFOX,
-            <span class="red-code">command_executor</span>=<span
-                    class="green-code">"http://172.17.0.1:4444/wd/hub"</span>)</code></pre>
-            <p>We use <span class="green-code">http://172.17.0.1</span> instead of <span
-                    class="green-code">http://localhost</span>
+            <pre><code class="language-python">driver = webdriver.Remote(desired_capabilitieswebdriver.DesiredCapabilities.FIREFOX,
+            command_executor="http://172.17.0.1:4444/wd/hub")</code></pre>
+            <p>We use <code>http://172.17.0.1</code> instead of <code>http://localhost</code>
                 since we're communicating from within one container to a different container, for more information about
                 this bridge between networks using the host machine you can refer to <a
                         href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
             </p>
             <p>With the next line of code our automated employee can access the customer order page of the frontend user
                 interface which is in a different container accessible at port 8000 on our Docker network.</p>
-            <pre><code class="language-bash">driver.get(<span
-                    class="green-code">"http://172.17.0.1:8000/customer-order"</span>)</code></pre>
+            <pre><code class="language-python">driver.get("http://172.17.0.1:8000/customer-order")</code></pre>
             <p>This is what our employee now sees:</p>
             <img src="assets/customer-order.png" alt="Customer Order form"/>
             <p>They can now fill in and submit the form:</p>
-            <pre><code class="language-python">
-    driver.find_element_by_id(<span class="green-code">"customer-name"</span>).send_keys(<span class="green-code">"John Doe"</span>)
-    driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys(<span
-                    class="green-code">"+44700000010"</span>)
-    driver.find_element_by_id(<span class="green-code">"customer-contact-number"</span>).send_keys("<span
-                    class="green-code">Bottle Water"</span>)
-    driver.find_element_by_id(<span class="green-code">"submit-customer-order"</span>).click()
-        </code></pre>
+            <pre><code class="language-python">driver.find_element_by_id("customer-name").send_keys("John Doe")
+driver.find_element_by_id("customer-contact-number").send_keys("+44700000010")
+driver.find_element_by_id("customer-order").send_keys("Bottle Water")
+driver.find_element_by_id("submit-customer-order").click()</code></pre>
             <p>If we look at the code for this form we can see that it is sending a <a
                     href="https://en.wikipedia.org/wiki/POST_(HTTP)">POST</a> request to our backend Flask
                 webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room
@@ -886,27 +856,43 @@ services:
                     class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
                     class="yellow-code">&gt;</span>...</code></pre>
             <p>Let's look at what's happening over on the server side by visiting our Flask webserver.</p>
-            <pre><code class="language-python">
-<span class="yellow-code">@app.route</span>(<span class="green-code">'/customer/order/new'</span><span
-                    class="orange-code">,</span> <span class="red-code">methods</span>=[<span
-                    class="green-code">'post'</span>])
-<span class="orange-code">def</span> <span class="yellow-code">customer_order</span>():
-    name = request.form[<span class="green-code">'customer-name'</span>]
-    contact_number = request.form[<span class="green-code">'customer-contact-number'</span>]
-    order = request.form[<span class="green-code">'customer-order'</span>]
-    c.execute(<span class="green-code">"</span><span class="orange-code">INSERT INTO</span> CUSTOMER_ORDER(CUSTOMER_NAME,CONTACT_NUMBER,CUSTOMER_ORDER) \
-    <span class="orange-code">VALUES</span> (?<span class="orange-code">,</span>?<span
-                    class="orange-code">,</span>?)<span class="green-code">"</span><span
-                    class="orange-code">,</span> (name<span class="orange-code">,</span> contact_number<span
-                    class="orange-code">,</span> order<span class="orange-code">,</span>))
-    conn.commit()
-    <span class="orange-code">return</span> <span class="green-code">'OK'</span>
+            <pre><code class="language-python">@app.route('/customer/order/new', methods=['POST'])
+@cross_origin()
+def customer_order():
+    # get values from json request body
+    data = request.json
+    customer_name = data['name']
+    contact_number = data['number']
+    customer_order = data['order']
+
+    # Connect to db with parameters matching docker-compose.yaml file
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
+
+    # Create cursor
+    cursor = mydb.cursor()
+
+    # insert values from form into new record in CUSTOMER_ORDER table
+    cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
+     VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
+
+    # Commit data to db
+    mydb.commit()
+
+    # Close connection
+    cursor.close()
+    mydb.close()
+
+    # Return success message
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
         </code></pre>
             <p>We're extracting the data from the form that was posted and inserting it as an new record into our
                 customer
                 order table.</p>
-            <p>We can see that Flask and sqlite3 share the same room, if it start's getting too crowded we might want to
-                prepare a new room for sqlite3</p>
             <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
                 order, it highlights the flow of data through some of our integrated services.</p>
         </div>

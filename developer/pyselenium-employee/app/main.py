@@ -32,4 +32,5 @@ driver.find_element_by_id("customer-contact-number").send_keys("+44700000010")
 driver.find_element_by_id("customer-order").send_keys("Bottle Water")
 driver.find_element_by_id("submit-customer-order").click()
 
+# close driver connection
 driver.close()

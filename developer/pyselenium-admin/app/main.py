@@ -10,7 +10,7 @@ ready = False
 time.sleep(5)
 while not ready:
     try:
-        r = requests.get('http://localhost:4444/wd/hub/status', timeout=1)
+        r = requests.get('http://172.17.0.1:4444/wd/hub/status', timeout=1)
         status = r.status_code
         if status == 200:
             ready = True
@@ -18,10 +18,10 @@ while not ready:
         continue
 
 driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
-                          command_executor="http://localhost:4444/wd/hub")
+                          command_executor="http://172.17.0.1:4444/wd/hub")
 
 # Go to create admin account page
-driver.get("http://localhost:8080/")
+driver.get("http://172.17.0.1:8080/")
 
 # Input username and password
 WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
