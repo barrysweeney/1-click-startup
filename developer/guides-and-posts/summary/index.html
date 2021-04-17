@@ -659,9 +659,9 @@ services:
     image: nextcloud
     restart: always
     ports:
-      - 80:80
+      - "80:80"
 
-  pyselenium-user:
+  pyselenium-employee:
     ...
 
   firefox:
@@ -788,9 +788,30 @@ services:
     ...
 </code></pre>
         <p>Now the script will be run on startup to set up the NextCloud admin and the recommended apps (including
-            document editing) ll be installed.</p>
+            document editing) will be installed.</p>
         <p>To complete adding this service to our application we'll also need a way to link to the NextCLoud document
             editing page from our custom frontend interface.</p>
+        <p>We can open the <code>1cs-frontend</code> folder with VS Code as before</p>
+        <img src="assets/1cs-frontend.png">
+        <img src="assets/open-with-vscode.png">
+        <p>We'll go to <code>src/components/layout.js</code> and we can add a new <code>&lt;ListLink&gt;</code></p>
+        <pre><code class="language-python">...
+
+  return (
+    ...
+          &lt;ListLink to="/"&gt;Home&lt;/ListLink&gt;
+          &lt;ListLink to="/customer-order/"&gt;Customer Order&lt;/ListLink&gt;
+          &lt;ListLink to="/stock-count/"&gt;Stock Count&lt;/ListLink&gt;
+          &lt;ListLink to="/contact-manager/"&gt;Contact Manager&lt;/ListLink&gt;
+          &lt;ListLink to="http://localhost:8080/apps/files"&gt;Files&lt;/ListLink&gt;
+    ...
+        )
+...
+</code></pre>
+        <p>As you'll see, as opposed to relative, we've provided an absolute path to the NextCloud file editor.</p>
+        <img src="assets/files-link.png">
+        <p>CLicking this will take out user here</p>
+        <img src="assets/nextcloud-files.png">
         <div class="automated-employee-demo" id="automated-employee-demo">
             <h3>🤖 Automated Employee Demo</h3>
             <hr/>

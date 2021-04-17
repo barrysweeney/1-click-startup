@@ -21,35 +21,16 @@ driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIR
                           command_executor="http://localhost:4444/wd/hub")
 
 # Go to create admin account page
-driver.get("http://localhost:80/")
+driver.get("http://localhost:8080/")
 
 # Input username and password
 WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
 WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "adminpass")))
 driver.find_element_by_id("adminlogin").send_keys("admin")
-driver.find_element_by_id("adminpass").send_keys("password1")
+driver.find_element_by_id("adminpass").send_keys("password")
 
 # Click "Finish setup" button
 driver.find_element_by_class_name("primary").click()
 
-# Wait for setup to finish
-WebDriverWait(driver, 50000).until(EC.presence_of_element_located((By.ID, "body-user")))
-
-# Click out of modal popup
-driver.find_element_by_xpath("/html/body/div[7]/div[1]/div/button").click()
-
-# Go to "forms" install page
-driver.get("http://localhost/settings/apps/installed/forms")
-
-# Click button to download and enable "Forms" app/extension
-driver.find_element_by_xpath("/html/body/div[3]/aside/div/div/section/div/div[1]/div/input").click()
-
-# Confirm password to complete action 
-driver.find_element_by_id("oc-dialog-0-content-input").send_keys("password1")
-
-
-
-
-
-
+# Close connection to driver
 driver.close()
