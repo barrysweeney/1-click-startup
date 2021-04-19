@@ -51,15 +51,29 @@ services:
     build: ./pyselenium-admin
     depends_on:
       - nextcloud
-      - firefox
+      - firefox-1
 
-  #  pyselenium-employee:
-  #    build: ./pyselenium-employee
-  #    depends_on:
-  #      - firefox
-  #      - frontend
+  pyselenium-employee:
+    build: ./pyselenium-employee
+    depends_on:
+      - firefox-2
+      - frontend
 
-  firefox:
+  firefox-1:
+    image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6901:5900"
+      - "7901:7900"
+
+  firefox-2:
     image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
     volumes:
       - /dev/shm:/dev/shm

@@ -505,7 +505,7 @@ while not ready:
     try:
         # Connect to db with parameters matching docker-compose.yaml file
         mydb = mysql.connector.connect(
-            host="mysqldb",
+            host="db",
             user="root",
             password="p@ssw0rd1"
         )
@@ -550,7 +550,7 @@ def register():
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
-        host="mysqldb",
+        host="db",
         user="root",
         password="p@ssw0rd1",
         database="startup"
@@ -593,7 +593,7 @@ def customer_order():
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
-        host="mysqldb",
+        host="db",
         user="root",
         password="p@ssw0rd1",
         database="startup"
@@ -830,7 +830,7 @@ services:
             <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers
                 relating to our
                 application.</p>
-            <p>Our automated employee lives in one of these containers/rooms. With the following line of code, they can
+            <p>Our automated employee lives in one of these containers. With the following line of code, they can
                 get
                 the
                 webdriver for Selenium which allows them to access the web.</p>
@@ -871,7 +871,7 @@ def customer_order():
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
-        host="mysqldb",
+        host="db",
         user="root",
         password="p@ssw0rd1",
         database="startup"
@@ -980,14 +980,21 @@ def customer_order():
                         class="language-shell">sudo docker-compose
                     build --no-cache</code></li>
             <li>It's important that the image version of <code>selenium-hub</code> and the <code>firefox</code> selenium
-                node are consistent since it's in pre-release beta
-                <pre><code>firefox:
+                nodes are consistent since it's in pre-release beta
+                <pre><code>firefox-1:
     image: selenium/<span class="red">node-firefox:4.0.0-beta-3-prerelease-20210402</span>
     ...
+
+  firefox-2:
+    image: selenium/<span class="red">node-firefox:4.0.0-beta-3-prerelease-20210402</span>
+  ...
 
   selenium-hub:
     image: selenium/<span class="red">hub:4.0.0-beta-3-prerelease-20210402</span>
     ...</code></pre>
+            </li>
+            <li>When debugging problems with the automated users it may be useful to use strategically placed <code>print()</code>
+                statements to confirm the code is behaving as you expect.
             </li>
         </div>
     </div>

@@ -21,7 +21,7 @@ while not ready:
     try:
         # Connect to db with parameters matching docker-compose.yaml file
         mydb = mysql.connector.connect(
-            host="mysqldb",
+            host="db",
             user="root",
             password="p@ssw0rd1"
         )
@@ -69,7 +69,7 @@ def register():
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
-        host="mysqldb",
+        host="db",
         user="root",
         password="p@ssw0rd1",
         database="startup"
@@ -105,7 +105,7 @@ def log_in():
 
     # connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
-        host="mysqldb",
+        host="db",
         user="root",
         password="p@ssw0rd1",
         database="startup"
@@ -167,7 +167,7 @@ def customer_order():
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
-        host="mysqldb",
+        host="db",
         user="root",
         password="p@ssw0rd1",
         database="startup"
