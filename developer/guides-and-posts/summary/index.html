@@ -517,7 +517,7 @@ while not ready:
         cursor.execute("USE startup")
         # Create "users" table if it doesn't exist
         cursor.execute(
-            "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
+            "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255))")
         # Close connection
         cursor.close()
         mydb.close()
@@ -542,11 +542,6 @@ def register():
     business = data['business']
     # Encrypt plain text password
     password = sha256_crypt.encrypt(data['password'])
-    # Employees can't log in until manager approves
-    can_log_in = False
-    # Managers can log in immediately
-    if role == "manager":
-        can_log_in = True
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
@@ -561,8 +556,8 @@ def register():
 
     # Execute query to add user to database users table
     cursor.execute(
-        "INSERT INTO users(name, email, password, role, business, can_log_in) VALUES(?, ?, ?, ?, ?, ?)",
-        (name, email, password, role, business, can_log_in,))
+        "INSERT INTO users(name, email, password, role, business,) VALUES(?, ?, ?, ?, ?)",
+        (name, email, password, role, business,))
 
     # Commit data to db
     mydb.commit()
@@ -574,9 +569,8 @@ def register():
     # Return success message
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}</code></pre>
         <p>Essentially what we have above is that the user will enter their email, password, business, and role, into a
-            form on the frontend. THe data is then sent to the flask server which will store the users details in the
-            database. Managers can log in immediately but employees will need to wait for manager's approval before they
-            log in since their <code>can_log_in</code> flag will initially be false.</p>
+            form on the frontend. The data is then sent to the flask server which will store the users details in the
+            database.</p>
         <p>Next we'll take a look at the route used to complete a customer order.</p>
         <pre><code class="language-python"># Store new customer order in the database
 # TODO: Restrict route to logged in users
@@ -963,6 +957,17 @@ def customer_order():
                     <h4>Payroll</h4>
                     <p>Integration with a payroll service could allow small business owners to easily pay their
                         employees based on their salary and hours worked which can be queried from the database.</p>
+                </li>
+                <li>
+                    <h4>Deployment</h4>
+                    <p>The main final file to ship to the user is <code>user/start.sh</code> which essentially installs
+                        Docker to run the <code>docker-compose.yml</code> file and Firefox to access the frontend
+                        interfaces.</p>
+                </li>
+                <li>
+                    <h4>Authentication</h4>
+                    <p>The apps authentication has been started but it will still be necessary to restrict routes to
+                        logged in users and also to use access-roles to restrict some routes to managers only.</p>
                 </li>
             </ul>
         </div>

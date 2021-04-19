@@ -33,7 +33,7 @@ while not ready:
         cursor.execute("USE startup")
         # Create "users" table if it doesn't exist
         cursor.execute(
-            "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255), can_log_in BOOLEAN)")
+            "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255))")
         # Create "customer_orders" table if it doesn't exist
         cursor.execute(
             "CREATE TABLE IF NOT EXISTS customer_order (id int(11) AUTO_INCREMENT PRIMARY KEY, customer_name VARCHAR(255), contact_number VARCHAR(255) , customer_order VARCHAR(255))")
@@ -61,11 +61,6 @@ def register():
     business = data['business']
     # Encrypt plain text password
     password = sha256_crypt.encrypt(data['password'])
-    # Employees can't log in until manager approves
-    can_log_in = False
-    # Managers can log in immediately
-    if role == "manager":
-        can_log_in = True
 
     # Connect to db with parameters matching docker-compose.yaml file
     mydb = mysql.connector.connect(
@@ -80,8 +75,8 @@ def register():
 
     # Execute query to add user to database users table
     cursor.execute(
-        "INSERT INTO users(name, email, password, role, business, can_log_in) VALUES(?, ?, ?, ?, ?, ?)",
-        (name, email, password, role, business, can_log_in,))
+        "INSERT INTO users(name, email, password, role, business, can_log_in) VALUES(?, ?, ?, ?, ?)",
+        (name, email, password, role, business,))
 
     # Commit data to db
     mydb.commit()
