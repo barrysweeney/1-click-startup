@@ -72,6 +72,7 @@
             <li><a href="#automated-manager-demo">AI Manager Demo</a></li>
             <li><a href="#adding-problems">Adding Problems</a></li>
             <li><a href="#next-steps">Work Still to do</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
         </ul>
     </div>
     <div id="understand-business">
@@ -109,7 +110,7 @@
             <tr>
                 <td>Customer complains</td>
                 <td>Communicate with customer</td>
-                <td>Apologize and find problem source</td>
+                <td>Find problem source</td>
             </tr>
             <tr>
                 <td>Quality decreases</td>
@@ -223,7 +224,7 @@
                 <td>Complete the order</td>
             </tr>
         </table>
-        <p>If we think about think about completing these tasks in terms of webpages we see that for communication or
+        <p>If we think about completing these tasks in terms of webpages we see that for communication or
             record keeping we can provide forms on the user interface but for tasks which need performed physically such
             as turning off equipment we can just provide a form to acknowledge that the task has been completed.</p>
         <p>Open source software can enable us to automate some of the tasks required to run the business. Stock could be
@@ -420,12 +421,12 @@ source .venv/bin/activate</code></pre>
         </p>
         <p>This frontend connects to the <strong>Backend Webserver</strong> at <a href="http://localhost:5000">http://localhost:5000</a>
         </p>
-        <p>Requests are made form the backend to the <strong>MySQL Database</strong> at <a href="http://localhost:3306">http://localhost:3306</a>
+        <p>Requests are made from the backend to the <strong>MySQL Database</strong> at <a href="http://localhost:3306">http://localhost:3306</a>
         </p>
         <p>For more control over the database in development, a database graphical interface - <strong>Adminer</strong>
             - is accessible at <a href="http://localhost:8080">http://localhost:8080</a></p>
-        <p>To login we enter our server as "mysqldb", username as "root" and password as "p@ssw0rd1"</p>
-        <img src="assets/adminer-login.png">
+        <p>To login we enter our server as "db", username as "root" and password as "p@ssw0rd1"</p>
+        <img src="assets/adminer.png">
         <p>This configuration information as well as other ports exposed for user automation can be found in the
             <code>docker-compose.yaml</code> file at the root of the cloned directory.</p>
         <p>Additional ports have been exposed such as</p>
@@ -812,6 +813,9 @@ services:
         <img src="assets/files-link.png">
         <p>CLicking this will take out user here</p>
         <img src="assets/nextcloud-files.png">
+        <p>You can view what the PySelenium user is seeing with noVNC which you can access at <a
+                href="http://localhost:7902">http://localhost:7902</a> and using the password <code>secret</code> when
+            prompted.</p>
         <div class="automated-employee-demo" id="automated-employee-demo">
             <h3>🤖 Automated Employee Demo</h3>
             <hr/>
@@ -895,20 +899,74 @@ def customer_order():
                 order table.</p>
             <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
                 order, it highlights the flow of data through some of our integrated services.</p>
+            <p>Also note that this isn't a complete picture of our automated employee; there's a few ideas of how to
+                expand on this autonomous employee in the <a href="#next-steps">next steps</a> section.</p>
         </div>
         <div class="automated-manager-demo" id="automated-manager-demo">
-            <h3>📊 Automated Manager Demo</h3>
+            <h3>📊 Automated Manager</h3>
             <hr>
+            <p>We'll also want an automated manager so that we could simulate a day in the life of a small business. The
+                jobs that get done, the emails that get sent, the forms that get filled in, etc.</p>
         </div>
         <div class="adding-problems" id="adding-problems">
             <h3>⛈ Adding work problems in the application</h3>
             <hr>
+            <p>When we're designing our application we'll also want to introduce realistic problems that could occur and
+                affect the business operations. This could be anything from employees leaving, to global events
+                effecting opening hours, etc.</p>
+            <p>In the simulation we can begin by including problems that are more likely to occur that would affect
+                normal operations. These could be implemented with appropriate randomness to make the simulation as
+                plausible as possible.</p>
+            <p>A simple example might be that someone calls in sick last minute. This will have a domino affect and it
+                will be necessary to respond appropriately. We can map out these problem use cases in a table format as
+                we have done with the expected daily business use cases.</p>
+            <h4>Example problem use cases</h4>
+            <table>
+                <tr>
+                    <th>Situation (When)</th>
+                    <th>Motivation (I want to)</th>
+                    <th>Expected Outcome (So I can)</th>
+                </tr>
+                <tr>
+                    <td>Employee calls in sick</td>
+                    <td>Ask another employee to cover the shift and update employees hours</td>
+                    <td>Update payroll and not be understaffed</td>
+                </tr>
+            </table>
         </div>
         <div class="next-steps" id="next-steps">
             <h3>📋 Next Steps</h3>
             <hr>
+            <ul>
+                <li>
+                    <h4>AI Users</h4>
+                    <p>We could introduce the concept of "virtual time" to make our employee perform tasks at an
+                        accelerated rate and record these in the webapp. In addition to this, we'd also like the
+                        employee to
+                        perform their tasks based on what work is assigned to them through their custom webapp
+                        interface.</p>
+                </li>
+                <li>
+                    <h4>Persistent Storage</h4>
+                    <p>At the minute our database storage isn't persistent so we could implement persistent data storage
+                        by creating a database dump when the user is finished with the application or periodically
+                        throughout the day and on startup the most recent database dump can be used to create and
+                        populate the database.</p>
+                </li>
+                <li>
+                    <h4>Email</h4>
+                    <p>Adding an email service will allow communication between managers and employees as well as
+                        managers and suppliers. The Gmail Python package may be a plausible option for this. An
+                        alternative would be an integration with NextCloud's email feature.</p>
+                </li>
+                <li>
+                    <h4>Payroll</h4>
+                    <p>Integration with a payroll service could allow small business owners to easily pay their
+                        employees based on their salary and hours worked which can be queried from the database.</p>
+                </li>
+            </ul>
         </div>
-        <div>
+        <div id="troubleshooting">
             <h3>Troubleshooting</h3>
             <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> - to
                 solve
@@ -916,6 +974,20 @@ def customer_order():
                 and
                 use the id to end the process with <code>sudo kill id</code> for example <br>
                 <img src="assets/lsof.png">
+            </li>
+            <li>When changes are made and they aren't updated when you run the docker-compose file it is sometimes
+                necessary to rebuild the images which you can do with the following command: <code
+                        class="language-shell">sudo docker-compose
+                    build --no-cache</code></li>
+            <li>It's important that the image version of <code>selenium-hub</code> and the <code>firefox</code> selenium
+                node are consistent since it's in pre-release beta
+                <pre><code>firefox:
+    image: selenium/<span class="red">node-firefox:4.0.0-beta-3-prerelease-20210402</span>
+    ...
+
+  selenium-hub:
+    image: selenium/<span class="red">hub:4.0.0-beta-3-prerelease-20210402</span>
+    ...</code></pre>
             </li>
         </div>
     </div>

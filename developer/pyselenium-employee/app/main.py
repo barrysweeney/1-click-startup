@@ -20,6 +20,7 @@ while not ready:
 driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
                           command_executor="http://172.17.0.1:4444/wd/hub")
 
+
 # go to customer order page
 driver.get("http://172.17.0.1:8000/customer-order")
 
@@ -34,3 +35,5 @@ driver.find_element_by_id("submit-customer-order").click()
 
 # close driver connection
 driver.close()
+
+print('got gere')
