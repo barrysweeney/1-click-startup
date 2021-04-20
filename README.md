@@ -496,6 +496,7 @@ Let's start running through the code.
 We start by importing the relevant packages which are either shipped
 with Python or installed using pip from our `requirements.txt` file.
 
+```python
     # For handling requests and responses
     import json
     from flask import Flask, request
@@ -505,6 +506,7 @@ with Python or installed using pip from our `requirements.txt` file.
     from passlib.hash import sha256_crypt
     # To enable requests from the frontend user interface
     from flask_cors import CORS, cross_origin
+```    
 
 We then create and configure the app
 
@@ -1122,7 +1124,7 @@ Employee calls in sick   Ask another employee to cover the shift and update empl
 
 ### Troubleshooting
 
-`Error: for db ... 0.0.0.0:3306: bind: address already in use`{.language-shell}
+`Error: for db ... 0.0.0.0:3306: bind: address already in use`
 - to solve this you can find which process is using the port by running
   `sudo lsof -i -P -n | grep 3306` and use the id to end the process with
   `sudo kill id` for example \
@@ -1131,7 +1133,7 @@ Employee calls in sick   Ask another employee to cover the shift and update empl
 When changes are made and they aren't updated when you run the
 docker-compose file it is sometimes necessary to rebuild the images
 which you can do with the following command:
-`sudo docker-compose                     build --no-cache`{.language-shell}
+`sudo docker-compose                     build --no-cache`
 
 It's important that the image version of `selenium-hub` and the
 `firefox` selenium nodes are consistent since it's in pre-release beta
@@ -1152,7 +1154,7 @@ When debugging problems with the automated users it may be useful to use
 strategically placed `print()`{.language-python} statements to confirm
 the code is behaving as you expect.
 
-`mysql.connector.errors.ProgrammingError: Not all parameters were used in                     the SQL statement`{.language-shell}
+`mysql.connector.errors.ProgrammingError: Not all parameters were used in                     the SQL statement`
 - The problem may relate to the different parameter markers between
   sqlite3 and MySQL as explained in [this StackOverflow answer by user
   unutbu](https://stackoverflow.com/a/20818201/9472445)
