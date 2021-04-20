@@ -20,6 +20,7 @@
     <h1>Searching Album of The Year using Flask, Selenium, Docker, and React - Part 2</h1>
     <a href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
         for post's source code</a>
+        <p><a href="../../guide-pt-1/aoty-guide-p1/index.html">Click here for part 1 of this series.</a></p>
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S6gee91Q5gc" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -29,10 +30,10 @@
         so
         much more along the way...</p>
     <img src="images/company-logos.png" alt="logos for Album Of The Year, Python, Selenium, and Docker"/>
-    <p>In <a href="#">part 1</a> we answered the question</p>
+    <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> we answered the question</p>
     <blockquote><em>"Can I find out which albums were released on my birthday?"</em></blockquote>
     <p>You sure can, <strong>just read on to find out how.</strong></p>
-    <p>In <a href="#">part 1 of this guide</a> we brought up that if you can relate to any of these then you're <em>definitely</em>
+    <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1 of this guide</a> we brought up that if you can relate to any of these then you're <em>definitely</em>
         in the right place.</p>
     <ul>
         <li>If you want to learn some Docker and Selenium basics in a fun project before moving on to more complex
@@ -248,7 +249,7 @@ class App extends Component {
     }</code></pre>
     <p>We can now move on to programming our Flask backend.</p>
     <h2 id="backend">Flask webserver backend</h2>
-    <p>We're essentially rewriting the code from <a href="#">part 1</a> of the guide but I'll go over the code here too
+    <p>We're essentially rewriting the code from <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> of the guide but I'll go over the code here too
         so it isn't required you've read our first part.</p>
     <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
         text editor you prefer. You can set up your own environment if your editor doesn't automatically configure it
@@ -452,7 +453,7 @@ for album in albums:
     <pre><code class="language-python"># Return response to user
 return json.dumps({'results': response}), 200, {'ContentType': 'application/json'}</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
-    <p>You can find all the source code for this guide <a href="#">here.</a></p>
+    <p>You can find all the source code for this guide <a href="../../guide-pt-1/aoty-guide-p1/index.html">here.</a></p>
     <h2 id="results">Results</h2>
     <p>Let's try searching for the albums released on a certain date to see our results.</p>
     <p>Inside the virtual environment, we can run</p>
@@ -469,7 +470,7 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
     <img src="images/frontend-results.png">
     <h2 id="whats-next">What's Next?</h2>
     <p>Remember you can <a
-            href="#">grab
+            href="../../guide-pt-1/aoty-guide-p1/index.html">grab
         the source code</a> so you can take this and run with it adapting it however you like, read on to find out what
         my plans are for this project and ideas about where this could go next.</p>
     <p>We can improve our frontend by designing with our users in mind with an interface integrating the album covers
