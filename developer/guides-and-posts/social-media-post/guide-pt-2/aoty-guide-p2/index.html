@@ -18,9 +18,10 @@
 <body>
 <div class="container">
     <h1>Searching Album of The Year using Flask, Selenium, Docker, and React - Part 2</h1>
-    <a href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
+    <a target="_blank"
+       href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
         for post's source code</a>
-    <p><a href="../../guide-pt-1/aoty-guide-p1/index.html">Click here for part 1 of this series.</a></p>
+    <p><a target="_blank" href="../../guide-pt-1/aoty-guide-p1/index.html">Click here for part 1 of this series.</a></p>
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S6gee91Q5gc" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -30,10 +31,11 @@
         so
         much more along the way...</p>
     <img src="images/company-logos.png" alt="logos for Album Of The Year, Python, Selenium, and Docker"/>
-    <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> we answered the question</p>
+    <p>In <a target="_blank" href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> we answered the question</p>
     <blockquote><em>"Can I find out which albums were released on my birthday?"</em></blockquote>
     <p>You sure can, <strong>just read on to find out how.</strong></p>
-    <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1 of this guide</a> we brought up that if you can
+    <p>In <a target="_blank" href="../../guide-pt-1/aoty-guide-p1/index.html">part 1 of this guide</a> we brought up
+        that if you can
         relate to any of these then you're <em>definitely</em>
         in the right place.</p>
     <ul>
@@ -41,7 +43,8 @@
             Docker
             Compose and automated testing applications.
         </li>
-        <li>If you're a new developer stuck in <a href="https://www.freecodecamp.org/news/escape-tutorial-purgatory/">tutorial
+        <li>If you're a new developer stuck in <a target="_blank"
+                                                  href="https://www.freecodecamp.org/news/escape-tutorial-purgatory/">tutorial
             purgatory</a> who wants to wrap their head around more challenging concepts then you can go deeper down the
             rabbit
             hole by following the links throughout the guide.
@@ -58,11 +61,12 @@
         <li>Crating a custom frontend with the frontend JavaScript framework React.</li>
         <li>Adapting a Python console app into a Flask webserver.</li>
     </ul>
-    <p>From <a href="https://reactjs.org/">ReactJS</a>:</p>
+    <p>From <a target="_blank" href="https://reactjs.org/">ReactJS</a>:</p>
     <blockquote>
         A JavaScript library for building user interfaces
     </blockquote>
-    <p>From <a href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask Python?</a>:</p>
+    <p>From <a target="_blank" href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask
+        Python?</a>:</p>
     <blockquote>"Flask is a web application framework written in Python.
 
         A Web Application Framework or simply a
@@ -80,33 +84,39 @@
     <p>Then we'll adapt our Python console app into a Flask webserver.</a>.</p>
     <p>We'll wrap up with a discussion of our results and how we could take this further..</p>
     <ul>
-        <li><a href="#dev-env">Configuring your development environment</a></li>
-        <li><a href="#frontend">React Frontend</a></li>
-        <li><a href="#backend">Flask Webserver Backend</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#whats-next">What's Next?</a></li>
-        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a target="_blank" href="#dev-env">Configuring your development environment</a></li>
+        <li><a target="_blank" href="#frontend">React Frontend</a></li>
+        <li><a target="_blank" href="#backend">Flask Webserver Backend</a></li>
+        <li><a target="_blank" href="#results">Results</a></li>
+        <li><a target="_blank" href="#whats-next">What's Next?</a></li>
+        <li><a target="_blank" href="#troubleshooting">Troubleshooting</a></li>
     </ul>
     <h2 id="dev-env">Configuring your development environment</h2>
     <p>If you want to follow along to the tutorial you can take some time to setup your environment by installing Docker
         using either of these guides</p>
     <ul>
-        <li><a href="https://docs.docker.com/engine/install/">Install Docker Engine on Linux</a></li>
-        <li><a href="https://docs.docker.com/docker-for-mac/install/">Install Docker Desktop on Mac</a></li>
-        <li><a href="https://docs.docker.com/docker-for-windows/install/">Install Docker Desktop on Windows</a></li>
+        <li><a target="_blank" href="https://docs.docker.com/engine/install/">Install Docker Engine on Linux</a></li>
+        <li><a target="_blank" href="https://docs.docker.com/docker-for-mac/install/">Install Docker Desktop on Mac</a>
+        </li>
+        <li><a target="_blank" href="https://docs.docker.com/docker-for-windows/install/">Install Docker Desktop on
+            Windows</a></li>
     </ul>
     <p>Either will help you setup the required software for this tutorial.</p>
-    <p>In addition to Docker, you'll also need <a href="https://nodejs.org/en/">NodeJs</a> which you can install with
+    <p>In addition to Docker, you'll also need <a target="_blank" href="https://nodejs.org/en/">NodeJs</a> which you can
+        install with
         either of these guides</p>
     <ul>
-        <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04">Install
+        <li><a target="_blank"
+               href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04">Install
             NodeJS on Ubuntu</a></li>
-        <li><a href="https://www.fosstechnix.com/install-node-js-on-mac/">Install NodeJS on Mac</a></li>
-        <li><a href="https://www.fosstechnix.com/how-to-install-node-js-on-windows/">Install NodeJS on Windows</a></li>
+        <li><a target="_blank" href="https://www.fosstechnix.com/install-node-js-on-mac/">Install NodeJS on Mac</a></li>
+        <li><a target="_blank" href="https://www.fosstechnix.com/how-to-install-node-js-on-windows/">Install NodeJS on
+            Windows</a></li>
     </ul>
     <p>You can now move on to creating our React app.</p>
     <h2 id="frontend">React Frontend</h2>
-    <p>First we can start with a generated <a href="https://reactjs.org/docs/glossary.html#single-page-application">single-page
+    <p>First we can start with a generated <a target="_blank"
+                                              href="https://reactjs.org/docs/glossary.html#single-page-application">single-page
         application</a> with the help of <code>create-react-app</code></p>
     <pre><code class="language-bash">npx create-react-app aoty-frontend
 cd aoty-frontend
@@ -214,7 +224,7 @@ class App extends Component {
         }
     }</code></pre>
     <p>That's essentially all of the work done on the frontend, we can just add some styling now with Bootstrap</p>
-    <p>As we mentioned earlier... From <a href="">w3schools - What is Bootstrap?</a>:</p>
+    <p>As we mentioned earlier... From <a target="_blank" href="">w3schools - What is Bootstrap?</a>:</p>
     <blockquote>"Bootstrap is the most popular CSS Framework for developing responsive and mobile-first websites."
     </blockquote>
     <p>We can open the <code>aoty-frontend</code> folder in the terminal and run <code>npm install bootstrap-react
@@ -251,7 +261,8 @@ class App extends Component {
     }</code></pre>
     <p>We can now move on to programming our Flask backend.</p>
     <h2 id="backend">Flask webserver backend</h2>
-    <p>We're essentially rewriting the code from <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> of the
+    <p>We're essentially rewriting the code from <a target="_blank" href="../../guide-pt-1/aoty-guide-p1/index.html">part
+        1</a> of the
         guide but I'll go over the code here too
         so it isn't required you've read our first part.</p>
     <p>A quick way to get up and running is to create a new directory on the terminal with <code>mkdir</code> and open
@@ -263,7 +274,8 @@ code aoty-flask-backend    </code></pre>
     <pre><code class="language-bash">python3 -m venv .venv</code></pre>
     <p>And we can activate the environment with</p>
     <pre><code class="language-shell"> source .venv/bin/activate</code></pre>
-    <p>For more info you can check out the <a href="https://docs.python.org/3/library/venv.html">official Python
+    <p>For more info you can check out the <a target="_blank" href="https://docs.python.org/3/library/venv.html">official
+        Python
         documentation on venv </a></p>
     <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
         installed.</p>
@@ -286,7 +298,8 @@ from flask_cors import CORS, cross_origin</code></pre>
     <p>We then create and configure the app</p>
     <pre><code class="language-python"># Create Flask instance
 app = Flask(__name__)</code></pre>
-    <p>From <a href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask - Application Setup</a>:
+    <p>From <a target="_blank" href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask - Application
+        Setup</a>:
     </p>
     <blockquote><code>__name__</code> is the name of the current Python module. The app needs to know where it’s
         located to set up some paths, and <code>__name__</code> is a convenient way to tell it that.
@@ -297,7 +310,8 @@ app = Flask(__name__)</code></pre>
 CORS(app) # Enables CORS for all routes
 # Allow Content-Type header
 app.config['CORS_HEADERS'] = 'Content-Type'</code></pre>
-    <p>From <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:</p>
+    <p>From <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:
+    </p>
     <blockquote><strong>Cross-Origin Resource Sharing</strong> (CORS) is an HTTP-header based mechanism that allows
         a server to
         indicate any other origins (domain, scheme, or port) than its own from which a browser should permit loading
@@ -408,7 +422,8 @@ while not all_albums_loaded:
             class="language-python">click()</code> method of the <code>WebElement</code>
         object returned by <code class="language-python">find_element_by_id</code><br>We do this because another element
         is covering the show
-        more button. You can see <a href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
+        more button. You can see <a target="_blank" href="https://stackoverflow.com/a/37880313/9472445">this
+            StackOverflow answer by
             user RemcoW</a> for more details and an explanation of <code class="language-python">arguments[0]</code></p>
     <p>We're not quite finished with this while loop just yet, we need to do two things:</p>
     <ul>
@@ -463,14 +478,15 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
     <pre><code class="language-python">if __name__ == '__main__':
     app.run()</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
-    <p>You can find all the source code for this guide <a href="../../guide-pt-1/aoty-guide-p1/index.html">here.</a></p>
+    <p>You can find all the source code for this guide <a target="_blank"
+                                                          href="../../guide-pt-1/aoty-guide-p1/index.html">here.</a></p>
     <h2 id="results">Results</h2>
     <p>Let's try searching for the albums released on a certain date to see our results.</p>
     <p>Inside the virtual environment, we can run</p>
     <pre><code>python3 app.py</code></pre>
     <p>to start our webserver</p>
     <p>If you've followed along and used <code>sudo</code> in the docker run command you'll be prompted for your
-        password and then we can move to our frontend application at <a href="http://localhost:3000">http://localhost:3000</a>
+        password and then we can move to our frontend application at <a target="_blank" href="http://localhost:3000">http://localhost:3000</a>
     </p>
     <p>Now we can enter a date and search</p>
     <img src="images/frontend-loading.png">
@@ -486,8 +502,10 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
     <p>We can improve our frontend by designing with our users in mind with an interface integrating the album covers
         and we could even add filtering by genre.</p>
     <p>Another possible challenge to take on would be deployment using services such as <a
-            href="https://www.heroku.com/">Heroku</a> and <a href="https://www.netlify.com/">Netlify</a>.</p>
-    <p>Stay tuned to <a href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
+            href="https://www.heroku.com/">Heroku</a> and <a target="_blank" href="https://www.netlify.com/">Netlify</a>.
+    </p>
+    <p>Stay tuned to <a target="_blank" href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss
+        out!</p>
     <h2 id="troubleshooting">Bonus: Troubleshooting</h2>
     <p>Here's some resources for resolving common errors you might run into along the way in this guide or in your own
         explorations.</p>
@@ -497,7 +515,8 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
             by peer'))</code> - this is a common error coined <a
                 href="http://www.itmaybeahack.com/homepage/iblog/architecture/C551260341/E20081031204203/index.html">The
             Python "Connection Rest By Peer" Problem</a>. You can
-            read more about it in <a href="https://stackoverflow.com/a/383816/9472445">this StackOverflow post by user
+            read more about it in <a target="_blank" href="https://stackoverflow.com/a/383816/9472445">this
+                StackOverflow post by user
                 S.Lott</a>. In our case it will likely arise from trying to access the status endpoint of the Selenium
             container before the container is ready. You can use <code class="language-python">time.sleep(1)</code>
             before making a request to <code>http://localhost:4444/wd/hub/status</code> and adjusting the time to fit
@@ -515,13 +534,15 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
                     href="https://stackoverflow.com/a/16244739/9472445">This StackOverflow answer by user Ardesco</a>
             describes the situation more clearly. We can catch this exception in an <code
                     class="language-python">except</code> block and tell our code to retry a certain operation until the
-            exception doesn't occur. You can see <a href="#stale-element">the example we've used in this guide</a> where
+            exception doesn't occur. You can see <a target="_blank" href="#stale-element">the example we've used in this
+                guide</a> where
             our solution was to use the
             <code class="language-python">continue</code> keyword inside a <code class="language-python">while</code>
             loop.
         </li>
         <li><code class="language-shell">Element is not clickable at point (x,y) because another element obscures
-            it</code> - You can see <a href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
+            it</code> - You can see <a target="_blank" href="https://stackoverflow.com/a/37880313/9472445">this
+            StackOverflow answer by
             user RemcoW</a> for more details and an explanation of our solution in this guide which was to use <code
                 class="language-python">driver.execute_script("arguments[0].click();", element)</code> as opposed to the
             <code class="language-python">click()</code> method of the <code>WebElement</code>
@@ -531,7 +552,7 @@ return json.dumps({'results': response}), 200, {'ContentType': 'application/json
             to access the Selenium webdriver endpoint from within a different Docker container you can change
             <code>http://localhost:4444/wd/hub</code> to <code>http://172.17.0.1:4444/wd/hub</code> or
             <code>http://host.docker.internal:4444/wd/hub</code>. The
-            rationale behind this is provided in <a href="https://stackoverflow.com/a/48547074/9472445">this
+            rationale behind this is provided in <a target="_blank" href="https://stackoverflow.com/a/48547074/9472445">this
                 StackOverflow answer by user devnev</a>.
         </li>
         <li><code class="language-shell">requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost',
