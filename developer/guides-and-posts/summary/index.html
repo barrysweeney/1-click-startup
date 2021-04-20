@@ -38,12 +38,13 @@
     <div class="how">
         <h3>How does it do this?</h3>
         <hr/>
-        <p>The end project will make use of open source software running in <a href="https://www.docker.com/">Docker</a>
+        <p>The end project will make use of open source software running in <a target="_blank"
+                                                                               href="https://www.docker.com/">Docker</a>
             containers and using a <a
                     href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> <a
                     href="https://www.youtube.com/watch?v=7YcW25PHnAA">REST API</a> webserver to simplify interactions
             with the software services.</p>
-        <p>We also provide custom, web user interfaces to help make running the business via these services
+        <p>We also provide custom web user interfaces to help make running the business via these services
             intuitive.</p>
         <ul>
             <li><strong>Manager Interface.</strong> The manager interface streamlines communication between the business
@@ -58,21 +59,24 @@
         <h3>How do we test the system?</h3>
         <hr/>
         <p>We also want to provide a testing framework with simulated users and managers using a
-            tool such as <a href="https://selenium-python.readthedocs.io/">PySelenium</a>.</p>
+            tool such as <a target="_blank" href="https://selenium-python.readthedocs.io/">PySelenium</a>. Tests are yet
+            to be set up;
+            more info is included in our <a target="_blank" href="#next-steps">TODO section</a> at the end of the
+            project summary.</p>
     </div>
     <div class="toc">
         <h2>What's In This Document</h2>
         <hr/>
         <ul>
-            <li><a href="#understand-business">Understanding a business</a></li>
-            <li><a href="#up-and-run">Getting the current system up and running</a></li>
-            <li><a href="#new-service">Adding a new service</a></li>
-            <li><a href="#custom-webserver">Custom Webserver</a></li>
-            <li><a href="#automated-employee-demo">Automated Employee Demo</a></li>
-            <li><a href="#automated-manager-demo">AI Manager Demo</a></li>
-            <li><a href="#adding-problems">Adding Problems</a></li>
-            <li><a href="#next-steps">Work Still to do</a></li>
-            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a target="_blank" href="#understand-business">Understanding a business</a></li>
+            <li><a target="_blank" href="#up-and-run">Getting the current system up and running</a></li>
+            <li><a target="_blank" href="#new-service">Adding a new service</a></li>
+            <li><a target="_blank" href="#custom-webserver">Custom Webserver</a></li>
+            <li><a target="_blank" href="#automated-employee-demo">Automated Employee Demo</a></li>
+            <li><a target="_blank" href="#automated-manager-demo">AI Manager Demo</a></li>
+            <li><a target="_blank" href="#adding-problems">Adding Problems</a></li>
+            <li><a target="_blank" href="#next-steps">Work Still to do</a></li>
+            <li><a target="_blank" href="#troubleshooting">Troubleshooting</a></li>
         </ul>
     </div>
     <div id="understand-business">
@@ -228,7 +232,7 @@
             record keeping we can provide forms on the user interface but for tasks which need performed physically such
             as turning off equipment we can just provide a form to acknowledge that the task has been completed.</p>
         <p>Open source software can enable us to automate some of the tasks required to run the business. Stock could be
-            automatically re-ordered for example. Open source communication services can also be employed.</p>
+            automatically re-ordered for example. Open source document editing services can also be employed.</p>
     </div>
     <div class="quickstart" id="up-and-run">
         <h3>🛫 Getting the current system up and running</h3>
@@ -236,10 +240,15 @@
         <p id="prereq">It may seem like a lot of initial setup if you're new to the tools but it'll be well worth it.
             Getting
             familiar with these tools will put you in good stead to take your ability as a software engineer to the next
-            level and will set you apart from others interviewing for entry-level software engineering jobs.</p>
+            level and will set you apart from others interviewing for entry-level software engineering jobs and
+            beyond.</p>
+        <p>Note that while some commands and screenshots are Linux based, they can be easily mapped to MacOS and
+            Windows, and I'll provide links throughout to other guides which demonstrate how to install certain tools on
+            non-linux based operating systems.</p>
         <h4>Set up Git and GitHub</h4>
         <p>We'll begin by getting the necessary files onto your machine with Git</p>
-        <p>From <a href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
+        <p>From <a target="_blank"
+                   href="https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git">The Odin
             Project - Introduction to Git</a>:</p>
         <blockquote>"Git is like a really epic save button for your files and directories. Officially, Git is a version
             control system.
@@ -265,25 +274,28 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>We change Git's default branch (don't worry about the Git terminology here) to main to match GitHub's default
             branch name</p>
         <pre><code class="language-bash">git config --global init.defaultBranch main</code></pre>
-        <p>Next you can go to <a href="https://github.com/">GitHub.com</a> and create an account if you don't already
+        <p>Next you can go to <a target="_blank" href="https://github.com/">GitHub.com</a> and create an account if you
+            don't already
             have one.</p>
         <p>That completes our Git setup.</p>
         <p>After getting our project up and running, to get started with Git I recommend returning <a
                 href="https://www.youtube.com/watch?v=HVsySz-h9r4">this video by Cory
-            Schafer</a> and <a href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
+            Schafer</a> and <a target="_blank"
+                               href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
             lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
             soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong></p>
         <p>Now we can get all the files you need to get up and running on your machine.</p>
         <p>The next few steps have been adapted from <a
                 href="https://help.github.com/articles/fork-a-repo/"> GitHub Docs - Fork a repo</a></p>
-        <p>On GitHub, we go to the <a href="https://github.com/barrysweeney/1-click-startup">1 Click Startup
+        <p>On GitHub, we go to the <a target="_blank" href="https://github.com/barrysweeney/1-click-startup">1 Click
+            Startup
             repository</a></p>
         <p>We click to fork the repository, essentially creating a new copy that doesn't affect the original</p>
         <img src="assets/fork.png">
         <p>Now we can clone the forked repository so you have the files available on your machine as well as on your
             GitHub account.</p>
         <p>You can modify the following URL with your GitHub username to find your forked repository:
-            https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</p>
+            <a target="_blank" href="#"></a>https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</p>
         <p>We can click the code button above the list of files</p>
         <img src="assets/code-button.png">
         <p>Next, to clone the repository with HTTPS you can click the clipboard icon to copy the URL (note the URL
@@ -298,7 +310,7 @@ git config --global user.email "yourname@example.com"</code></pre>
         <h5>Set up Docker Engine</h5>
         <p>We'll install Docker so we can run our different services (frontend UI, database, etc) in containers to limit
             the number of services we need to install locally.</p>
-        <p>From <a href="https://www.docker.com/why-docker">Docker</a>:</p>
+        <p>From <a target="_blank" href="https://www.docker.com/why-docker">Docker</a>:</p>
         <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
             environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the
             de
@@ -307,17 +319,18 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p> This guide includes installing Docker engine on Ubuntu. For other operating systems, Linux platforms, and
             alternative install methods I'll point you to these guides to</p>
         <ul>
-            <li><a target="_blank" href="https://docs.docker.com/engine/install/"
+            <li><a target="_blank" target="_blank" href="https://docs.docker.com/engine/install/"
             >Install Docker Engine on Linux</a
             ></li>
-            <li><a target="_blank" href="https://docs.docker.com/docker-for-mac/install/"
+            <li><a target="_blank" target="_blank" href="https://docs.docker.com/docker-for-mac/install/"
             >Install Docker Desktop on MAC</a
             ></li>
-            <li><a target="_blank" href="https://docs.docker.com/docker-for-windows/install/"
+            <li><a target="_blank" target="_blank" href="https://docs.docker.com/docker-for-windows/install/"
             >Install Docker Desktop on Windows</a
             ></li>
         </ul>
-        <p>The following steps are adapted from <a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker
+        <p>The following steps are adapted from <a target="_blank"
+                                                   href="https://docs.docker.com/engine/install/ubuntu/">Install Docker
             Engine on Ubuntu</a></p>
         <p>If you think you may have some older versions of Docker installed tou can uninstall them with</p>
         <pre><code class="language-bash">sudo apt-get remove docker docker-engine docker.io containerd runc</code></pre>
@@ -336,12 +349,14 @@ sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agen
 sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <h5>Set up Docker Compose</h5>
         <p>Next we'll install Docker Compose</p>
-        <p>From <a href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
+        <p>From <a target="_blank" href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
         <blockquote>"Compose is a tool for defining and running multi-container Docker applications."</blockquote>
-        <p>The following steps are adapted from <a href="https://docs.docker.com/compose/install/">Docker - Install
+        <p>The following steps are adapted from <a target="_blank" href="https://docs.docker.com/compose/install/">Docker
+            - Install
             Docker Compose</a></p>
         <p>This is the command we can use to install Compose on Linux systems, for other systems and alternative install
-            options you can use <a href="https://docs.docker.com/compose/install/">Docker - Install Docker Compose</a>
+            options you can use <a target="_blank" href="https://docs.docker.com/compose/install/">Docker - Install
+                Docker Compose</a>
         </p>
         <pre><code class="language-bash">sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></pre>
         <p>And we can apply executable permissions with</p>
@@ -417,14 +432,16 @@ source .venv/bin/activate</code></pre>
         <p>Now we can run</p>
         <pre><code class="language-bash">sudo docker-compose up</code></pre>
         <p>The relevant ports are now exposed and can be accessed on your local machine</p>
-        <p>The <strong>Frontend Interface</strong> is accessible at <a href="http://localhost:8000">http://localhost:8000</a>
+        <p>The <strong>Frontend Interface</strong> is accessible at <a target="_blank" href="http://localhost:8000">http://localhost:8000</a>
         </p>
-        <p>This frontend connects to the <strong>Backend Webserver</strong> at <a href="http://localhost:5000">http://localhost:5000</a>
+        <p>This frontend connects to the <strong>Backend Webserver</strong> at <a target="_blank"
+                                                                                  href="http://localhost:5000">http://localhost:5000</a>
         </p>
-        <p>Requests are made from the backend to the <strong>MySQL Database</strong> at <a href="http://localhost:3306">http://localhost:3306</a>
+        <p>Requests are made from the backend to the <strong>MySQL Database</strong> at <a target="_blank"
+                                                                                           href="http://localhost:3306">http://localhost:3306</a>
         </p>
         <p>For more control over the database in development, a database graphical interface - <strong>Adminer</strong>
-            - is accessible at <a href="http://localhost:8080">http://localhost:8080</a></p>
+            - is accessible at <a target="_blank" href="http://localhost:8080">http://localhost:8080</a></p>
         <p>To login we enter our server as "db", username as "root" and password as "p@ssw0rd1"</p>
         <img src="assets/adminer.png">
         <p>This configuration information as well as other ports exposed for user automation can be found in the
@@ -436,24 +453,15 @@ source .venv/bin/activate</code></pre>
         <img src="assets/compose-yaml.png">
         <p>Essentially we either provide a path to a Dockerfile to build the service (as done with the backend service)
             or we name the image as an existing service we want to use such as with the mysql image (this image is then
-            pulled from <a href="https://hub.docker.com/">Docker Hub</a>)</p>
+            pulled from <a target="_blank" href="https://hub.docker.com/">Docker Hub</a>)</p>
         <p>We don't need to worry too much about all of the commands right now as we'll see them again later when we're
             adding a new service.</p>
-        <p>*******************************************************</p>
-        <p>From <a href="https://www.selenium.dev/">Selenium</a>:</p>
-        <blockquote>"Selenium automates browsers. That's it!
-            What you do with that power is entirely up to you.
-
-            Primarily it is for automating web applications for testing purposes, but is certainly not limited to just
-            that.
-
-            Boring web-based administration tasks can (and should) also be automated as well."
-        </blockquote>
     </div>
     <div class="custom-webserver" id="custom-webserver">
         <h3>💽 Custom Webserver</h3>
         <hr>
-        <p>From <a href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask Python?</a>:</p>
+        <p>From <a target="_blank" href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask
+            Python?</a>:</p>
         <blockquote>"Flask is a web application framework written in Python.
 
             A Web Application Framework or simply a
@@ -479,7 +487,8 @@ from flask_cors import CORS, cross_origin</code></pre>
         <p>We then create and configure the app</p>
         <pre><code class="language-python"># Create Flask instance
 app = Flask(__name__)</code></pre>
-        <p>From <a href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask - Application Setup</a>:
+        <p>From <a target="_blank" href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask -
+            Application Setup</a>:
         </p>
         <blockquote><code>__name__</code> is the name of the current Python module. The app needs to know where it’s
             located to set up some paths, and <code>__name__</code> is a convenient way to tell it that.
@@ -490,7 +499,8 @@ app = Flask(__name__)</code></pre>
 CORS(app) # Enables CORS for all routes
 # Allow Content-Type header
 app.config['CORS_HEADERS'] = 'Content-Type'</code></pre>
-        <p>From <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:</p>
+        <p>From <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:
+        </p>
         <blockquote><strong>Cross-Origin Resource Sharing</strong> (CORS) is an HTTP-header based mechanism that allows
             a server to
             indicate any other origins (domain, scheme, or port) than its own from which a browser should permit loading
@@ -680,6 +690,15 @@ services:
 source .venv/bon/activate</code></pre>
         <p>And now we can install our required packages with pip</p>
         <pre><code>pip3 install selenium requests</code></pre>
+        <p>From <a target="_blank" href="https://www.selenium.dev/">Selenium</a>:</p>
+        <blockquote>"Selenium automates browsers. That's it!
+            What you do with that power is entirely up to you.
+
+            Primarily it is for automating web applications for testing purposes, but is certainly not limited to just
+            that.
+
+            Boring web-based administration tasks can (and should) also be automated as well."
+        </blockquote>
         <p>And we can head over to <code>app/main.py</code> and start importing these</p>
         <pre><code class="language-python">from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -816,7 +835,8 @@ services:
             <p>As one of the main goals of this project is to create automated users, it's worth exploring an example of
                 one
                 of the tasks that have been automated. </p>
-            <p>We'll have <a href="https://selenium-python.readthedocs.io/">PySelenium</a> interact with our user
+            <p>We'll have <a target="_blank" href="https://selenium-python.readthedocs.io/">PySelenium</a> interact with
+                our user
                 interface
                 to populate and submit a form to our backend <a
                         href="https://flask.palletsprojects.com/en/1.1.x/installation/">Flask</a>
@@ -891,10 +911,12 @@ def customer_order():
             <p>We're extracting the data from the form that was posted and inserting it as an new record into our
                 customer
                 order table.</p>
-            <p>Although this is only a single <a href="#use-cases">use case</a>, that of an employee taking a customer
+            <p>Although this is only a single <a target="_blank" href="#use-cases">use case</a>, that of an employee
+                taking a customer
                 order, it highlights the flow of data through some of our integrated services.</p>
             <p>Also note that this isn't a complete picture of our automated employee; there's a few ideas of how to
-                expand on this autonomous employee in the <a href="#next-steps">next steps</a> section.</p>
+                expand on this autonomous employee in the <a target="_blank" href="#next-steps">next steps</a> section.
+            </p>
         </div>
         <div class="automated-manager-demo" id="automated-manager-demo">
             <h3>📊 Automated Manager</h3>
@@ -969,6 +991,17 @@ def customer_order():
                     <p>The apps authentication has been started but it will still be necessary to restrict routes to
                         logged in users and also to use access-roles to restrict some routes to managers only.</p>
                 </li>
+                <li>
+                    <h4>Testing</h4>
+                    <p>PySelenium could be used to set up automated tests to make sure that our system is behaving as
+                        expected.</p>
+                </li>
+                <li>
+                    <h4>Normal and problem use cases</h4>
+                    <p>It'd be good to work towards implementing the <a href="#understand-business">use cases in the table
+                        earlier in the project summary</a> and also possible <a href="#adding-problems">problem use
+                        cases</a>.</p>
+                </li>
             </ul>
         </div>
         <div id="troubleshooting">
@@ -998,8 +1031,16 @@ def customer_order():
     image: selenium/<span class="red">hub:4.0.0-beta-3-prerelease-20210402</span>
     ...</code></pre>
             </li>
-            <li>When debugging problems with the automated users it may be useful to use strategically placed <code>print()</code>
+            <li>When debugging problems with the automated users it may be useful to use strategically placed <code
+                    class="language-python">print()</code>
                 statements to confirm the code is behaving as you expect.
+            </li>
+            <li>
+                <code class="language-shell">mysql.connector.errors.ProgrammingError: Not all parameters were used in
+                    the SQL statement</code> - The problem may relate to the different parameter markers between sqlite3
+                and MySQL as explained in <a target="_blank" href="https://stackoverflow.com/a/20818201/9472445">this
+                StackOverflow
+                answer by user unutbu</a>
             </li>
         </div>
     </div>

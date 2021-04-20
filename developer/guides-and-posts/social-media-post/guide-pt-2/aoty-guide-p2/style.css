@@ -4,17 +4,17 @@ img {
 
 blockquote {
     padding-left: 0.90625rem;
-    border-left: 0.54375rem solid #42af29;
+    border-left: 0.54375rem solid #ff0000;
 }
 
 a {
-    color: #42af29;
+    color: #ff0000;
     text-decoration: underline;
 }
 
 a:hover, a:active {
     text-shadow: none;
     background-image: none;
-    color: #42af29;
+    color: #ff0000;
     text-decoration: none;
 }

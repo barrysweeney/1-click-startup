@@ -20,7 +20,7 @@
     <h1>Searching Album of The Year using Flask, Selenium, Docker, and React - Part 2</h1>
     <a href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
         for post's source code</a>
-        <p><a href="../../guide-pt-1/aoty-guide-p1/index.html">Click here for part 1 of this series.</a></p>
+    <p><a href="../../guide-pt-1/aoty-guide-p1/index.html">Click here for part 1 of this series.</a></p>
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S6gee91Q5gc" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -33,7 +33,8 @@
     <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> we answered the question</p>
     <blockquote><em>"Can I find out which albums were released on my birthday?"</em></blockquote>
     <p>You sure can, <strong>just read on to find out how.</strong></p>
-    <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1 of this guide</a> we brought up that if you can relate to any of these then you're <em>definitely</em>
+    <p>In <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1 of this guide</a> we brought up that if you can
+        relate to any of these then you're <em>definitely</em>
         in the right place.</p>
     <ul>
         <li>If you want to learn some Docker and Selenium basics in a fun project before moving on to more complex
@@ -110,8 +111,9 @@
     <pre><code class="language-bash">npx create-react-app aoty-frontend
 cd aoty-frontend
 npm start</code></pre>
-    <p><code>npx is the package runner tool that comes with npm which is the node package manager installed along with
-        NodeJS.</code></p>
+    <p><code>npx</code> is the package runner tool that comes with npm which is the node package manager installed along
+        with
+        NodeJS.</p>
     <p>The generated app will now be in the folder <code>aoty-frontend</code> which I would now recommend opening with
         your IDE/text editor of choice.</p>
     <p>We'll start be rewriting <code>src/App.js</code>. We can change the <code>App()</code> function to</p>
@@ -249,13 +251,18 @@ class App extends Component {
     }</code></pre>
     <p>We can now move on to programming our Flask backend.</p>
     <h2 id="backend">Flask webserver backend</h2>
-    <p>We're essentially rewriting the code from <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> of the guide but I'll go over the code here too
+    <p>We're essentially rewriting the code from <a href="../../guide-pt-1/aoty-guide-p1/index.html">part 1</a> of the
+        guide but I'll go over the code here too
         so it isn't required you've read our first part.</p>
-    <p>I like to start by creating a new Python project with a Virtual Environment in PyCharm but you can use any IDE or
-        text editor you prefer. You can set up your own environment if your editor doesn't automatically configure it
-        for you by executing the <code>venv</code> command from within a new directory which you could name <code>aoty-backend</code>
-        or similar:</p>
-    <pre><code class="language-bash">python3 -m venv /path/to/new/virtual/environment</code></pre>
+    <p>A quick way to get up and running is to create a new directory on the terminal with <code>mkdir</code> and open
+        it with VS Code</p>
+    <pre><code class="language-shell">sudo mkdir aoty-flask-backend
+code aoty-flask-backend    </code></pre>
+    <p>We can create a virtual environment within the <code>aoty-flask-backend</code> folder then (I like to open the VS
+        Code terminal with <code>ctrl+alt+`</code>)</p>
+    <pre><code class="language-bash">python3 -m venv .venv</code></pre>
+    <p>And we can activate the environment with</p>
+    <pre><code class="language-shell"> source .venv/bin/activate</code></pre>
     <p>For more info you can check out the <a href="https://docs.python.org/3/library/venv.html">official Python
         documentation on venv </a></p>
     <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
@@ -452,6 +459,9 @@ for album in albums:
     <p>Finally, we'll return our response to the user</p>
     <pre><code class="language-python"># Return response to user
 return json.dumps({'results': response}), 200, {'ContentType': 'application/json'}</code></pre>
+    <p>And we'll provide the command to run our Flask app outside of the function</p>
+    <pre><code class="language-python">if __name__ == '__main__':
+    app.run()</code></pre>
     <p>Congrats! Now let's see the results of our hard work in the next section.</p>
     <p>You can find all the source code for this guide <a href="../../guide-pt-1/aoty-guide-p1/index.html">here.</a></p>
     <h2 id="results">Results</h2>
