@@ -18,9 +18,10 @@
 <body>
 <div class="container">
     <h1>Searching Album of The Year using Python, PySelenium, and Docker</h1>
-    <a target="_blank" href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
+    <a target="_blank" rel="noopener noreferrer"
+       href="https://github.com/barrysweeney/1-click-startup/tree/master/guides-and-posts/album-of-the-day">Click here
         for post's source code</a>
-        <p><a target="_blank" href="../../guide-pt-2/aoty-guide-p2/index.html">Click here for part 2 of this series.</a></p>
+    <p><a target="_blank" rel="noopener noreferrer" href="../../guide-pt-2/aoty-guide-p2/index.html">Click here for part 2 of this series.</a></p>
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S6gee91Q5gc" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -38,7 +39,8 @@
             Docker
             Compose and automated testing applications.
         </li>
-        <li>If you're a new developer stuck in <a target="_blank" href="https://www.freecodecamp.org/news/escape-tutorial-purgatory/">tutorial
+        <li>If you're a new developer stuck in <a target="_blank" rel="noopener noreferrer"
+                                                  href="https://www.freecodecamp.org/news/escape-tutorial-purgatory/">tutorial
             purgatory</a> who wants to wrap their head around more challenging concepts then you can go deeper down the
             rabbit
             hole by following the links throughout the guide.
@@ -48,12 +50,12 @@
             your foot through the door.
         </li>
     </ul>
-    <p>From <a target="_blank" href="https://www.docker.com/why-docker">Docker</a>:</p>
+    <p>From <a target="_blank" rel="noopener noreferrer" href="https://www.docker.com/why-docker">Docker</a>:</p>
     <blockquote>"Containers are a standardized unit of software that allows developers to isolate their app from its
         environment, solving the “it works on my machine” headache. For millions of developers today, Docker is the de
         facto standard to build and share containerized apps - from desktop, to the cloud."
     </blockquote>
-    <p>From <a target="_blank" href="https://www.selenium.dev/">Selenium</a>:</p>
+    <p>From <a target="_blank" rel="noopener noreferrer" href="https://www.selenium.dev/">Selenium</a>:</p>
     <blockquote>"Selenium automates browsers. That's it!
         What you do with that power is entirely up to you.
 
@@ -68,17 +70,18 @@
     <p>Firstly we'll setup our remote Selenium WebDriver with Docker run. This will save us from downloading the driver
         ourselves and dealing with executable path configurations, or running our own Selenium server locally.</p>
     <p>Next we'll tell our Python code how to access our driver.</p>
-    <p>Then we'll use the Python Selenium package to interact with the <a target="_blank" href="https://www.albumoftheyear.org/">Album
+    <p>Then we'll use the Python Selenium package to interact with the <a target="_blank" rel="noopener noreferrer"
+                                                                          href="https://www.albumoftheyear.org/">Album
         of the Year website</a>.</p>
     <p>We'll wrap up with a discussion of our results and how we could take this further with a frontend interface.</p>
     <ul>
-        <li><a target="_blank" href="#selenium-container">Containerized Selenium Container</a></li>
-        <li><a target="_blank" href="#dev-env">Configuring your development environment</a></li>
-        <li><a target="_blank" href="#project-structure">Project Structure</a></li>
-        <li><a target="_blank" href="#coding">Coding our PySelenium album searching bot</a></li>
-        <li><a target="_blank" href="#results">Results from our PySelenium bot</a></li>
-        <li><a target="_blank" href="#whats-next">What's Next?</a></li>
-        <li><a target="_blank" href="#troubleshooting">Troubleshooting</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#selenium-container">Containerized Selenium Container</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#dev-env">Configuring your development environment</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#project-structure">Project Structure</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#coding">Coding our PySelenium album searching bot</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#results">Results from our PySelenium bot</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#whats-next">What's Next?</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="#troubleshooting">Troubleshooting</a></li>
     </ul>
     <h2 id="selenium-container">Containerized Selenium webdriver?</h2>
     <figure>
@@ -89,20 +92,24 @@
                 href="https://unsplash.com/s/photos/container?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
         </figcaption>
     </figure>
-    <p>We know we can <a target="_blank" href="https://www.selenium.dev/documentation/en/webdriver/driver_requirements/">download the
+    <p>We know we can <a target="_blank" rel="noopener noreferrer"
+                         href="https://www.selenium.dev/documentation/en/webdriver/driver_requirements/">download the
         driver binaries</a> and add executables to our PATH to access our webdriver via local host. <br> The question
         then becomes</p>
     <blockquote><em>Is there an easier way?</em></blockquote>
-    <p>Of course we could <a target="_blank" href="https://www.selenium.dev/documentation/en/remote_webdriver/remote_webdriver_server/">run
+    <p>Of course we could <a target="_blank" rel="noopener noreferrer"
+                             href="https://www.selenium.dev/documentation/en/remote_webdriver/remote_webdriver_server/">run
         a remote WebDriver server from the command line with a jar file</a>, but we can also use <a
             href="https://github.com/SeleniumHQ/docker-selenium">Docker Selenium</a>.</p>
     <h2 id="dev-env">Configuring your development environment</h2>
     <p>If you want to follow along to the tutorial you can take some time to setup your environment by installing Docker
         using either of these guides</p>
     <ul>
-        <li><a target="_blank" href="https://docs.docker.com/engine/install/">Install Docker Engine on Linux</a></li>
-        <li><a target="_blank" href="https://docs.docker.com/docker-for-mac/install/">Install Docker Desktop on Mac</a></li>
-        <li><a target="_blank" href="https://docs.docker.com/docker-for-windows/install/">Install Docker Desktop on Windows</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/engine/install/">Install Docker Engine on Linux</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/docker-for-mac/install/">Install Docker Desktop on Mac</a>
+        </li>
+        <li><a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/docker-for-windows/install/">Install Docker Desktop on
+            Windows</a></li>
     </ul>
     <p>Either will help you setup the required software for this tutorial.</p>
     <h2 id="project-structure">Project Structure</h2>
@@ -127,7 +134,8 @@
             python3 -m venv /path/to/new/virtual/environment
         </code>
     </pre>
-    <p>For more info you can check out the <a target="_blank" href="https://docs.python.org/3/library/venv.html">official Python
+    <p>For more info you can check out the <a target="_blank" rel="noopener noreferrer" href="https://docs.python.org/3/library/venv.html">official
+        Python
         documentation on venv </a></p>
     <p>Note that you may need to change <code>python3</code> to <code>python</code> depending on which version you have
         installed.</p>
@@ -186,7 +194,8 @@ day_of_month = '1'
 release_date_to_search = '%s %s' % (month_name_short, day_of_month)</code></pre>
     <p>Why this date? Because it's your birthday (there's a &cong;1.42857142857e-10 chance it is. My favourite album was
         released this day actually).</p>
-    <p>We can tell our driver to head over to <a target="_blank" href="https://www.albumoftheyear.org">Album of The Year</a> and to the
+    <p>We can tell our driver to head over to <a target="_blank" rel="noopener noreferrer" href="https://www.albumoftheyear.org">Album of The
+        Year</a> and to the
         release page for all the albums released in the month we
         hardcoded.</p>
     <pre><code class="language-python">driver.get("https://www.albumoftheyear.org/%s/releases/%s-%s.php?s=release&genre=all" % (year, month_name, month_code))</code></pre>
@@ -204,7 +213,8 @@ while not all_albums_loaded:
             class="language-python">click()</code> method of the <code>WebElement</code>
         object returned by <code class="language-python">find_element_by_id</code><br>We do this because another element
         is covering the show
-        more button. You can see <a target="_blank" href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
+        more button. You can see <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/a/37880313/9472445">this
+            StackOverflow answer by
             user RemcoW</a> for more details and an explanation of <code class="language-python">arguments[0]</code></p>
     <p>We're not quite finished with this while loop just yet, we need to do two things:</p>
     <ul>
@@ -310,11 +320,14 @@ my-selenium-container</code></pre>
         the source code</a> so you can take this and run with it adapting it however you like, read on to find out what
         my plans are for this project and ideas about where this could go next.</p>
     <p>I was motivated to create this project because I couldn't find a site that could be used to search for albums by
-        a specific release date. I'll be designing the frontend for this program in an <a target="_blank" href="../../guide-pt-2/aoty-guide-p2/index.html">upcoming post</a> and showing how you
+        a specific release date. I'll be designing the frontend for this program in an <a target="_blank" rel="noopener noreferrer"
+                                                                                          href="../../guide-pt-2/aoty-guide-p2/index.html">upcoming
+            post</a> and showing how you
         can deploy it so you can
         use and share it with others.</p>
-        <p><a target="_blank" href="../../guide-pt-2/aoty-guide-p2/index.html">Click here for part 2 of this series.</a></p>
-    <p>Stay tuned to <a target="_blank" href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss out!</p>
+    <p><a target="_blank" rel="noopener noreferrer" href="../../guide-pt-2/aoty-guide-p2/index.html">Click here for part 2 of this series.</a></p>
+    <p>Stay tuned to <a target="_blank" rel="noopener noreferrer" href="https://www.barrysweeney.com/blog/">my blog</a>, you don't want to miss
+        out!</p>
     <h2 id="troubleshooting">Bonus: Troubleshooting</h2>
     <p>Here's some resources for resolving common errors you might run into along the way in this guide or in your own
         explorations.</p>
@@ -324,7 +337,8 @@ my-selenium-container</code></pre>
             by peer'))</code> - this is a common error coined <a
                 href="http://www.itmaybeahack.com/homepage/iblog/architecture/C551260341/E20081031204203/index.html">The
             Python "Connection Rest By Peer" Problem</a>. You can
-            read more about it in <a target="_blank" href="https://stackoverflow.com/a/383816/9472445">this StackOverflow post by user
+            read more about it in <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/a/383816/9472445">this
+                StackOverflow post by user
                 S.Lott</a>. In our case it will likely arise from trying to access the status endpoint of the Selenium
             container before the container is ready. You can use <code class="language-python">time.sleep(1)</code>
             before making a request to <code>http://localhost:4444/wd/hub/status</code> and adjusting the time to fit
@@ -342,13 +356,15 @@ my-selenium-container</code></pre>
                     href="https://stackoverflow.com/a/16244739/9472445">This StackOverflow answer by user Ardesco</a>
             describes the situation more clearly. We can catch this exception in an <code
                     class="language-python">except</code> block and tell our code to retry a certain operation until the
-            exception doesn't occur. You can see <a target="_blank" href="#stale-element">the example we've used in this guide</a> where
+            exception doesn't occur. You can see <a target="_blank" rel="noopener noreferrer" href="#stale-element">the example we've used in this
+                guide</a> where
             our solution was to use the
             <code class="language-python">continue</code> keyword inside a <code class="language-python">while</code>
             loop.
         </li>
         <li><code class="language-shell">Element is not clickable at point (x,y) because another element obscures
-            it</code> - You can see <a target="_blank" href="https://stackoverflow.com/a/37880313/9472445">this StackOverflow answer by
+            it</code> - You can see <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/a/37880313/9472445">this
+            StackOverflow answer by
             user RemcoW</a> for more details and an explanation of our solution in this guide which was to use <code
                 class="language-python">driver.execute_script("arguments[0].click();", element)</code> as opposed to the
             <code class="language-python">click()</code> method of the <code>WebElement</code>
@@ -358,7 +374,7 @@ my-selenium-container</code></pre>
             to access the Selenium webdriver endpoint from within a different Docker container you can change
             <code>http://localhost:4444/wd/hub</code> to <code>http://172.17.0.1:4444/wd/hub</code> or
             <code>http://host.docker.internal:4444/wd/hub</code>. The
-            rationale behind this is provided in <a target="_blank" href="https://stackoverflow.com/a/48547074/9472445">this
+            rationale behind this is provided in <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/a/48547074/9472445">this
                 StackOverflow answer by user devnev</a>.
         </li>
     </ul>
