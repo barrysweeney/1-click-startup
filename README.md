@@ -497,22 +497,22 @@ We start by importing the relevant packages which are either shipped
 with Python or installed using pip from our `requirements.txt` file.
 
 ```python
-    # For handling requests and responses
-    import json
-    from flask import Flask, request
-    # For database connection
-    import mysql.connector
-    # For password encryption
-    from passlib.hash import sha256_crypt
-    # To enable requests from the frontend user interface
-    from flask_cors import CORS, cross_origin
+# For handling requests and responses
+import json
+from flask import Flask, request
+# For database connection
+import mysql.connector
+# For password encryption
+from passlib.hash import sha256_crypt
+# To enable requests from the frontend user interface
+from flask_cors import CORS, cross_origin
 ```    
 
 We then create and configure the app
-
-    # Create Flask instance
-    app = Flask(__name__)
-
+```python
+# Create Flask instance
+app = Flask(__name__)
+```
 From [Flask - Application
 Setup](https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/):
 
@@ -522,12 +522,12 @@ Setup](https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/):
 
 Next, we use the `flask_cors` module to allow communication between our
 frontend interface and backend webserver.
-
-    # Enable CORS to permit requests from the frontend to the backend (a different origin)
-    CORS(app) # Enables CORS for all routes
-    # Allow Content-Type header
-    app.config['CORS_HEADERS'] = 'Content-Type'
-
+```python
+# Enable CORS to permit requests from the frontend to the backend (a different origin)
+CORS(app) # Enables CORS for all routes
+# Allow Content-Type header
+app.config['CORS_HEADERS'] = 'Content-Type'
+```
 From [MDN Web Docs -
 CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS):
 
@@ -541,124 +541,125 @@ containers in the `docker-compose.yaml` file using `depends_on`, we
 still need to wait for the MySQL server *within* the container to be
 ready for connections.
 
-    # Wait for MYSQL container to be ready for connection before allowing requests to database
-    ready = False
-    while not ready:
-        try:
-            # Connect to db with parameters matching docker-compose.yaml file
-            mydb = mysql.connector.connect(
-                host="db",
-                user="root",
-                password="p@ssw0rd1"
-            )
-            # Create cursor
-            cursor = mydb.cursor()
-            # Create and use database "startup" if it doesn't exist
-            # TODO: Implement persistent database storage with volume mounting
-            cursor.execute("CREATE DATABASE startup IF NOT EXISTS ")
-            cursor.execute("USE startup")
-            # Create "users" table if it doesn't exist
-            cursor.execute(
-                "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255))")
-            # Close connection
-            cursor.close()
-            mydb.close()
-            # Break out of while loop by setting ready to True
-            ready = True
-        except mysql.connector.errors.InterfaceError:
-            # Try to connect to database again
-            continue
-
-Next we'll look at two routes in a little bit more detail. We'll first
-look at user registration as an introduction to our authentication
-routes.
-
-    # Authentication
-
-    # User registration route
-    @app.route('/register', methods=['POST'])
-    @cross_origin()
-    def register():
-        # Get values from json request body
-        data = request.json
-        name = data['name']
-        email = data['email']
-        role = data['role']
-        business = data['business']
-        # Encrypt plain text password
-        password = sha256_crypt.encrypt(data['password'])
-
+```python
+# Wait for MYSQL container to be ready for connection before allowing requests to database
+ready = False
+while not ready:
+    try:
         # Connect to db with parameters matching docker-compose.yaml file
         mydb = mysql.connector.connect(
             host="db",
             user="root",
-            password="p@ssw0rd1",
-            database="startup"
+            password="p@ssw0rd1"
         )
-
         # Create cursor
         cursor = mydb.cursor()
-
-        # Execute query to add user to database users table
+        # Create and use database "startup" if it doesn't exist
+        # TODO: Implement persistent database storage with volume mounting
+        cursor.execute("CREATE DATABASE startup IF NOT EXISTS ")
+        cursor.execute("USE startup")
+        # Create "users" table if it doesn't exist
         cursor.execute(
-            "INSERT INTO users(name, email, password, role, business,) VALUES(?, ?, ?, ?, ?)",
-            (name, email, password, role, business,))
-
-        # Commit data to db
-        mydb.commit()
-
+            "CREATE TABLE IF NOT EXISTS users (id int(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE , password VARCHAR(255), role VARCHAR(255), business VARCHAR(255))")
         # Close connection
         cursor.close()
         mydb.close()
+        # Break out of while loop by setting ready to True
+        ready = True
+    except mysql.connector.errors.InterfaceError:
+        # Try to connect to database again
+        continue
+```
+Next we'll look at two routes in a little bit more detail. We'll first
+look at user registration as an introduction to our authentication
+routes.
+```python
+# Authentication
 
-        # Return success message
-        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+# User registration route
+@app.route('/register', methods=['POST'])
+@cross_origin()
+def register():
+    # Get values from json request body
+    data = request.json
+    name = data['name']
+    email = data['email']
+    role = data['role']
+    business = data['business']
+    # Encrypt plain text password
+    password = sha256_crypt.encrypt(data['password'])
 
+    # Connect to db with parameters matching docker-compose.yaml file
+    mydb = mysql.connector.connect(
+        host="db",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
+
+    # Create cursor
+    cursor = mydb.cursor()
+
+    # Execute query to add user to database users table
+    cursor.execute(
+        "INSERT INTO users(name, email, password, role, business,) VALUES(?, ?, ?, ?, ?)",
+        (name, email, password, role, business,))
+
+    # Commit data to db
+    mydb.commit()
+
+    # Close connection
+    cursor.close()
+    mydb.close()
+
+    # Return success message
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+```
 Essentially what we have above is that the user will enter their email,
 password, business, and role, into a form on the frontend. The data is
 then sent to the flask server which will store the users details in the
 database.
 
 Next we'll take a look at the route used to complete a customer order.
+```python
+# Store new customer order in the database
+# TODO: Restrict route to logged in users
+# TODO: Link order to business
+# TODO: Reduce stock level of ordered items
+@app.route('/customer/order/new', methods=['POST'])
+@cross_origin()
+def customer_order():
+    # get values from json request body
+    data = request.json
+    customer_name = data['name']
+    contact_number = data['number']
+    customer_order = data['order']
 
-    # Store new customer order in the database
-    # TODO: Restrict route to logged in users
-    # TODO: Link order to business
-    # TODO: Reduce stock level of ordered items
-    @app.route('/customer/order/new', methods=['POST'])
-    @cross_origin()
-    def customer_order():
-        # get values from json request body
-        data = request.json
-        customer_name = data['name']
-        contact_number = data['number']
-        customer_order = data['order']
+    # Connect to db with parameters matching docker-compose.yaml file
+    mydb = mysql.connector.connect(
+        host="db",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
 
-        # Connect to db with parameters matching docker-compose.yaml file
-        mydb = mysql.connector.connect(
-            host="db",
-            user="root",
-            password="p@ssw0rd1",
-            database="startup"
-        )
+    # Create cursor
+    cursor = mydb.cursor()
 
-        # Create cursor
-        cursor = mydb.cursor()
+    # insert values from form into new record in CUSTOMER_ORDER table
+    cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
+     VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
 
-        # insert values from form into new record in CUSTOMER_ORDER table
-        cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
-         VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
+    # Commit data to db
+    mydb.commit()
 
-        # Commit data to db
-        mydb.commit()
+    # Close connection
+    cursor.close()
+    mydb.close()
 
-        # Close connection
-        cursor.close()
-        mydb.close()
-
-        # Return success message
-        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
-
+    # Return success message
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+```
 You'll notice some similarities across the routes as we're typically
 doing the following steps:
 
@@ -671,12 +672,12 @@ doing the following steps:
 One last thing we'll mention before we move onto adding a new service to
 the application is the idea of extracting data from the URL. For
 example:
-
-    # Get an employees details from the database using their id
-    @app.route("/employee/<id>")
-    def get_employee(id):
-        return 'Not yet implemented'
-
+```python
+# Get an employees details from the database using their id
+@app.route("/employee/<id>")
+def get_employee(id):
+    return 'Not yet implemented'
+```
 Using the `<id>` syntax in the route and having the `id` as a method
 parameter allows us to use `id` inside the method which will allow us to
 search the database by id for example.
@@ -694,37 +695,37 @@ Collabora Office Online to manage and edit documents.
 
 Firstly, we'll need to modify our `docker-compose.yml` file to add the
 new service
+```yaml
+version: "3.7"
 
-    version: "3.7"
+services:
+  frontend:
+    ...
 
-    services:
-      frontend:
-        ...
+  backend:
+    ...
 
-      backend:
-        ...
+  adminer:
+    ...
 
-      adminer:
-        ...
+  db:
+    ...
 
-      db:
-        ...
+  nextcloud:
+    image: nextcloud
+    restart: always
+    ports:
+      - "80:80"
 
-      nextcloud:
-        image: nextcloud
-        restart: always
-        ports:
-          - "80:80"
+  pyselenium-employee:
+    ...
 
-      pyselenium-employee:
-        ...
+  firefox:
+    ...
 
-      firefox:
-        ...
-
-      selenium-hub:
-        ...
-
+  selenium-hub:
+    ...
+```
 We set the image to pull from Docker Hub and map the port from within
 the container to `port 8080` on our local machine.
 
@@ -764,33 +765,33 @@ From [Selenium](https://www.selenium.dev/):
 > automated as well."
 
 And we can head over to `app/main.py` and start importing these
-
-    from selenium import webdriver
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.support.ui import WebDriverWait
-    import time
-    import requests
-
+```python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+import time
+import requests
+```
 The selenium webdriver container is started along with the other
-services like the frontend, backend, and database, but we ned to wait
+services like the frontend, backend, and database, but we need to wait
 for it to be ready for connections
+```python
+# Wait for Selenium webdriver container to be ready
+ready = False
+time.sleep(5)
+while not ready:
+    try:
+        r = requests.get('http://172.17.0.1:4444/wd/hub/status', timeout=1)
+        status = r.status_code
+        if status == 200:
+            ready = True
+    except ConnectionResetError or ConnectionError:
+        continue
 
-    # Wait for Selenium webdriver container to be ready
-    ready = False
-    time.sleep(5)
-    while not ready:
-        try:
-            r = requests.get('http://172.17.0.1:4444/wd/hub/status', timeout=1)
-            status = r.status_code
-            if status == 200:
-                ready = True
-        except ConnectionResetError or ConnectionError:
-            continue
-
-    driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
-                              command_executor="http://172.17.0.1:4444/wd/hub")
-
+driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIREFOX,
+                          command_executor="http://172.17.0.1:4444/wd/hub")
+```
 We use `http://172.17.0.1` instead of `http://localhost` since we're
 communicating from within one container to a different container, for
 more information about this bridge between networks using the host
@@ -798,26 +799,26 @@ machine you can refer to [this StackOverflow question by user
 klor](https://stackoverflow.com/q/48546124/9472445).
 
 Now we can use this line of code
-
-    # Go to create admin account page
-    driver.get("http://172.17.0.1:8080/")
-
+```python
+# Go to create admin account page
+driver.get("http://172.17.0.1:8080/")
+```
 Which will take us to this page
 
 ![](developer/guides-and-posts/summary/assets/create-admin.png)
 
 We can now input the username and password before clicking the finish
 setup button also on the page
+```python
+# Input username and password
+WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
+WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "adminpass")))
+driver.find_element_by_id("adminlogin").send_keys("admin")
+driver.find_element_by_id("adminpass").send_keys("password")
 
-    # Input username and password
-    WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
-    WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "adminpass")))
-    driver.find_element_by_id("adminlogin").send_keys("admin")
-    driver.find_element_by_id("adminpass").send_keys("password")
-
-    # Click "Finish setup" button
-    driver.find_element_by_class_name("primary").click()
-
+# Click "Finish setup" button
+driver.find_element_by_class_name("primary").click()
+```
 The ids where found by using the browsers inspect element feature
 
 ![Browser developer tools inspect feature](developer/guides-and-posts/summary/assets/inspect.png)
@@ -828,23 +829,23 @@ clicking the page and clicking "Inspect" ... Another good tool to use is
 screenshot above.
 
 We can now close our connection to the driver
-
-    driver.close()
-
+```python
+driver.close()
+```
 If we move over to our `Dockerfile` now we can containerize our
 automated admin
+```dockerfile
+FROM python:3.8
 
-    FROM python:3.8
+WORKDIR /app
 
-    WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-    COPY requirements.txt .
-    RUN pip install -r requirements.txt
+COPY /app/main.py .
 
-    COPY /app/main.py .
-
-    CMD ["python", "main.py"]
-
+CMD ["python", "main.py"]
+```
 Of course we'll also need to create the requirements.txt file which we
 can do from the terminal (`` ctrl+alt+` ``)
 
@@ -858,39 +859,39 @@ you can safely remove this line from `requirements/txt`
 Now if we return to our main `docker-compose.yaml` file at the root of
 the cloned `1-click-startup` directory we can add this automated admin
 service
+```yaml
+version: "3.7"
 
-    version: "3.7"
+services:
+  frontend:
+    ...
 
-    services:
-      frontend:
-        ...
+  backend:
+    ...
 
-      backend:
-        ...
+  adminer:
+    ...
 
-      adminer:
-        ...
+  db:
+    ...
 
-      db:
-        ...
+  nextcloud:
+    ...
 
-      nextcloud:
-        ...
+  pyselenium-admin:
+    build: ./pyselenium-admin
+    depends_on:
+      - nextcloud
 
-      pyselenium-admin:
-        build: ./pyselenium-admin
-        depends_on:
-          - nextcloud
+  pyselenium-user:
+    ...
 
-      pyselenium-user:
-        ...
+  firefox:
+    ...
 
-      firefox:
-        ...
-
-      selenium-hub:
-        ...
-
+  selenium-hub:
+    ...
+```
 Now the script will be run on startup to set up the NextCloud admin and
 the recommended apps (including document editing) will be installed.
 
@@ -904,6 +905,7 @@ We can open the `1cs-frontend` folder with VS Code as before
 
 We'll go to `src/components/layout.js` and we can add a new `<ListLink>`
 
+```html
     ...
 
       return (
@@ -916,7 +918,7 @@ We'll go to `src/components/layout.js` and we can add a new `<ListLink>`
         ...
             )
     ...
-
+```
 As you'll see, as opposed to relative, we've provided an absolute path
 to the NextCloud file editor.
 
@@ -951,8 +953,10 @@ Our automated employee lives in one of these containers. With the
 following line of code, they can get the webdriver for Selenium which
 allows them to access the web.
 
-    driver = webdriver.Remote(desired_capabilitieswebdriver.DesiredCapabilities.FIREFOX,
-                command_executor="http://172.17.0.1:4444/wd/hub")
+```python
+driver = webdriver.Remote(desired_capabilitieswebdriver.DesiredCapabilities.FIREFOX,
+            command_executor="http://172.17.0.1:4444/wd/hub")
+```
 
 We use `http://172.17.0.1` instead of `http://localhost` since we're
 communicating from within one container to a different container, for
@@ -964,63 +968,65 @@ With the next line of code our automated employee can access the
 customer order page of the frontend user interface which is in a
 different container accessible at port 8000 on our Docker network.
 
-    driver.get("http://172.17.0.1:8000/customer-order")
-
+```python
+driver.get("http://172.17.0.1:8000/customer-order")
+```
 This is what our employee now sees:
 
 ![Customer Order form](developer/guides-and-posts/summary/assets/customer-order.png)
 
 They can now fill in and submit the form:
-
-    driver.find_element_by_id("customer-name").send_keys("John Doe")
-    driver.find_element_by_id("customer-contact-number").send_keys("+44700000010")
-    driver.find_element_by_id("customer-order").send_keys("Bottle Water")
-    driver.find_element_by_id("submit-customer-order").click()
-
+```python
+driver.find_element_by_id("customer-name").send_keys("John Doe")
+driver.find_element_by_id("customer-contact-number").send_keys("+44700000010")
+driver.find_element_by_id("customer-order").send_keys("Bottle Water")
+driver.find_element_by_id("submit-customer-order").click()
+```
 If we look at the code for this form we can see that it is sending a
 [POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request to our backend
 Flask webserver running on port 5000 of our Docker network (We take the
 letter we wrote in the frontend room to Flask's room).
-
-    <form method="post" action="http://172.17.0.1:5000/customer/order/new">...
+```jsx
+<form method="post" action="http://172.17.0.1:5000/customer/order/new">...
+```
 
 Let's look at what's happening over on the server side by visiting our
 Flask webserver.
+```python
+@app.route('/customer/order/new', methods=['POST'])
+@cross_origin()
+def customer_order():
+    # get values from json request body
+    data = request.json
+    customer_name = data['name']
+    contact_number = data['number']
+    customer_order = data['order']
 
-    @app.route('/customer/order/new', methods=['POST'])
-    @cross_origin()
-    def customer_order():
-        # get values from json request body
-        data = request.json
-        customer_name = data['name']
-        contact_number = data['number']
-        customer_order = data['order']
+    # Connect to db with parameters matching docker-compose.yaml file
+    mydb = mysql.connector.connect(
+        host="db",
+        user="root",
+        password="p@ssw0rd1",
+        database="startup"
+    )
 
-        # Connect to db with parameters matching docker-compose.yaml file
-        mydb = mysql.connector.connect(
-            host="db",
-            user="root",
-            password="p@ssw0rd1",
-            database="startup"
-        )
+    # Create cursor
+    cursor = mydb.cursor()
 
-        # Create cursor
-        cursor = mydb.cursor()
+    # insert values from form into new record in CUSTOMER_ORDER table
+    cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
+     VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
 
-        # insert values from form into new record in CUSTOMER_ORDER table
-        cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
-         VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
+    # Commit data to db
+    mydb.commit()
 
-        # Commit data to db
-        mydb.commit()
+    # Close connection
+    cursor.close()
+    mydb.close()
 
-        # Close connection
-        cursor.close()
-        mydb.close()
-
-        # Return success message
-        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
-
+    # Return success message
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+```
 
 We're extracting the data from the form that was posted and inserting it
 as an new record into our customer order table.
@@ -1137,19 +1143,19 @@ which you can do with the following command:
 
 It's important that the image version of `selenium-hub` and the
 `firefox` selenium nodes are consistent since it's in pre-release beta
+```yaml
+firefox-1:
+    image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
+    ...
 
-    firefox-1:
-        image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
-        ...
+  firefox-2:
+    image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
+    ...
 
-      firefox-2:
-        image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
-      ...
-
-      selenium-hub:
-        image: selenium/hub:4.0.0-beta-3-prerelease-20210402
-        ...
-
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-3-prerelease-20210402
+    ...
+```
 When debugging problems with the automated users it may be useful to use
 strategically placed `print()`{.language-python} statements to confirm
 the code is behaving as you expect.
