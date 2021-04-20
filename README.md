@@ -906,18 +906,17 @@ We can open the `1cs-frontend` folder with VS Code as before
 We'll go to `src/components/layout.js` and we can add a new `<ListLink>`
 
 ```html
+...
+  return (
     ...
-
-      return (
-        ...
-              <ListLink to="/">Home</ListLink>
-              <ListLink to="/customer-order/">Customer Order</ListLink>
-              <ListLink to="/stock-count/">Stock Count</ListLink>
-              <ListLink to="/contact-manager/">Contact Manager</ListLink>
-              <ListLink to="http://localhost:8080/apps/files">Files</ListLink>
-        ...
-            )
+          <ListLink to="/">Home</ListLink>
+          <ListLink to="/customer-order/">Customer Order</ListLink>
+          <ListLink to="/stock-count/">Stock Count</ListLink>
+          <ListLink to="/contact-manager/">Contact Manager</ListLink>
+          <ListLink to="http://localhost:8080/apps/files">Files</ListLink>
     ...
+          )
+...
 ```
 As you'll see, as opposed to relative, we've provided an absolute path
 to the NextCloud file editor.
