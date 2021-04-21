@@ -866,13 +866,13 @@ driver.find_element_by_id("adminpass").send_keys("password")
 driver.find_element_by_class_name("primary").click()
 ```
 
-The ids where found by using the browsers inspect element feature
+The ids were found by using the browsers inspect element feature
 
 ![Browser developer tools inspect feature](developer/guides-and-posts/summary/assets/inspect.png)
 
-You can access this by pressing the F12 key when on the page or by right clicking the page and clicking "Inspect" ...
+You can access this by pressing the F12 key when on the page or by right-clicking the page and clicking "Inspect" ...
 Another good tool to use is
-`ctrl+shift_c` to pick an element from the page, as shown in the screenshot above.
+`ctrl+shift+c` to pick an element from the page, as shown in the screenshot above.
 
 We can now close our connection to the driver
 
@@ -895,7 +895,7 @@ COPY /app/main.py .
 CMD ["python", "main.py"]
 ```
 
-Of course we'll also need to create the requirements.txt file which we can do from the terminal (`` ctrl+alt+` ``)
+Of course, we'll also need to create the requirements.txt file which we can do from the terminal (`` ctrl+alt+` ``)
 
      pip3 freeze > requirements.txt
 
@@ -990,7 +990,7 @@ interact with our user interface to populate and submit a form to our backend
 [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/)
 webserver which will then store data in a MySQL database.
 
-When we run `sudo docker-compose up`{.language-bash} we're starting different containers relating to our application.
+When we run `sudo docker-compose up` we're starting different containers relating to our application.
 
 Our automated employee lives in one of these containers. With the following line of code, they can get the webdriver for
 Selenium which allows them to access the web.
@@ -1192,14 +1192,14 @@ firefox-1:
     ...
 ```
 
-When debugging problems with the automated users it may be useful to use strategically placed `print()`
-{.language-python} statements to confirm the code is behaving as you expect.
+When debugging problems with the automated users it may be useful to use strategically placed `print()` statements to
+confirm the code is behaving as you expect.
 
 `mysql.connector.errors.ProgrammingError: Not all parameters were used in                     the SQL statement`
 
 - The problem may relate to the different parameter markers between sqlite3 and MySQL as explained
   in [this StackOverflow answer by user unutbu](https://stackoverflow.com/a/20818201/9472445)
-  
+
 ### License
 
 MIT License

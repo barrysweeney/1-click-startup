@@ -664,7 +664,7 @@ services:
     image: nextcloud
     restart: always
     ports:
-      - "80:80"
+      - "8080:80"
 
   pyselenium-employee:
     ...
@@ -741,10 +741,10 @@ driver.find_element_by_id("adminpass").send_keys("password")
 
 # Click "Finish setup" button
 driver.find_element_by_class_name("primary").click()</code></pre>
-        <p>The ids where found by using the browsers inspect element feature</p>
+        <p>The ids were found by using the browsers inspect element feature</p>
         <img src="assets/inspect.png" alt="Browser developer tools inspect feature">
         <p>You can access this by pressing the F12 key when on the page or by right clicking the page and clicking
-            "Inspect" ... Another good tool to use is <code>ctrl+shift_c</code> to pick an element from the page, as
+            "Inspect" ... Another good tool to use is <code>ctrl+shift+c</code> to pick an element from the page, as
             shown
             in the screenshot above.</p>
         <p>We can now close our connection to the driver</p>
