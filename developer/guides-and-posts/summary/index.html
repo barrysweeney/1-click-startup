@@ -32,7 +32,8 @@
     <div class="what">
         <h3>What does it do?</h3>
         <hr/>
-        <p>With one click, a full IT system is set up for the business which will allow the business owner and employees
+        <p>With one click, a full IT system is set up for the business, which will allow the business owner and
+            employees
             to interact with familiar software to make sure the work that needs done for their job gets done.</p>
     </div>
     <div class="how">
@@ -59,20 +60,25 @@
         <h3>How do we test the system?</h3>
         <hr/>
         <p>We also want to provide a testing framework with simulated users and managers using a
-            tool such as <a target="_blank" rel="noopener noreferrer" href="https://selenium-python.readthedocs.io/">PySelenium</a>. Tests are yet
+            tool such as <a target="_blank" rel="noopener noreferrer" href="https://selenium-python.readthedocs.io/">PySelenium</a>.
+            Tests are yet
             to be set up;
-            more info is included in our <a target="_blank" rel="noopener noreferrer" href="#next-steps">TODO section</a> at the end of the
+            more info is included in our <a target="_blank" rel="noopener noreferrer" href="#next-steps">TODO
+                section</a> at the end of the
             project summary.</p>
     </div>
     <div class="toc">
         <h2>What's In This Document</h2>
         <hr/>
         <ul>
-            <li><a target="_blank" rel="noopener noreferrer" href="#understand-business">Understanding a business</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#up-and-run">Getting the current system up and running</a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="#understand-business">Understanding a business</a>
+            </li>
+            <li><a target="_blank" rel="noopener noreferrer" href="#up-and-run">Getting the current system up and
+                running</a></li>
             <li><a target="_blank" rel="noopener noreferrer" href="#new-service">Adding a new service</a></li>
             <li><a target="_blank" rel="noopener noreferrer" href="#custom-webserver">Custom Webserver</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#automated-employee-demo">Automated Employee Demo</a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="#automated-employee-demo">Automated Employee Demo</a>
+            </li>
             <li><a target="_blank" rel="noopener noreferrer" href="#automated-manager-demo">AI Manager Demo</a></li>
             <li><a target="_blank" rel="noopener noreferrer" href="#adding-problems">Adding Problems</a></li>
             <li><a target="_blank" rel="noopener noreferrer" href="#next-steps">Work Still to do</a></li>
@@ -82,8 +88,8 @@
     <div id="understand-business">
         <h3>👤 Understanding a business</h3>
         <hr/>
-        <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that we
-            need to define our user and figure out more specific details regarding their current work-flows.</p>
+        <p>We want to solve problems our user is facing and improve their overall work-flow. In order to do that, we
+            need to define our user, and figure out more specific details regarding their current work-flows.</p>
         <p>After conducting a survey with Google forms and an in person interview with a local business owner, the
             following use cases have been identified. These are jobs we want to incorporate into our product to improve
             the user's workflow.</p>
@@ -228,19 +234,20 @@
                 <td>Complete the order</td>
             </tr>
         </table>
-        <p>If we think about completing these tasks in terms of webpages we see that for communication or
-            record keeping we can provide forms on the user interface but for tasks which need performed physically such
-            as turning off equipment we can just provide a form to acknowledge that the task has been completed.</p>
+        <p>If we think about completing these tasks in terms of webpages, we see that for communication or
+            record keeping we can provide forms on the user interface, but for tasks which need performed physically -
+            such
+            as turning off equipment - we can just provide a form to report that the task has been completed.</p>
         <p>Open source software can enable us to automate some of the tasks required to run the business. Stock could be
-            automatically re-ordered for example. Open source document editing services can also be employed.</p>
+            automatically re-ordered for example. Open source document editing services could also be employed.</p>
     </div>
     <div class="quickstart" id="up-and-run">
         <h3>🛫 Getting the current system up and running</h3>
         <hr/>
-        <p id="prereq">It may seem like a lot of initial setup if you're new to the tools but it'll be well worth it.
+        <p id="prereq">It may seem like a lot of initial setup if you're new to the tools, but it'll be well worth it.
             Getting
             familiar with these tools will put you in good stead to take your ability as a software engineer to the next
-            level and will set you apart from others interviewing for entry-level software engineering jobs and
+            level, and will set you apart from others interviewing for entry-level software engineering jobs and
             beyond.</p>
         <p>Note that while some commands and screenshots are Linux based, they can be easily mapped to MacOS and
             Windows, and I'll provide links throughout to other guides which demonstrate how to install certain tools on
@@ -257,10 +264,10 @@
                 href="https://www.theodinproject.com/courses/foundations/lessons/setting-up-git">The Odin Project
             - Configure Git (Linux or Mac) and Github
             (all operating systems)</a></p>
-        <p>First we open a new terminal with the key combination <code>ctrl+alt+t</code> or alternatively search for
+        <p>First, we open a new terminal with the key combination <code>ctrl+alt+t</code> or alternatively search for
             "terminal"</p>
         <img src="assets/open-terminal.png">
-        <p>From there we can run these commands in the terminal to update the Linux system</p>
+        <p>From there, we can run these commands in the terminal to update the Linux system</p>
         <pre><code class="language-bash">sudo apt update
 sudo apt upgrade</code></pre>
         <p>And to install git</p>
@@ -274,7 +281,9 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>We change Git's default branch (don't worry about the Git terminology here) to main to match GitHub's default
             branch name</p>
         <pre><code class="language-bash">git config --global init.defaultBranch main</code></pre>
-        <p>Next you can go to <a target="_blank" rel="noopener noreferrer" href="https://github.com/">GitHub.com</a> and create an account if you
+        <p>Next, you can go to <a target="_blank" rel="noopener noreferrer" href="https://github.com/">GitHub.com</a>
+            and
+            create an account if you
             don't already
             have one.</p>
         <p>That completes our Git setup.</p>
@@ -283,11 +292,12 @@ git config --global user.email "yourname@example.com"</code></pre>
             Schafer</a> and <a target="_blank" rel="noopener noreferrer"
                                href="https://www.theodinproject.com/courses/foundations/lessons/git-basics">this Git
             lesson on The Odin Project</a>. Try not to feel too overwhelmed by all the commands at this point, as you'll
-            soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong></p>
+            soon find out there are only a few commands you'll use in your <strong>basic Git workflow</strong>.</p>
         <p>Now we can get all the files you need to get up and running on your machine.</p>
         <p>The next few steps have been adapted from <a
                 href="https://help.github.com/articles/fork-a-repo/"> GitHub Docs - Fork a repo</a></p>
-        <p>On GitHub, we go to the <a target="_blank" rel="noopener noreferrer" href="https://github.com/barrysweeney/1-click-startup">1 Click
+        <p>On GitHub, we go to the <a target="_blank" rel="noopener noreferrer"
+                                      href="https://github.com/barrysweeney/1-click-startup">1 Click
             Startup
             repository</a></p>
         <p>We click to fork the repository, essentially creating a new copy that doesn't affect the original</p>
@@ -295,11 +305,12 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>Now we can clone the forked repository so you have the files available on your machine as well as on your
             GitHub account.</p>
         <p>You can modify the following URL with your GitHub username to find your forked repository:
-            <a target="_blank" rel="noopener noreferrer" href="#"></a>https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</p>
+            <a target="_blank" rel="noopener noreferrer" href="#">https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</a>
+        </p>
         <p>We can click the code button above the list of files</p>
         <img src="assets/code-button.png">
         <p>Next, to clone the repository with HTTPS you can click the clipboard icon to copy the URL (note the URL
-            should look like https://github.com/YOUR-GITHUB-USERNAME/1-click-startup )</p>
+            should look like <strong>https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</strong>)</p>
         <img src="assets/https-clipboard.png">
         <p>Now we can go back to our terminal and type git clone and paste the copied URL with <code>ctrl+shift+v</code>
         </p>
@@ -317,24 +328,24 @@ git config --global user.email "yourname@example.com"</code></pre>
             facto standard to build and share containerized apps"
         </blockquote>
         <p> This guide includes installing Docker engine on Ubuntu. For other operating systems, Linux platforms, and
-            alternative install methods I'll point you to these guides to</p>
+            alternative install methods, I'll point you to these guides to:</p>
         <ul>
-            <li><a target="_blank" rel="noopener noreferrer" target="_blank" href="https://docs.docker.com/engine/install/"
+            <li><a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/engine/install/"
             >Install Docker Engine on Linux</a
             ></li>
-            <li><a target="_blank" rel="noopener noreferrer" target="_blank" href="https://docs.docker.com/docker-for-mac/install/"
+            <li><a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/docker-for-mac/install/"
             >Install Docker Desktop on MAC</a
             ></li>
-            <li><a target="_blank" rel="noopener noreferrer" target="_blank" href="https://docs.docker.com/docker-for-windows/install/"
+            <li><a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/docker-for-windows/install/"
             >Install Docker Desktop on Windows</a
             ></li>
         </ul>
         <p>The following steps are adapted from <a target="_blank" rel="noopener noreferrer"
                                                    href="https://docs.docker.com/engine/install/ubuntu/">Install Docker
             Engine on Ubuntu</a></p>
-        <p>If you think you may have some older versions of Docker installed tou can uninstall them with</p>
+        <p>If you think you may have some older versions of Docker installed, you can uninstall them with</p>
         <pre><code class="language-bash">sudo apt-get remove docker docker-engine docker.io containerd runc</code></pre>
-        <p>Next we'll set up the Docker repository. First we'll update the apt package index and install the packages
+        <p>Next, we'll set up the Docker repository. First, we'll update the apt package index and install the packages
             that allow apt to use a repository over HTTPS.</p>
         <pre><code class="language-bash">sudo apt-get update
 sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agent \ software-properties-common</code></pre>
@@ -349,13 +360,16 @@ sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agen
 sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <h5>Set up Docker Compose</h5>
         <p>Next we'll install Docker Compose</p>
-        <p>From <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/compose/">Docker - Overview of Docker Compose</a>:</p>
+        <p>From <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/compose/">Docker - Overview
+            of Docker Compose</a>:</p>
         <blockquote>"Compose is a tool for defining and running multi-container Docker applications."</blockquote>
-        <p>The following steps are adapted from <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/compose/install/">Docker
+        <p>The following steps are adapted from <a target="_blank" rel="noopener noreferrer"
+                                                   href="https://docs.docker.com/compose/install/">Docker
             - Install
             Docker Compose</a></p>
         <p>This is the command we can use to install Compose on Linux systems, for other systems and alternative install
-            options you can use <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/compose/install/">Docker - Install
+            options you can use <a target="_blank" rel="noopener noreferrer"
+                                   href="https://docs.docker.com/compose/install/">Docker - Install
                 Docker Compose</a>
         </p>
         <pre><code class="language-bash">sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></pre>
@@ -365,7 +379,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>We'll be using Visual Studio Code (VS Code) for the purpose of this guide due to it's versatility; allowing
             us to code JavaScript
             and Python in the same editor.</p>
-        <p>I think the easiest way is to open up Ubuntu Software which should appear when you start searching for
+        <p>You can open up Ubuntu Software which should appear when you start searching for
             "ubuntu"</p>
         <img src="assets/usoft.png" alt="Searching Ubuntu desktop for Ubuntu Store">
         <p>From inside the Software store you can use the 🔎 icon and start searching for "vscode"</p>
@@ -376,9 +390,10 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
             application drawer</p>
         <img src="assets/vscode-favourite.png"
              alt="Searching for Visual Studio Code on Ubuntu with the add to favourites option highlighted">
-        <p>THe following section of the tutorial draws from <a
+        <p>The following section of the tutorial draws from <a
                 href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS
-            Code</a> You can now open a new window of Visual Studio Code</p>
+            Code</a></p>
+        <p>You can now open a new window of Visual Studio Code</p>
         <img src="assets/vscode-new-window.png"
              alt="Searching for Visual Studio Code on Ubuntu with the New Window option highlighted">
         <p>Now we can navigate to the extensions tab</p>
@@ -400,17 +415,17 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
             must tell VS Code which interpreter to use."
         </blockquote>
         <p>Inside the cloned 1-click-startup repository you'll see a folder "1cs-backend" which you can right click to
-            select open with other application</p>
+            select "open with other application"</p>
         <img src="assets/open-with-vscode.png">
-        <p>We can select VS Code and from here, we can install a virtual environment. Here's what the Visual Studio Code
+        <p>We can select VS Code, and from here, we can install a virtual environment. Here's what the Visual Studio Code
             guide referenced above
-            has to say about them:</p>
+            has to say about why virtual environments are important:</p>
         <blockquote>"A best practice among Python developers is to avoid installing packages into a global interpreter
             environment. You instead use a project-specific virtual environment that contains a copy of a global
             interpreter. Once you activate that environment, any packages you then install are isolated from other
             environments. Such isolation reduces many complications that can arise from conflicting package versions."
         </blockquote>
-        <p>Within VS Code you can use <code>ctrl+alt+`</code> to open a terminal and type the following to setup and
+        <p>Within VS Code, you can use <code>ctrl+alt+`</code> to open a terminal, and then type the following to set up and
             activate the virtual environment</p>
         <pre><code class="language-bash">python3 -m venv .venv
 source .venv/bin/activate</code></pre>
@@ -423,44 +438,48 @@ source .venv/bin/activate</code></pre>
             activated virtual environment</p>
         <pre><code class="language-bash">pip3 install -r requirements.txt</code></pre>
         <p>That's all the work done to set up our python backend. If you try to run the code now you'll still get errors
-            because we are yet to setup our database etc.</p>
+            because we are yet to set up our database etc.</p>
         <h4>Run development containers</h4>
-        <p>To run our development containers we'll navigate to where we've cloned the files locally which can be done by
+        <p>To run our development containers, we'll navigate to where we've cloned the files locally, which can be done by
             opening a terminal with <code>ctrl+alt+t</code></p>
-        <p>From here we can change directory to the cloned repository with</p>
+        <p>From here, we can change directory to the cloned repository with</p>
         <pre><code class="language-bash">cd 1-click-startup</code></pre>
-        <p>Now we can run</p>
+        <p>Now, we can run</p>
         <pre><code class="language-bash">sudo docker-compose up</code></pre>
-        <p>The relevant ports are now exposed and can be accessed on your local machine</p>
-        <p>The <strong>Frontend Interface</strong> is accessible at <a target="_blank" rel="noopener noreferrer" href="http://localhost:8000">http://localhost:8000</a>
+        <p>The relevant ports are now exposed and can be accessed on your local machine.</p>
+        <p>The <strong>Frontend Interface</strong> is accessible at <a target="_blank" rel="noopener noreferrer"
+                                                                       href="http://localhost:8000">http://localhost:8000</a>
         </p>
-        <p>This frontend connects to the <strong>Backend Webserver</strong> at <a target="_blank" rel="noopener noreferrer"
+        <p>This frontend connects to the <strong>Backend Webserver</strong> at <a target="_blank"
+                                                                                  rel="noopener noreferrer"
                                                                                   href="http://localhost:5000">http://localhost:5000</a>
         </p>
-        <p>Requests are made from the backend to the <strong>MySQL Database</strong> at <a target="_blank" rel="noopener noreferrer"
+        <p>Requests are made from the backend to the <strong>MySQL Database</strong> at <a target="_blank"
+                                                                                           rel="noopener noreferrer"
                                                                                            href="http://localhost:3306">http://localhost:3306</a>
         </p>
         <p>For more control over the database in development, a database graphical interface - <strong>Adminer</strong>
-            - is accessible at <a target="_blank" rel="noopener noreferrer" href="http://localhost:8080">http://localhost:8080</a></p>
+            - is accessible at <a target="_blank" rel="noopener noreferrer" href="http://localhost:8080">http://localhost:8080</a>
+        </p>
         <p>To login we enter our server as "db", username as "root" and password as "p@ssw0rd1"</p>
         <img src="assets/adminer.png">
-        <p>This configuration information as well as other ports exposed for user automation can be found in the
+        <p>This configuration information, as well as other ports exposed for user automation, can be found in the
             <code>docker-compose.yaml</code> file at the root of the cloned directory.</p>
-        <p>Additional ports have been exposed such as</p>
-        <p>We'll dive a little deeper into this file when we move on to adding a service later but for now we can take a
-            quick look so you get the general idea of how we tell our application which services to start and what port
+        <p>We'll dive a little deeper into this file when we move on to adding a service later, but for now we can take a
+            quick look, so you get the general idea of how we tell our application which services to start and what port
             to expose them on:</p>
         <img src="assets/compose-yaml.png">
-        <p>Essentially we either provide a path to a Dockerfile to build the service (as done with the backend service)
+        <p>Essentially, we either provide a path to a Dockerfile to build the service (as done with the backend service),
             or we name the image as an existing service we want to use such as with the mysql image (this image is then
-            pulled from <a target="_blank" rel="noopener noreferrer" href="https://hub.docker.com/">Docker Hub</a>)</p>
+            pulled from <a target="_blank" rel="noopener noreferrer" href="https://hub.docker.com/">Docker Hub</a>).</p>
         <p>We don't need to worry too much about all of the commands right now as we'll see them again later when we're
             adding a new service.</p>
     </div>
     <div class="custom-webserver" id="custom-webserver">
         <h3>💽 Custom Webserver</h3>
         <hr>
-        <p>From <a target="_blank" rel="noopener noreferrer" href="https://pythonbasics.org/what-is-flask-python/">Python Basic - What is Flask
+        <p>From <a target="_blank" rel="noopener noreferrer" href="https://pythonbasics.org/what-is-flask-python/">Python
+            Basic - What is Flask
             Python?</a>:</p>
         <blockquote>"Flask is a web application framework written in Python.
 
@@ -469,11 +488,11 @@ source .venv/bin/activate</code></pre>
             modules that enable web application developers to write applications without worrying about low-level
             details"
         </blockquote>
-        <p>When a user submits a form or clicks a button on the font-end user interface in their browser, a request is
-            made to certain endpoint on the "backend" webserver. For example, when a user attempts to login, their email
-            and password is sent to the Flask webserver which then performs the authentication.</p>
+        <p>When a user submits a form or clicks a button on the front-end user interface (in their browser), a request is
+            made to a certain endpoint on the "backend" webserver. For example, when a user attempts to log in, their email
+            and password are sent to the Flask webserver which then performs the authentication.</p>
         <p>Let's start running through the code.</p>
-        <p>We start by importing the relevant packages which are either shipped with Python or installed using pip from
+        <p>We start by importing the relevant packages, which are either shipped with Python, or installed using pip from
             our <code>requirements.txt</code> file.</p>
         <pre><code class="language-python"># For handling requests and responses
 import json
@@ -487,7 +506,8 @@ from flask_cors import CORS, cross_origin</code></pre>
         <p>We then create and configure the app</p>
         <pre><code class="language-python"># Create Flask instance
 app = Flask(__name__)</code></pre>
-        <p>From <a target="_blank" rel="noopener noreferrer" href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask -
+        <p>From <a target="_blank" rel="noopener noreferrer"
+                   href="https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/">Flask -
             Application Setup</a>:
         </p>
         <blockquote><code>__name__</code> is the name of the current Python module. The app needs to know where it’s
@@ -499,7 +519,8 @@ app = Flask(__name__)</code></pre>
 CORS(app) # Enables CORS for all routes
 # Allow Content-Type header
 app.config['CORS_HEADERS'] = 'Content-Type'</code></pre>
-        <p>From <a target="_blank" rel="noopener noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:
+        <p>From <a target="_blank" rel="noopener noreferrer"
+                   href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs - CORS</a>:
         </p>
         <blockquote><strong>Cross-Origin Resource Sharing</strong> (CORS) is an HTTP-header based mechanism that allows
             a server to
@@ -578,10 +599,10 @@ def register():
 
     # Return success message
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}</code></pre>
-        <p>Essentially what we have above is that the user will enter their email, password, business, and role, into a
-            form on the frontend. The data is then sent to the flask server which will store the users details in the
+        <p>Essentially, what we have above, is that the user will enter their email, password, and business, into a
+            form on the frontend. The data is then sent to the flask server, which will store the users details in the
             database.</p>
-        <p>Next we'll take a look at the route used to complete a customer order.</p>
+        <p>Next, we'll take a look at the route used to complete a customer order.</p>
         <pre><code class="language-python"># Store new customer order in the database
 # TODO: Restrict route to logged in users
 # TODO: Link order to business
@@ -589,7 +610,7 @@ def register():
 @app.route('/customer/order/new', methods=['POST'])
 @cross_origin()
 def customer_order():
-    # get values from json request body
+    # Get values from json request body
     data = request.json
     customer_name = data['name']
     contact_number = data['number']
@@ -606,7 +627,7 @@ def customer_order():
     # Create cursor
     cursor = mydb.cursor()
 
-    # insert values from form into new record in CUSTOMER_ORDER table
+    # Insert values from form into new record in CUSTOMER_ORDER table
     cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
      VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
 
@@ -619,7 +640,7 @@ def customer_order():
 
     # Return success message
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}</code></pre>
-        <p>You'll notice some similarities across the routes as we're typically doing the following steps:</p>
+        <p>You'll notice some similarities across the routes, as we're typically doing the following steps:</p>
         <ul>
             <li>Extract data from request</li>
             <li>Connect to database</li>
@@ -627,7 +648,7 @@ def customer_order():
             <li>Close database connection</li>
             <li>Send response to user</li>
         </ul>
-        <p>One last thing we'll mention before we move onto adding a new service to the application is the idea of
+        <p>One last thing we'll mention before we move on to adding a new service to the application is the idea of
             extracting data from the URL. For example:</p>
         <pre><code class="language-python"># Get an employees details from the database using their id
 @app.route("/employee/&lt;id&gt;")
@@ -635,14 +656,14 @@ def get_employee(id):
     return 'Not yet implemented'</code></pre>
         <p>Using the <code>&lt;id&gt;</code> syntax in the route and having the <code>id</code> as a method parameter
             allows us to
-            use <code>id</code> inside the method which will allow us to search the database by id for example.</p>
+            use <code>id</code> inside the method, which will allow us to search the database by id, for example.</p>
     </div>
     <div class="new-service" id="new-service">
         <h3>➕ Adding a new service</h3>
         <hr>
-        <p>Many small businesses use spreadsheets to manage payroll and sales predictions as opposed to expensive
-            proprietary specialized applications.</p>
-        <p>Let's add NextCLoud which will allow our user to use the integrated Collabora Office Online to manage and
+        <p>Many small businesses use spreadsheets to manage payroll and sales predictions, as opposed to expensive
+            proprietary, specialized applications.</p>
+        <p>Let's add NextCloud, which will allow our user to use the integrated Collabora Office Online to manage and
             edit documents.</p>
         <p>Firstly, we'll need to modify our <code>docker-compose.yml</code> file to add the new service</p>
         <pre><code class="language-yaml">version: "3.7"
@@ -676,20 +697,19 @@ services:
     ...</code></pre>
         <p>We set the image to pull from Docker Hub and map the port from within the
             container to <code>port 8080</code> on our local machine.</p>
-        <p>Next, we'll link this service to the custom frontend. We'll want NextCloud to be setup with the apps already
-            installed so we'll create a small python script to do that. This will have the dual effect of locking the
-            route down to only the manager since we could theoretically make the password to only them.</p>
-        <p>We'll create a new folder</p>
+        <p>Next, we'll link this service to the custom frontend. We'll want NextCloud to be set up with the apps already
+            installed, so we'll create a small Python script to do that.</p>
+        <p>We'll create a new folder "pyselenium-admin"</p>
         <img src="assets/pyadmin.png">
         <p>Which we can then open with our IDE/text editor</p>
         <img src="assets/open-with-vscode.png">
-        <p>And then open a new terminal within vscode with <code>ctrl+alt+`</code> and run</p>
-        <pre><code class="language-shell">touch app/main.py .gitignore Dockerfile</code></pre>
-        <p>And we'll create ab activate our virtual environment with the following:</p>
-        <pre><code>python3 -m venv .venv
+        <p>And then open a new terminal within VS Code with <code>ctrl+alt+`</code> and run</p>
+        <pre><code class="language-shell">touch app/main.py Dockerfile</code></pre>
+        <p>And we'll create and activate our virtual environment with the following:</p>
+        <pre><code class="language-shell">python3 -m venv .venv
 source .venv/bon/activate</code></pre>
         <p>And now we can install our required packages with pip</p>
-        <pre><code>pip3 install selenium requests</code></pre>
+        <pre><code class="language-shell">pip3 install selenium requests</code></pre>
         <p>From <a target="_blank" rel="noopener noreferrer" href="https://www.selenium.dev/">Selenium</a>:</p>
         <blockquote>"Selenium automates browsers. That's it!
             What you do with that power is entirely up to you.
@@ -699,7 +719,7 @@ source .venv/bon/activate</code></pre>
 
             Boring web-based administration tasks can (and should) also be automated as well."
         </blockquote>
-        <p>And we can head over to <code>app/main.py</code> and start importing these</p>
+        <p>We can head over to <code>app/main.py</code> and start importing these</p>
         <pre><code class="language-python">from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -707,7 +727,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 import requests</code></pre>
         <p>The selenium webdriver container is started along with the other services like the frontend, backend, and
-            database, but we ned to wait for it to be ready for connections</p>
+            database, but we need to wait for it to be ready for connections.</p>
         <pre><code class="language-python"># Wait for Selenium webdriver container to be ready
 ready = False
 time.sleep(5)
@@ -724,15 +744,15 @@ driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIR
                           command_executor="http://172.17.0.1:4444/wd/hub")</code></pre>
         <p>We use <code>http://172.17.0.1</code> instead of <code>http://localhost</code>
             since we're communicating from within one container to a different container, for more information about
-            this bridge between networks using the host machine you can refer to <a
+            this bridge between networks using the host machine, you can refer to <a
                     href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
         </p>
         <p>Now we can use this line of code</p>
         <pre><code class="language-python"># Go to create admin account page
 driver.get("http://172.17.0.1:8080/")</code></pre>
-        <p>Which will take us to this page</p>
+        <p>Which will take our automated user to this page</p>
         <img src="assets/create-admin.png">
-        <p>We can now input the username and password before clicking the finish setup button also on the page</p>
+        <p>We can now instruct our user to input the username and password, before clicking the finish setup button (out of frame)</p>
         <pre><code class="language-python"># Input username and password
 WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
 WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "adminpass")))
@@ -741,15 +761,15 @@ driver.find_element_by_id("adminpass").send_keys("password")
 
 # Click "Finish setup" button
 driver.find_element_by_class_name("primary").click()</code></pre>
-        <p>The ids were found by using the browsers inspect element feature</p>
+        <p>The ids were found by using the browser's "Inspect Element" feature</p>
         <img src="assets/inspect.png" alt="Browser developer tools inspect feature">
-        <p>You can access this by pressing the F12 key when on the page or by right clicking the page and clicking
+        <p>You can access this by pressing the <code>F12</code> key when on the page, or by right clicking the page and clicking
             "Inspect" ... Another good tool to use is <code>ctrl+shift+c</code> to pick an element from the page, as
             shown
             in the screenshot above.</p>
-        <p>We can now close our connection to the driver</p>
+        <p>We can now close our connection to the driver.</p>
         <pre><code class="language-python">driver.close()</code></pre>
-        <p>If we move over to our <code>Dockerfile</code> now we can containerize our automated admin</p>
+        <p>If we move over to our <code>Dockerfile</code> now, we can containerize our automated admin</p>
         <pre><code class="language-docker">FROM python:3.8
 
 WORKDIR /app
@@ -760,15 +780,15 @@ RUN pip install -r requirements.txt
 COPY /app/main.py .
 
 CMD ["python", "main.py"]</code></pre>
-        <p>Of course we'll also need to create the requirements.txt file which we can do from the terminal (<code>ctrl+alt+`</code>)
+        <p>Of course we'll also need to create the requirements.txt file, which we can do from the terminal (<code>ctrl+alt+`</code>)
         </p>
-        <pre><code> pip3 freeze > requirements.txt</code></pre>
-        <p>Note there is <a
+        <pre class="language-shell"><code> pip3 freeze > requirements.txt</code></pre>
+        <p>Note: there is <a
                 href="https://stackoverflow.com/questions/39577984/what-is-pkg-resources-0-0-0-in-output-of-pip-freeze-command">an
             issue</a> where a line <code>pkg-resources==0.0.0</code> is sometimes generated. If it is, you can safely
             remove this line from <code>requirements/txt</code></p>
-        <p>Now if we return to our main <code>docker-compose.yaml</code> file at the root of the cloned <code>1-click-startup</code>
-            directory we can add this automated admin service</p>
+        <p>Now, if we return to our main <code>docker-compose.yaml</code> file at the root of the cloned <code>1-click-startup</code>
+            directory, we can add this automated admin service</p>
         <pre><code class="language-yaml">version: "3.7"
 
 services:
@@ -795,20 +815,23 @@ services:
   pyselenium-user:
     ...
 
-  firefox:
+  firefox-1:
+    ...
+
+  firefox-2:
     ...
 
   selenium-hub:
     ...
 </code></pre>
-        <p>Now the script will be run on startup to set up the NextCloud admin and the recommended apps (including
+        <p>Now the script will be run on startup to set up the NextCloud admin, and the recommended apps (including
             document editing) will be installed.</p>
-        <p>To complete adding this service to our application we'll also need a way to link to the NextCLoud document
+        <p>To complete adding this service to our application, we'll also need a way to link to the NextCLoud document
             editing page from our custom frontend interface.</p>
         <p>We can open the <code>1cs-frontend</code> folder with VS Code as before</p>
         <img src="assets/1cs-frontend.png">
         <img src="assets/open-with-vscode.png">
-        <p>We'll go to <code>src/components/layout.js</code> and we can add a new <code>&lt;ListLink&gt;</code></p>
+        <p>We'll go to <code>src/components/layout.js</code> and add a new <code>&lt;ListLink&gt;</code></p>
         <pre><code class="language-python">...
 
   return (
@@ -822,12 +845,12 @@ services:
         )
 ...
 </code></pre>
-        <p>As you'll see, as opposed to relative, we've provided an absolute path to the NextCloud file editor.</p>
+        <p>As opposed to relative, we've provided an absolute path to the NextCloud file editor.</p>
         <img src="assets/files-link.png">
-        <p>CLicking this will take out user here</p>
+        <p>Clicking this "Files" link will take our user here...</p>
         <img src="assets/nextcloud-files.png">
-        <p>You can view what the PySelenium user is seeing with noVNC which you can access at <a
-                href="http://localhost:7902">http://localhost:7902</a> and using the password <code>secret</code> when
+        <p>You can view what the PySelenium user is seeing with noVNC, which you can access at <a
+                href="http://localhost:7902">http://localhost:7902</a> using the password <code>secret</code> when
             prompted.</p>
         <div class="automated-employee-demo" id="automated-employee-demo">
             <h3>🤖 Automated Employee Demo</h3>
@@ -835,7 +858,8 @@ services:
             <p>As one of the main goals of this project is to create automated users, it's worth exploring an example of
                 one
                 of the tasks that have been automated. </p>
-            <p>We'll have <a target="_blank" rel="noopener noreferrer" href="https://selenium-python.readthedocs.io/">PySelenium</a> interact with
+            <p>We'll have <a target="_blank" rel="noopener noreferrer" href="https://selenium-python.readthedocs.io/">PySelenium</a>
+                interact with
                 our user
                 interface
                 to populate and submit a form to our backend <a
@@ -911,11 +935,13 @@ def customer_order():
             <p>We're extracting the data from the form that was posted and inserting it as an new record into our
                 customer
                 order table.</p>
-            <p>Although this is only a single <a target="_blank" rel="noopener noreferrer" href="#use-cases">use case</a>, that of an employee
+            <p>Although this is only a single <a target="_blank" rel="noopener noreferrer" href="#use-cases">use
+                case</a>, that of an employee
                 taking a customer
                 order, it highlights the flow of data through some of our integrated services.</p>
             <p>Also note that this isn't a complete picture of our automated employee; there's a few ideas of how to
-                expand on this autonomous employee in the <a target="_blank" rel="noopener noreferrer" href="#next-steps">next steps</a> section.
+                expand on this autonomous employee in the <a target="_blank" rel="noopener noreferrer"
+                                                             href="#next-steps">next steps</a> section.
             </p>
         </div>
         <div class="automated-manager-demo" id="automated-manager-demo">
@@ -998,7 +1024,8 @@ def customer_order():
                 </li>
                 <li>
                     <h4>Normal and problem use cases</h4>
-                    <p>It'd be good to work towards implementing the <a href="#understand-business">use cases in the table
+                    <p>It'd be good to work towards implementing the <a href="#understand-business">use cases in the
+                        table
                         earlier in the project summary</a> and also possible <a href="#adding-problems">problem use
                         cases</a>.</p>
                 </li>
@@ -1006,20 +1033,24 @@ def customer_order():
         </div>
         <div id="troubleshooting">
             <h3>Troubleshooting</h3>
-            <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> - to
-                solve
-                this you can find which process is using the port by running <code>sudo lsof -i -P -n | grep 3306</code>
-                and
-                use the id to end the process with <code>sudo kill id</code> for example <br>
-                <img src="assets/lsof.png">
-            </li>
-            <li>When changes are made and they aren't updated when you run the docker-compose file it is sometimes
-                necessary to rebuild the images which you can do with the following command: <code
-                        class="language-shell">sudo docker-compose
-                    build --no-cache</code></li>
-            <li>It's important that the image version of <code>selenium-hub</code> and the <code>firefox</code> selenium
-                nodes are consistent since it's in pre-release beta
-                <pre><code>firefox-1:
+            <ul>
+                <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> -
+                    to
+                    solve
+                    this you can find which process is using the port by running <code>sudo lsof -i -P -n | grep
+                        3306</code>
+                    and
+                    use the id to end the process with <code>sudo kill id</code> for example <br>
+                    <img src="assets/lsof.png">
+                </li>
+                <li>When changes are made and they aren't updated when you run the docker-compose file it is sometimes
+                    necessary to rebuild the images which you can do with the following command: <code
+                            class="language-shell">sudo docker-compose
+                        build --no-cache</code></li>
+                <li>It's important that the image version of <code>selenium-hub</code> and the <code>firefox</code>
+                    selenium
+                    nodes are consistent since it's in pre-release beta
+                    <pre><code>firefox-1:
     image: selenium/<span class="red">node-firefox:4.0.0-beta-3-prerelease-20210402</span>
     ...
 
@@ -1030,18 +1061,22 @@ def customer_order():
   selenium-hub:
     image: selenium/<span class="red">hub:4.0.0-beta-3-prerelease-20210402</span>
     ...</code></pre>
-            </li>
-            <li>When debugging problems with the automated users it may be useful to use strategically placed <code
-                    class="language-python">print()</code>
-                statements to confirm the code is behaving as you expect.
-            </li>
-            <li>
-                <code class="language-shell">mysql.connector.errors.ProgrammingError: Not all parameters were used in
-                    the SQL statement</code> - The problem may relate to the different parameter markers between sqlite3
-                and MySQL as explained in <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/a/20818201/9472445">this
-                StackOverflow
-                answer by user unutbu</a>
-            </li>
+                </li>
+                <li>When debugging problems with the automated users it may be useful to use strategically placed <code
+                        class="language-python">print()</code>
+                    statements to confirm the code is behaving as you expect.
+                </li>
+                <li>
+                    <code class="language-shell">mysql.connector.errors.ProgrammingError: Not all parameters were used
+                        in
+                        the SQL statement</code> - The problem may relate to the different parameter markers between
+                    sqlite3
+                    and MySQL as explained in <a target="_blank" rel="noopener noreferrer"
+                                                 href="https://stackoverflow.com/a/20818201/9472445">this
+                    StackOverflow
+                    answer by user unutbu</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
