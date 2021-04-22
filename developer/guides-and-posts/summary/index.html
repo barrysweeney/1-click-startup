@@ -63,7 +63,7 @@
             tool such as <a target="_blank" rel="noopener noreferrer" href="https://selenium-python.readthedocs.io/">PySelenium</a>.
             Tests are yet
             to be set up;
-            more info is included in our <a target="_blank" rel="noopener noreferrer" href="#next-steps">TODO
+            more info is included in our <a href="#next-steps">TODO
                 section</a> at the end of the
             project summary.</p>
     </div>
@@ -71,18 +71,15 @@
         <h2>What's In This Document</h2>
         <hr/>
         <ul>
-            <li><a target="_blank" rel="noopener noreferrer" href="#understand-business">Understanding a business</a>
-            </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#up-and-run">Getting the current system up and
-                running</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#new-service">Adding a new service</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#custom-webserver">Custom Webserver</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#automated-employee-demo">Automated Employee Demo</a>
-            </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#automated-manager-demo">AI Manager Demo</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#adding-problems">Adding Problems</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#next-steps">Work Still to do</a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#understand-business">Understanding a business</a></li>
+            <li><a href="#up-and-run">Getting the current system up and running</a></li>
+            <li><a href="#new-service">Adding a new service</a></li>
+            <li><a href="#custom-webserver">Custom Webserver</a></li>
+            <li><a href="#automated-employee-demo">Automated Employee Demo</a></li>
+            <li><a href="#automated-manager-demo">AI Manager Demo</a></li>
+            <li><a href="#adding-problems">Adding Problems</a></li>
+            <li><a href="#next-steps">Work Still to do</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
         </ul>
     </div>
     <div id="understand-business">
@@ -305,7 +302,7 @@ git config --global user.email "yourname@example.com"</code></pre>
         <p>Now we can clone the forked repository so you have the files available on your machine as well as on your
             GitHub account.</p>
         <p>You can modify the following URL with your GitHub username to find your forked repository:
-            <a target="_blank" rel="noopener noreferrer" href="#">https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</a>
+            <a href="#">https://github.com/YOUR-GITHUB-USERNAME/1-click-startup</a>
         </p>
         <p>We can click the code button above the list of files</p>
         <img src="assets/code-button.png">
@@ -417,7 +414,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
         <p>Inside the cloned 1-click-startup repository you'll see a folder "1cs-backend" which you can right click to
             select "open with other application"</p>
         <img src="assets/open-with-vscode.png">
-        <p>We can select VS Code, and from here, we can install a virtual environment. Here's what the Visual Studio Code
+        <p>We can select VS Code, and from here, we can install a virtual environment. Here's what the Visual Studio
+            Code
             guide referenced above
             has to say about why virtual environments are important:</p>
         <blockquote>"A best practice among Python developers is to avoid installing packages into a global interpreter
@@ -425,7 +423,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
             interpreter. Once you activate that environment, any packages you then install are isolated from other
             environments. Such isolation reduces many complications that can arise from conflicting package versions."
         </blockquote>
-        <p>Within VS Code, you can use <code>ctrl+alt+`</code> to open a terminal, and then type the following to set up and
+        <p>Within VS Code, you can use <code>ctrl+alt+`</code> to open a terminal, and then type the following to set up
+            and
             activate the virtual environment</p>
         <pre><code class="language-bash">python3 -m venv .venv
 source .venv/bin/activate</code></pre>
@@ -440,7 +439,8 @@ source .venv/bin/activate</code></pre>
         <p>That's all the work done to set up our python backend. If you try to run the code now you'll still get errors
             because we are yet to set up our database etc.</p>
         <h4>Run development containers</h4>
-        <p>To run our development containers, we'll navigate to where we've cloned the files locally, which can be done by
+        <p>To run our development containers, we'll navigate to where we've cloned the files locally, which can be done
+            by
             opening a terminal with <code>ctrl+alt+t</code></p>
         <p>From here, we can change directory to the cloned repository with</p>
         <pre><code class="language-bash">cd 1-click-startup</code></pre>
@@ -465,11 +465,13 @@ source .venv/bin/activate</code></pre>
         <img src="assets/adminer.png">
         <p>This configuration information, as well as other ports exposed for user automation, can be found in the
             <code>docker-compose.yaml</code> file at the root of the cloned directory.</p>
-        <p>We'll dive a little deeper into this file when we move on to adding a service later, but for now we can take a
+        <p>We'll dive a little deeper into this file when we move on to adding a service later, but for now we can take
+            a
             quick look, so you get the general idea of how we tell our application which services to start and what port
             to expose them on:</p>
         <img src="assets/compose-yaml.png">
-        <p>Essentially, we either provide a path to a Dockerfile to build the service (as done with the backend service),
+        <p>Essentially, we either provide a path to a Dockerfile to build the service (as done with the backend
+            service),
             or we name the image as an existing service we want to use such as with the mysql image (this image is then
             pulled from <a target="_blank" rel="noopener noreferrer" href="https://hub.docker.com/">Docker Hub</a>).</p>
         <p>We don't need to worry too much about all of the commands right now as we'll see them again later when we're
@@ -488,11 +490,14 @@ source .venv/bin/activate</code></pre>
             modules that enable web application developers to write applications without worrying about low-level
             details"
         </blockquote>
-        <p>When a user submits a form or clicks a button on the front-end user interface (in their browser), a request is
-            made to a certain endpoint on the "backend" webserver. For example, when a user attempts to log in, their email
+        <p>When a user submits a form or clicks a button on the front-end user interface (in their browser), a request
+            is
+            made to a certain endpoint on the "backend" webserver. For example, when a user attempts to log in, their
+            email
             and password are sent to the Flask webserver which then performs the authentication.</p>
         <p>Let's start running through the code.</p>
-        <p>We start by importing the relevant packages, which are either shipped with Python, or installed using pip from
+        <p>We start by importing the relevant packages, which are either shipped with Python, or installed using pip
+            from
             our <code>requirements.txt</code> file.</p>
         <pre><code class="language-python"># For handling requests and responses
 import json
@@ -752,7 +757,8 @@ driver = webdriver.Remote(desired_capabilities=webdriver.DesiredCapabilities.FIR
 driver.get("http://172.17.0.1:8080/")</code></pre>
         <p>Which will take our automated user to this page</p>
         <img src="assets/create-admin.png">
-        <p>We can now instruct our user to input the username and password, before clicking the finish setup button (out of frame)</p>
+        <p>We can now instruct our user to input the username and password, before clicking the finish setup button (out
+            of frame)</p>
         <pre><code class="language-python"># Input username and password
 WebDriverWait(driver, 300).until(EC.presence_of_element_located((By.ID, "adminlogin")))
 WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.ID, "adminpass")))
@@ -763,7 +769,8 @@ driver.find_element_by_id("adminpass").send_keys("password")
 driver.find_element_by_class_name("primary").click()</code></pre>
         <p>The ids were found by using the browser's "Inspect Element" feature</p>
         <img src="assets/inspect.png" alt="Browser developer tools inspect feature">
-        <p>You can access this by pressing the <code>F12</code> key when on the page, or by right clicking the page and clicking
+        <p>You can access this by pressing the <code>F12</code> key when on the page, or by right clicking the page and
+            clicking
             "Inspect" ... Another good tool to use is <code>ctrl+shift+c</code> to pick an element from the page, as
             shown
             in the screenshot above.</p>
@@ -879,7 +886,8 @@ services:
                 this bridge between networks using the host machine you can refer to <a
                         href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
             </p>
-            <p>With the next line of code, our automated employee can access the customer order page of the frontend user
+            <p>With the next line of code, our automated employee can access the customer order page of the frontend
+                user
                 interface (which is in a different container accessible at port 8000 on our Docker network).</p>
             <pre><code class="language-python">driver.get("http://172.17.0.1:8000/customer-order")</code></pre>
             <p>This is what our employee now sees:</p>
@@ -932,25 +940,27 @@ def customer_order():
         </code></pre>
             <p>We're extracting the data from the form that was posted, and inserting it as a new record in our
                 <code>customer_order table</code></p>
-            <p>Although this is only a single <a target="_blank" rel="noopener noreferrer" href="#use-cases">use
+            <p>Although this is only a single <a href="#use-cases">use
                 case</a>, that of an employee
                 taking a customer
                 order, it highlights the flow of data through some of our integrated services.</p>
             <p>Also note that this isn't a complete picture of our automated employee; there's a few ideas of how to
-                expand on this autonomous employee in the <a target="_blank" rel="noopener noreferrer"
-                                                             href="#next-steps">next steps</a> section.
+                expand on this autonomous employee in the <a
+                        href="#next-steps">next steps</a> section.
             </p>
         </div>
         <div class="automated-manager-demo" id="automated-manager-demo">
             <h3>📊 Automated Manager</h3>
             <hr>
-            <p>We'll also want an automated manager, so that we could simulate a day in the life of a small business. The
+            <p>We'll also want an automated manager, so that we could simulate a day in the life of a small business.
+                The
                 jobs that get done, the emails that get sent, the forms that get filled in, etc.</p>
         </div>
         <div class="adding-problems" id="adding-problems">
             <h3>⛈ Adding work problems in the application</h3>
             <hr>
-            <p>When we're designing our application, we'll also want to introduce realistic problems that could occur and
+            <p>When we're designing our application, we'll also want to introduce realistic problems that could occur
+                and
                 affect the business operations. This could be anything from employees leaving, to global events
                 effecting opening hours.</p>
             <p>In the simulation, we can begin by including problems that are more likely to occur that would affect
@@ -980,7 +990,8 @@ def customer_order():
                 <li>
                     <h4>AI Users</h4>
                     <p>We could introduce the concept of "virtual time" to make our employee perform tasks at an
-                        accelerated rate, and record completed tasks in the webapp. In addition to this, we'd also like the
+                        accelerated rate, and record completed tasks in the webapp. In addition to this, we'd also like
+                        the
                         employee to
                         perform their tasks based on what work is assigned to them through their custom webapp
                         interface.</p>
@@ -1006,7 +1017,8 @@ def customer_order():
                 <li>
                     <h4>Deployment</h4>
                     <p>The main final file to ship to the user is <code>user/start.sh</code> which essentially installs
-                        Docker to run the <code>docker-compose.yml</code> file, and installs Firefox to access the frontend
+                        Docker to run the <code>docker-compose.yml</code> file, and installs Firefox to access the
+                        frontend
                         interfaces.</p>
                 </li>
                 <li>
@@ -1021,8 +1033,9 @@ def customer_order():
                 </li>
                 <li>
                     <h4>Normal and problem use cases</h4>
-                    <p>It'd be good to work towards implementing the <a href="#understand-business">normal use cases</a> as well ass possible <a href="#adding-problems">problem use
-                        cases</a>.</p>
+                    <p>It'd be good to work towards implementing the <a href="#understand-business">normal use cases</a>
+                        as well ass possible <a href="#adding-problems">problem use
+                            cases</a>.</p>
                 </li>
             </ul>
         </div>
@@ -1038,7 +1051,8 @@ def customer_order():
                     use the id to end the process with <code>sudo kill &lt;id&gt;</id></code><br>
                     <img src="assets/lsof.png">
                 </li>
-                <li>When you make changes and they aren't having an effect when you run the <code>docker-compose.yaml</code> file, it is sometimes
+                <li>When you make changes and they aren't having an effect when you run the
+                    <code>docker-compose.yaml</code> file, it is sometimes
                     necessary to rebuild the images, which you can do with the following command: <code
                             class="language-shell">sudo docker-compose
                         build --no-cache</code></li>
