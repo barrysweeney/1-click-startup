@@ -506,8 +506,6 @@ To log in, we enter our server as "db", username as "root" and password as
 This configuration information as well as other ports exposed for user automation can be found in
 the `docker-compose.yaml` file at the root of the cloned directory.
 
-Additional ports have been exposed such as
-
 We'll dive a little deeper into this file when we move on to adding a service later but for now we can take a quick look
 so that you get the general idea of how we tell our application which services to start and what port to expose them on:
 
