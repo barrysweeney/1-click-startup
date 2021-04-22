@@ -64,7 +64,7 @@ What's In This Document
 We want to solve problems our user is facing and improve their overall work-flow. In order to do that we need to define
 our user and figure out more specific details regarding their current work-flows.
 
-After conducting a survey with Google forms and an in person interview with a local business owner, the following use
+After conducting a survey with Google forms, and an in person interview with a local business owner, the following use
 cases have been identified. These are jobs we want to incorporate into our product to improve the user's workflow.
 
 ##### Use Cases
@@ -216,18 +216,18 @@ If we think about completing these tasks in terms of webpages we see that for co
 provide forms on the user interface but for tasks which need performed physically such as turning off equipment we can
 just provide a form to acknowledge that the task has been completed.
 
-Open source software can enable us to automate some of the tasks required to run the business. Stock could be
+Open source software can enable us to automate some tasks required to run the business. Stock could be
 automatically re-ordered for example. Open source document editing services can also be employed.
 
 ### 🛫 Getting the current system up and running
 
 * * * * *
 
-It may seem like a lot of initial setup if you're new to the tools but it'll be well worth it. Getting familiar with
+It may seem like a lot of initial setup if you're new to the tools, but it'll be well worth it. Getting familiar with
 these tools will put you in good stead to take your ability as a software engineer to the next level and will set you
 apart from others interviewing for entry-level software engineering jobs and beyond.
 
-Note that while some commands and screenshots are Linux based, they can be easily mapped to MacOS and Windows, and I'll
+Note that while some commands and screenshots are Linux based, they can be easily mapped to macOS and Windows, and I'll
 provide links throughout to other guides which demonstrate how to install certain tools on non-linux based operating
 systems.
 
@@ -238,7 +238,7 @@ We'll begin by getting the necessary files onto your machine with Git
 From [The Odin Project - Introduction to Git](https://www.theodinproject.com/courses/foundations/lessons/introduction-to-git):
 
 > "Git is like a really epic save button for your files and directories.
-> Officially, Git is a version control system.
+> Officially, Git is a version control system."
 
 The next few steps have been adapted
 from [The Odin Project - Configure Git (Linux or Mac) and Github (all operating systems)](https://www.theodinproject.com/courses/foundations/lessons/setting-up-git)
@@ -290,7 +290,7 @@ We click to fork the repository, essentially creating a new copy that doesn't af
 
 ![](developer/guides-and-posts/summary/assets/fork.png)
 
-Now we can clone the forked repository so you have the files available on your machine as well as on your GitHub
+Now we can clone the forked repository, so you have the files available on your machine as well as on your GitHub
 account.
 
 You can modify the following URL with your GitHub username to find your forked repository:
@@ -311,13 +311,13 @@ It should look something like this
 
     git clone https://github.com/YOUR-GITHUB-USERNAME/1-click-startup
 
-If we hit enter the local clone should be created and we should have all the files we need.
+If we hit enter the local clone should be created, and we should have all the files we need.
 
 #### Set up Docker and Docker Compose
 
 ##### Set up Docker Engine
 
-We'll install Docker so we can run our different services (frontend UI, database, etc) in containers to limit the number
+We'll install Docker, so we can run our different services (frontend UI, database, etc) in containers to limit the number
 of services we need to install locally.
 
 From [Docker](https://www.docker.com/why-docker):
@@ -383,7 +383,7 @@ And we can apply executable permissions with
 
 #### Set up IDE
 
-We'll be using Visual Studio Code (VS Code) for the purpose of this guide due to it's versatility; allowing us to code
+We'll be using Visual Studio Code (VS Code) for the purpose of this guide due to its versatility; allowing us to code
 JavaScript and Python in the same editor.
 
 I think the easiest way is to open up Ubuntu Software which should appear when you start searching for "ubuntu"
@@ -398,7 +398,7 @@ And we can now click the install button
 
 ![Visual Studio Code install button](developer/guides-and-posts/summary/assets/vscode-install-button.png)
 
-We can now search for "vscode" and at this point I like to add to favourites so I can access VS Code from the
+We can now search for "vscode" and at this point I like to add to favourites, so I can access VS Code from the
 application drawer
 
 ![Searching for Visual Studio Code on Ubuntu with the add to favourites option highlighted](developer/guides-and-posts/summary/assets/vscode-favourite.png)
@@ -418,7 +418,7 @@ And download the Python extension
 ![Python VS Code extension with install button](developer/guides-and-posts/summary/assets/python-extension-vscode.png)
 
 As Ubuntu comes with Python3 pre-installed we can move on to installing pip. (For other Operating Systems you can see
-options like brew for MacOS and WSL for Windows
+options like brew for macOS and WSL for Windows
 in [Getting Started with Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial) )
 
 To install pip...
@@ -434,7 +434,7 @@ From [Getting Started with Python in VS Code](https://code.visualstudio.com/docs
 > to use."
 
 Inside the cloned 1-click-startup repository you'll see a folder
-"1cs-backend" which you can right click to select open with other application
+"1cs-backend" which you can right-click to select open with other application
 
 ![](developer/guides-and-posts/summary/assets/open-with-vscode.png)
 
@@ -448,7 +448,7 @@ referenced above has to say about them:
 > install are isolated from other environments. Such isolation reduces
 > many complications that can arise from conflicting package versions."
 
-Within VS Code you can use `` ctrl+alt+` `` to open a terminal and type the following to setup and activate the virtual
+Within VS Code you can use `` ctrl+alt+` `` to open a terminal and type the following to set up and activate the virtual
 environment
 
     python3 -m venv .venv
@@ -469,7 +469,7 @@ environment
     pip3 install -r requirements.txt
 
 That's all the work done to set up our python backend. If you try to run the code now you'll still get errors because we
-are yet to setup our database etc.
+are yet to set up our database etc.
 
 #### Run development containers
 
@@ -498,7 +498,7 @@ Requests are made from the backend to the **MySQL Database** at
 For more control over the database in development, a database graphical interface - **Adminer** - is accessible
 at <http://localhost:8080>
 
-To login we enter our server as "db", username as "root" and password as
+To log in, we enter our server as "db", username as "root" and password as
 "p@ssw0rd1"
 
 ![](developer/guides-and-posts/summary/assets/adminer.png)
@@ -509,15 +509,15 @@ the `docker-compose.yaml` file at the root of the cloned directory.
 Additional ports have been exposed such as
 
 We'll dive a little deeper into this file when we move on to adding a service later but for now we can take a quick look
-so you get the general idea of how we tell our application which services to start and what port to expose them on:
+so that you get the general idea of how we tell our application which services to start and what port to expose them on:
 
 ![](developer/guides-and-posts/summary/assets/compose-yaml.png)
 
-Essentially we either provide a path to a Dockerfile to build the service (as done with the backend service) or we name
+Essentially we either provide a path to a Dockerfile to build the service (as done with the backend service), or we name
 the image as an existing service we want to use such as with the mysql image (this image is then pulled
 from [Docker Hub](https://hub.docker.com/))
 
-We don't need to worry too much about all of the commands right now as we'll see them again later when we're adding a
+We don't need to worry too much about all the commands right now as we'll see them again later when we're adding a
 new service.
 
 ### 💽 Custom Webserver
@@ -534,7 +534,7 @@ From [Python Basic - What is Flask Python?](https://pythonbasics.org/what-is-fla
 
 When a user submits a form or clicks a button on the font-end user interface in their browser, a request is made to
 certain endpoint on the
-"backend" webserver. For example, when a user attempts to login, their email and password is sent to the Flask webserver
+"backend" webserver. For example, when a user attempts to log in, their email and password is sent to the Flask webserver
 which then performs the authentication.
 
 Let's start running through the code.
@@ -616,7 +616,7 @@ while not ready:
         continue
 ```
 
-Next we'll look at two routes in a little bit more detail. We'll first look at user registration as an introduction to
+Next we'll look at two routes in a little more detail. We'll first look at user registration as an introduction to
 our authentication routes.
 
 ```python
@@ -774,7 +774,7 @@ services:
 
 We set the image to pull from Docker Hub and map the port from within the container to `port 8080` on our local machine.
 
-Next, we'll link this service to the custom frontend. We'll want NextCloud to be setup with the apps already installed
+Next, we'll link this service to the custom frontend. We'll want NextCloud to be setup with the apps already installed,
 so we'll create a small python script to do that. This will have the dual effect of locking the route down to only the
 manager since we could theoretically make the password to only them.
 
@@ -941,7 +941,7 @@ services:
     ...
 ```
 
-Now the script will be run on startup to set up the NextCloud admin and the recommended apps (including document
+Now the script will be run on startup to set up the NextCloud admin, and the recommended apps (including document
 editing) will be installed.
 
 To complete adding this service to our application we'll also need a way to link to the NextCLoud document editing page
@@ -1025,8 +1025,8 @@ driver.find_element_by_id("submit-customer-order").click()
 ```
 
 If we look at the code for this form we can see that it is sending a
-[POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request to our backend Flask webserver running on port 5000 of our
-Docker network (We take the letter we wrote in the frontend room to Flask's room).
+[POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request to our backend Flask webserver (running on port 5000 of our
+Docker network).
 
 ```jsx
 <form method="post" action="http://172.17.0.1:5000/customer/order/new">...
@@ -1070,7 +1070,7 @@ def customer_order():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 ```
 
-We're extracting the data from the form that was posted and inserting it as an new record into our customer order table.
+We're extracting the data from the form that was posted and inserting it as a new record into our customer order table.
 
 Although this is only a single [use case](#use-cases), that of an employee taking a customer order, it highlights the
 flow of data through some of our integrated services.
@@ -1096,7 +1096,7 @@ business operations. This could be anything from employees leaving, to global ev
 In the simulation we can begin by including problems that are more likely to occur that would affect normal operations.
 These could be implemented with appropriate randomness to make the simulation as plausible as possible.
 
-A simple example might be that someone calls in sick last minute. This will have a domino effect and it will be
+A simple example might be that someone calls in sick last minute. This will have a domino effect, and it will be
 necessary to respond appropriately. We can map out these problem use cases in a table format as we have done with the
 expected daily business use cases.
 
@@ -1127,9 +1127,9 @@ expected daily business use cases.
 
 -   #### Persistent Storage
 
-    At the minute our database storage isn't persistent so we could implement persistent data storage by creating a
-    database dump when the user is finished with the application or periodically throughout the day and on startup the
-    most recent database dump can be used to create and populate the database.
+    At the minute, our database storage isn't persistent. We could implement persistent data storage by creating a
+    database dump when the user is finished with the application or periodically throughout the day. On startup the
+    most recent database dump can then be used to create and populate the database.
 
 -   #### Email
 
@@ -1149,7 +1149,7 @@ expected daily business use cases.
 
 -   #### Authentication
 
-    The apps authentication has been started but it will still be necessary to restrict routes to logged in users and
+    The app's authentication has been started, but it will still be necessary to restrict routes to logged-in users and
     also to use access-roles to restrict some routes to managers only.
 
 -   #### Testing
@@ -1171,9 +1171,9 @@ expected daily business use cases.
   `sudo kill id` for example \
   ![](developer/guides-and-posts/summary/assets/lsof.png)
 
-When changes are made and they aren't updated when you run the docker-compose file it is sometimes necessary to rebuild
+When you make changes, and they aren't available when you run the `docker-compose.yaml` file, it is sometimes necessary to rebuild
 the images which you can do with the following command:
-`sudo docker-compose                     build --no-cache`
+`sudo docker-compose build --no-cache`
 
 It's important that the image version of `selenium-hub` and the
 `firefox` selenium nodes are consistent since it's in pre-release beta
