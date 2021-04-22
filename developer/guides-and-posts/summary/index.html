@@ -864,14 +864,14 @@ services:
                 interface
                 to populate and submit a form to our backend <a
                         href="https://flask.palletsprojects.com/en/1.1.x/installation/">Flask</a>
-                webserver which will then store data in a MySQL database.</p>
+                webserver, which will then store data in a MySQL database.</p>
             <p>When we run <code class="language-bash">sudo docker-compose up</code> we're starting different containers
                 relating to our
                 application.</p>
             <p>Our automated employee lives in one of these containers. With the following line of code, they can
                 get
                 the
-                webdriver for Selenium which allows them to access the web.</p>
+                webdriver for Selenium, which allows them to access the web.</p>
             <pre><code class="language-python">driver = webdriver.Remote(desired_capabilitieswebdriver.DesiredCapabilities.FIREFOX,
             command_executor="http://172.17.0.1:4444/wd/hub")</code></pre>
             <p>We use <code>http://172.17.0.1</code> instead of <code>http://localhost</code>
@@ -879,8 +879,8 @@ services:
                 this bridge between networks using the host machine you can refer to <a
                         href="https://stackoverflow.com/q/48546124/9472445">this StackOverflow question by user klor</a>.
             </p>
-            <p>With the next line of code our automated employee can access the customer order page of the frontend user
-                interface which is in a different container accessible at port 8000 on our Docker network.</p>
+            <p>With the next line of code, our automated employee can access the customer order page of the frontend user
+                interface (which is in a different container accessible at port 8000 on our Docker network).</p>
             <pre><code class="language-python">driver.get("http://172.17.0.1:8000/customer-order")</code></pre>
             <p>This is what our employee now sees:</p>
             <img src="assets/customer-order.png" alt="Customer Order form"/>
@@ -889,11 +889,9 @@ services:
 driver.find_element_by_id("customer-contact-number").send_keys("+44700000010")
 driver.find_element_by_id("customer-order").send_keys("Bottle Water")
 driver.find_element_by_id("submit-customer-order").click()</code></pre>
-            <p>If we look at the code for this form we can see that it is sending a <a
+            <p>If we look at the code for this form, we can see that it is sending a <a
                     href="https://en.wikipedia.org/wiki/POST_(HTTP)">POST</a> request to our backend Flask
-                webserver running on port 5000 of our Docker network (We take the letter we wrote in the frontend room
-                to
-                Flask's room).</p>
+                webserver (running on port 5000 of our Docker network).</p>
             <pre><code class="language-bash"><span class="yellow-code">&lt;form</span> method=<span class="green-code">"post"</span> action=<span
                     class="green-code">"http://172.17.0.1:5000/customer/order/new"</span><span
                     class="yellow-code">&gt;</span>...</code></pre>
@@ -901,7 +899,7 @@ driver.find_element_by_id("submit-customer-order").click()</code></pre>
             <pre><code class="language-python">@app.route('/customer/order/new', methods=['POST'])
 @cross_origin()
 def customer_order():
-    # get values from json request body
+    # Get values from json request body
     data = request.json
     customer_name = data['name']
     contact_number = data['number']
@@ -918,7 +916,7 @@ def customer_order():
     # Create cursor
     cursor = mydb.cursor()
 
-    # insert values from form into new record in CUSTOMER_ORDER table
+    # Insert values from form into new record in CUSTOMER_ORDER table
     cursor.execute("INSERT INTO customer_order (customer_name, contact_number, customer_order) \
      VALUES (%s,%s,%s)", (customer_name, contact_number, customer_order))
 
@@ -932,9 +930,8 @@ def customer_order():
     # Return success message
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
         </code></pre>
-            <p>We're extracting the data from the form that was posted and inserting it as an new record into our
-                customer
-                order table.</p>
+            <p>We're extracting the data from the form that was posted, and inserting it as a new record in our
+                <code>customer_order table</code></p>
             <p>Although this is only a single <a target="_blank" rel="noopener noreferrer" href="#use-cases">use
                 case</a>, that of an employee
                 taking a customer
@@ -947,19 +944,19 @@ def customer_order():
         <div class="automated-manager-demo" id="automated-manager-demo">
             <h3>📊 Automated Manager</h3>
             <hr>
-            <p>We'll also want an automated manager so that we could simulate a day in the life of a small business. The
+            <p>We'll also want an automated manager, so that we could simulate a day in the life of a small business. The
                 jobs that get done, the emails that get sent, the forms that get filled in, etc.</p>
         </div>
         <div class="adding-problems" id="adding-problems">
             <h3>⛈ Adding work problems in the application</h3>
             <hr>
-            <p>When we're designing our application we'll also want to introduce realistic problems that could occur and
+            <p>When we're designing our application, we'll also want to introduce realistic problems that could occur and
                 affect the business operations. This could be anything from employees leaving, to global events
-                effecting opening hours, etc.</p>
-            <p>In the simulation we can begin by including problems that are more likely to occur that would affect
+                effecting opening hours.</p>
+            <p>In the simulation, we can begin by including problems that are more likely to occur that would affect
                 normal operations. These could be implemented with appropriate randomness to make the simulation as
                 plausible as possible.</p>
-            <p>A simple example might be that someone calls in sick last minute. This will have a domino affect and it
+            <p>A simple example might be that someone calls in sick last minute. This will have a domino effect, and it
                 will be necessary to respond appropriately. We can map out these problem use cases in a table format as
                 we have done with the expected daily business use cases.</p>
             <h4>Example problem use cases</h4>
@@ -983,16 +980,16 @@ def customer_order():
                 <li>
                     <h4>AI Users</h4>
                     <p>We could introduce the concept of "virtual time" to make our employee perform tasks at an
-                        accelerated rate and record these in the webapp. In addition to this, we'd also like the
+                        accelerated rate, and record completed tasks in the webapp. In addition to this, we'd also like the
                         employee to
                         perform their tasks based on what work is assigned to them through their custom webapp
                         interface.</p>
                 </li>
                 <li>
                     <h4>Persistent Storage</h4>
-                    <p>At the minute our database storage isn't persistent so we could implement persistent data storage
+                    <p>At the minute, our database storage isn't persistent. We could implement persistent data storage
                         by creating a database dump when the user is finished with the application or periodically
-                        throughout the day and on startup the most recent database dump can be used to create and
+                        throughout the day. On startup, the most recent database dump can then be used to create and
                         populate the database.</p>
                 </li>
                 <li>
@@ -1004,29 +1001,27 @@ def customer_order():
                 <li>
                     <h4>Payroll</h4>
                     <p>Integration with a payroll service could allow small business owners to easily pay their
-                        employees based on their salary and hours worked which can be queried from the database.</p>
+                        employees based on their salary and hours worked (which could be queried from the database).</p>
                 </li>
                 <li>
                     <h4>Deployment</h4>
                     <p>The main final file to ship to the user is <code>user/start.sh</code> which essentially installs
-                        Docker to run the <code>docker-compose.yml</code> file and Firefox to access the frontend
+                        Docker to run the <code>docker-compose.yml</code> file, and installs Firefox to access the frontend
                         interfaces.</p>
                 </li>
                 <li>
                     <h4>Authentication</h4>
-                    <p>The apps authentication has been started but it will still be necessary to restrict routes to
-                        logged in users and also to use access-roles to restrict some routes to managers only.</p>
+                    <p>The app's authentication has been started but it will still be necessary to restrict routes to
+                        logged in users, and use access-roles to restrict some routes to managers only.</p>
                 </li>
                 <li>
                     <h4>Testing</h4>
-                    <p>PySelenium could be used to set up automated tests to make sure that our system is behaving as
+                    <p>PySelenium could be used to set up automated tests to ensure our system is behaving as
                         expected.</p>
                 </li>
                 <li>
                     <h4>Normal and problem use cases</h4>
-                    <p>It'd be good to work towards implementing the <a href="#understand-business">use cases in the
-                        table
-                        earlier in the project summary</a> and also possible <a href="#adding-problems">problem use
+                    <p>It'd be good to work towards implementing the <a href="#understand-business">normal use cases</a> as well ass possible <a href="#adding-problems">problem use
                         cases</a>.</p>
                 </li>
             </ul>
@@ -1037,19 +1032,19 @@ def customer_order():
                 <li><code class="language-shell">Error: for db ... 0.0.0.0:3306: bind: address already in use</code> -
                     to
                     solve
-                    this you can find which process is using the port by running <code>sudo lsof -i -P -n | grep
+                    this, you can find which process is using the port by running <code>sudo lsof -i -P -n | grep
                         3306</code>
                     and
-                    use the id to end the process with <code>sudo kill id</code> for example <br>
+                    use the id to end the process with <code>sudo kill &lt;id&gt;</id></code><br>
                     <img src="assets/lsof.png">
                 </li>
-                <li>When changes are made and they aren't updated when you run the docker-compose file it is sometimes
-                    necessary to rebuild the images which you can do with the following command: <code
+                <li>When you make changes and they aren't having an effect when you run the <code>docker-compose.yaml</code> file, it is sometimes
+                    necessary to rebuild the images, which you can do with the following command: <code
                             class="language-shell">sudo docker-compose
                         build --no-cache</code></li>
                 <li>It's important that the image version of <code>selenium-hub</code> and the <code>firefox</code>
                     selenium
-                    nodes are consistent since it's in pre-release beta
+                    nodes are consistent since it's in pre-release beta.
                     <pre><code>firefox-1:
     image: selenium/<span class="red">node-firefox:4.0.0-beta-3-prerelease-20210402</span>
     ...
@@ -1062,7 +1057,7 @@ def customer_order():
     image: selenium/<span class="red">hub:4.0.0-beta-3-prerelease-20210402</span>
     ...</code></pre>
                 </li>
-                <li>When debugging problems with the automated users it may be useful to use strategically placed <code
+                <li>When debugging problems with the automated users, it may be useful to use strategically placed <code
                         class="language-python">print()</code>
                     statements to confirm the code is behaving as you expect.
                 </li>
