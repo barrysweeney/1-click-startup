@@ -1159,7 +1159,9 @@ expected daily business use cases.
     The main final file to ship to the user is `user/start.sh` which essentially installs Docker to run
     the `docker-compose.yml` file and Firefox to access the frontend interfaces.
 
-### Troubleshooting
+### 🔧 Troubleshooting
+
+* * * * *
 
 `Error: for db ... 0.0.0.0:3306: bind: address already in use`
 
@@ -1197,7 +1199,9 @@ confirm the code is behaving as you expect.
 - The problem may relate to the different parameter markers between sqlite3 and MySQL as explained
   in [this StackOverflow answer by user unutbu](https://stackoverflow.com/a/20818201/9472445)
 
-### License
+### 📜 License
+
+* * * * *
 
 MIT License
 
