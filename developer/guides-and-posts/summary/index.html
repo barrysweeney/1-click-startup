@@ -987,6 +987,36 @@ def customer_order():
             <h3>📋 Next Steps</h3>
             <hr>
             <ul>
+
+                <li>
+                    <h4>Normal and problem use cases</h4>
+                    <p>It'd be good to work towards implementing the <a href="#understand-business">normal use cases</a>
+                        as well as possible <a href="#adding-problems">problem use
+                            cases</a>.</p>
+                </li>
+                <li>
+                    <h4>Email</h4>
+                    <p>Adding an email service will allow communication between managers and employees as well as
+                        managers and suppliers. The Gmail Python package may be a plausible option for this. An
+                        alternative would be an integration with NextCloud's email feature.</p>
+                </li>
+                <li>
+                    <h4>Authentication</h4>
+                    <p>The app's authentication has been started but it will still be necessary to restrict routes to
+                        logged in users, and use access-roles to restrict some routes to managers only.</p>
+                </li>
+                <li>
+                    <h4>Persistent Storage</h4>
+                    <p>At the minute, our database storage isn't persistent. We could implement persistent data storage
+                        by creating a database dump when the user is finished with the application or periodically
+                        throughout the day. On startup, the most recent database dump can then be used to create and
+                        populate the database.</p>
+                </li>
+                <li>
+                    <h4>Payroll</h4>
+                    <p>Integration with a payroll service could allow small business owners to easily pay their
+                        employees based on their salary and hours worked (which could be queried from the database).</p>
+                </li>
                 <li>
                     <h4>AI Users</h4>
                     <p>We could introduce the concept of "virtual time" to make our employee perform tasks at an
@@ -997,22 +1027,9 @@ def customer_order():
                         interface.</p>
                 </li>
                 <li>
-                    <h4>Persistent Storage</h4>
-                    <p>At the minute, our database storage isn't persistent. We could implement persistent data storage
-                        by creating a database dump when the user is finished with the application or periodically
-                        throughout the day. On startup, the most recent database dump can then be used to create and
-                        populate the database.</p>
-                </li>
-                <li>
-                    <h4>Email</h4>
-                    <p>Adding an email service will allow communication between managers and employees as well as
-                        managers and suppliers. The Gmail Python package may be a plausible option for this. An
-                        alternative would be an integration with NextCloud's email feature.</p>
-                </li>
-                <li>
-                    <h4>Payroll</h4>
-                    <p>Integration with a payroll service could allow small business owners to easily pay their
-                        employees based on their salary and hours worked (which could be queried from the database).</p>
+                    <h4>Testing</h4>
+                    <p>PySelenium could be used to set up automated tests to ensure our system is behaving as
+                        expected.</p>
                 </li>
                 <li>
                     <h4>Deployment</h4>
@@ -1020,22 +1037,6 @@ def customer_order():
                         Docker to run the <code>docker-compose.yml</code> file, and installs Firefox to access the
                         frontend
                         interfaces.</p>
-                </li>
-                <li>
-                    <h4>Authentication</h4>
-                    <p>The app's authentication has been started but it will still be necessary to restrict routes to
-                        logged in users, and use access-roles to restrict some routes to managers only.</p>
-                </li>
-                <li>
-                    <h4>Testing</h4>
-                    <p>PySelenium could be used to set up automated tests to ensure our system is behaving as
-                        expected.</p>
-                </li>
-                <li>
-                    <h4>Normal and problem use cases</h4>
-                    <p>It'd be good to work towards implementing the <a href="#understand-business">normal use cases</a>
-                        as well as possible <a href="#adding-problems">problem use
-                            cases</a>.</p>
                 </li>
             </ul>
         </div>
