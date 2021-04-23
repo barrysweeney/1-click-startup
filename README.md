@@ -216,8 +216,8 @@ If we think about completing these tasks in terms of webpages we see that for co
 provide forms on the user interface but for tasks which need performed physically such as turning off equipment we can
 just provide a form to acknowledge that the task has been completed.
 
-Open source software can enable us to automate some tasks required to run the business. Stock could be
-automatically re-ordered for example. Open source document editing services can also be employed.
+Open source software can enable us to automate some tasks required to run the business. Stock could be automatically
+re-ordered for example. Open source document editing services can also be employed.
 
 ### 🛫 Getting the current system up and running
 
@@ -317,8 +317,8 @@ If we hit enter the local clone should be created, and we should have all the fi
 
 ##### Set up Docker Engine
 
-We'll install Docker, so we can run our different services (frontend UI, database, etc) in containers to limit the number
-of services we need to install locally.
+We'll install Docker, so we can run our different services (frontend UI, database, etc) in containers to limit the
+number of services we need to install locally.
 
 From [Docker](https://www.docker.com/why-docker):
 
@@ -515,8 +515,8 @@ Essentially we either provide a path to a Dockerfile to build the service (as do
 the image as an existing service we want to use such as with the mysql image (this image is then pulled
 from [Docker Hub](https://hub.docker.com/))
 
-We don't need to worry too much about all the commands right now as we'll see them again later when we're adding a
-new service.
+We don't need to worry too much about all the commands right now as we'll see them again later when we're adding a new
+service.
 
 ### 💽 Custom Webserver
 
@@ -532,8 +532,8 @@ From [Python Basic - What is Flask Python?](https://pythonbasics.org/what-is-fla
 
 When a user submits a form or clicks a button on the font-end user interface in their browser, a request is made to
 certain endpoint on the
-"backend" webserver. For example, when a user attempts to log in, their email and password is sent to the Flask webserver
-which then performs the authentication.
+"backend" webserver. For example, when a user attempts to log in, their email and password is sent to the Flask
+webserver which then performs the authentication.
 
 Let's start running through the code.
 
@@ -614,8 +614,8 @@ while not ready:
         continue
 ```
 
-Next we'll look at two routes in a little more detail. We'll first look at user registration as an introduction to
-our authentication routes.
+Next we'll look at two routes in a little more detail. We'll first look at user registration as an introduction to our
+authentication routes.
 
 ```python
 # Authentication
@@ -1117,17 +1117,17 @@ expected daily business use cases.
 
 * * * * *
 
+-   #### Normal and problem use cases
+
+    It'd be good to work towards implementing
+    the [use cases in the table earlier in the project summary](#understand-business) and also
+    possible [problem use cases](#adding-problems).
+
 -   #### AI Users
 
     We could introduce the concept of "virtual time" to make our employee perform tasks at an accelerated rate and
     record these in the webapp. In addition to this, we'd also like the employee to perform their tasks based on what
     work is assigned to them through their custom webapp interface.
-
--   #### Persistent Storage
-
-    At the minute, our database storage isn't persistent. We could implement persistent data storage by creating a
-    database dump when the user is finished with the application or periodically throughout the day. On startup the
-    most recent database dump can then be used to create and populate the database.
 
 -   #### Email
 
@@ -1135,30 +1135,30 @@ expected daily business use cases.
     The Gmail Python package may be a plausible option for this. An alternative would be an integration with NextCloud's
     email feature.
 
--   #### Payroll
-
-    Integration with a payroll service could allow small business owners to easily pay their employees based on their
-    salary and hours worked which can be queried from the database.
-
--   #### Deployment
-
-    The main final file to ship to the user is `user/start.sh` which essentially installs Docker to run
-    the `docker-compose.yml` file and Firefox to access the frontend interfaces.
-
 -   #### Authentication
 
     The app's authentication has been started, but it will still be necessary to restrict routes to logged-in users and
     also to use access-roles to restrict some routes to managers only.
 
+-   #### Payroll
+
+    Integration with a payroll service could allow small business owners to easily pay their employees based on their
+    salary and hours worked which can be queried from the database.
+
+-   #### Persistent Storage
+
+    At the minute, our database storage isn't persistent. We could implement persistent data storage by creating a
+    database dump when the user is finished with the application or periodically throughout the day. On startup the most
+    recent database dump can then be used to create and populate the database.
+
 -   #### Testing
 
     PySelenium could be used to set up automated tests to make sure that our system is behaving as expected.
 
--   #### Normal and problem use cases
+-   #### Deployment
 
-    It'd be good to work towards implementing
-    the [use cases in the table earlier in the project summary](#understand-business) and also
-    possible [problem use cases](#adding-problems).
+    The main final file to ship to the user is `user/start.sh` which essentially installs Docker to run
+    the `docker-compose.yml` file and Firefox to access the frontend interfaces.
 
 ### Troubleshooting
 
@@ -1169,8 +1169,8 @@ expected daily business use cases.
   `sudo kill id` for example \
   ![](developer/guides-and-posts/summary/assets/lsof.png)
 
-When you make changes, and they aren't available when you run the `docker-compose.yaml` file, it is sometimes necessary to rebuild
-the images which you can do with the following command:
+When you make changes, and they aren't available when you run the `docker-compose.yaml` file, it is sometimes necessary
+to rebuild the images which you can do with the following command:
 `sudo docker-compose build --no-cache`
 
 It's important that the image version of `selenium-hub` and the
