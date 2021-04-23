@@ -1,88 +1,74 @@
 version: "3.7"
 
 services:
-  #  frontend:
-  #    build: ./1cs-frontend
-  #    depends_on:
-  #      - backend
-  #    volumes:
-  #      - ./1cs-frontend/src:/app/src
-  #    ports:
-  #      - "8000:8000"
-  #
-  #  backend:
-  #    build:
-  #      context: ./1cs-backend
-  #      dockerfile: Dockerfile.dev
-  #    depends_on:
-  #      - mysqldb
-  #    volumes:
-  #      - ./1cs-backend/src:/app/src
-  #    ports:
-  #      - "5000:5000"
+    frontend:
+      build: ../developer/1cs-frontend
+      depends_on:
+        - backend
+      volumes:
+        - ../developer/1cs-frontend/src:/app/src
+      ports:
+        - "8000:8000"
 
-  db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    volumes:
-      - db:/var/lib/mysql
-    cap_add:
-      - SYS_NICE  # CAP_SYS_NICE
-    environment:
-      - MYSQL_ROOT_PASSWORD=p@ssw0rd1
-      - MYSQL_PASSWORD=p@ssw0rd1
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-    ports:
-      - "3306:3306"
+    backend:
+      build:
+        context: ../developer/1cs-backend
+        dockerfile: Dockerfile.dev
+      depends_on:
+        - db
+      volumes:
+        - ../developer/1cs-backend/src:/app/src
+      ports:
+        - "5000:5000"
 
-  app:
-    image: nextcloud
-    restart: always
-    ports:
-      - 80:80
-    links:
-      - db
-    volumes:
-      - nextcloud:/var/www/html
-    environment:
-      - MYSQL_PASSWORD=p@ssw0rd1
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
-    depends_on:
-      - db
+    db:
+      image: mysql
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      volumes:
+        - db:/var/lib/mysql
+      cap_add:
+        - SYS_NICE  # CAP_SYS_NICE
+      environment:
+        - MYSQL_ROOT_PASSWORD=p@ssw0rd1
+        - MYSQL_PASSWORD=p@ssw0rd1
+        - MYSQL_DATABASE=nextcloud
+        - MYSQL_USER=nextcloud
+      ports:
+        - "3306:3306"
 
-      #  pyselenium:
-      #    build: ./pyselenium-user
-      #    depends_on:
-      #      - firefox
-      #      - frontend
-      #    volumes:
-      #      - ./pyselenium/src:/app/src
-      #
-      #  firefox:
-      #    image: selenium/node-firefox:4.0.0-beta-1-20210215
-      #    volumes:
-      #      - /dev/shm:/dev/shm
-      #    depends_on:
-      #      - selenium-hub
-      #    environment:
-      #      - SE_EVENT_BUS_HOST=selenium-hub
-      #      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      #      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      #    ports:
-      #      - "6902:5900"
+    nextcloud:
+      image: nextcloud
+      restart: always
+      ports:
+        - "8080:80"
 
-      #  selenium-hub:
-      #    image: selenium/hub:4.0.0-beta-1-20210215
-      #    container_name: selenium-hub
-      #    ports:
-      #      - "4442:4442"
-      #      - "4443:4443"
-      #      - "4444:4444"
-      #
+    pyselenium:
+      build: ../developer/pyselenium-admin
+      depends_on:
+        - firefox
+        - frontend
+
+    firefox:
+      image: selenium/node-firefox:4.0.0-beta-1-20210215
+      volumes:
+        - /dev/shm:/dev/shm
+      depends_on:
+        - selenium-hub
+      environment:
+        - SE_EVENT_BUS_HOST=selenium-hub
+        - SE_EVENT_BUS_PUBLISH_PORT=4442
+        - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      ports:
+        - "6902:5900"
+
+    selenium-hub:
+      image: selenium/hub:4.0.0-beta-1-20210215
+      container_name: selenium-hub
+      ports:
+        - "4442:4442"
+        - "4443:4443"
+        - "4444:4444"
 
 volumes:
   db:
