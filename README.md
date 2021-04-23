@@ -39,21 +39,21 @@ We also provide custom web user interfaces to help make running the business via
 
 We also want to provide a testing framework with simulated users and managers using a tool such as
 [PySelenium](https://selenium-python.readthedocs.io/). Tests are yet to be set up; more info is included in
-our [TODO section](#next-steps) at the end of the project summary.
+our [TODO section](#-next-steps) at the end of the project summary.
 
 What's In This Document
 -----------------------
 
 * * * * *
 
-- [Understanding a business](#understand-business)
-- [Getting the current system up and running](#up-and-run)
-- [Adding a new service](#new-service)
-- [Custom Webserver](#custom-webserver)
-- [Automated Employee Demo](#automated-employee-demo)
-- [AI Manager Demo](#automated-manager-demo)
-- [Adding Problems](#adding-problems)
-- [Work Still to do](#next-steps)
+- [Understanding a business](#-understanding-a-business)
+- [Getting the current system up and running](#-getting-the-current-system-up-and-running)
+- [Adding a new service](#-adding-a-new-service)
+- [Custom Webserver](#-custom-webserver)
+- [Automated Employee Demo](#-automated-employee-demo)
+- [AI Manager](#-automated-manager)
+- [Adding Problems](#-adding-work-problems-in-the-application)
+- [Work Still to do](#-next-steps)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
 
@@ -293,8 +293,7 @@ We click to fork the repository, essentially creating a new copy that doesn't af
 Now we can clone the forked repository, so you have the files available on your machine as well as on your GitHub
 account.
 
-You can modify the following URL with your GitHub username to find your forked repository:
-[](#)https://github.com/YOUR-GITHUB-USERNAME/1-click-startup
+You can modify the following URL with your GitHub username to find your forked repository: https://github.com/YOUR-GITHUB-USERNAME/1-click-startup
 
 We can click the code button above the list of files
 
@@ -1075,7 +1074,7 @@ flow of data through some of our integrated services.
 
 Also note that this isn't a complete picture of our automated employee; there's a few ideas of how to expand on this
 autonomous employee in the
-[next steps](#next-steps) section.
+[next steps](#-next-steps) section.
 
 ### 📊 Automated Manager
 
@@ -1120,8 +1119,8 @@ expected daily business use cases.
 -   #### Normal and problem use cases
 
     It'd be good to work towards implementing
-    the [use cases in the table earlier in the project summary](#understand-business) and also
-    possible [problem use cases](#adding-problems).
+    the [use cases in the table earlier in the project summary](#-understanding-a-business) and also
+    possible [problem use cases](#-adding-work-problems-in-the-application).
 
 -   #### AI Users
 
