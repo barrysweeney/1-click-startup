@@ -15,7 +15,7 @@ The owner of a small business such as a fast-food restaurant.
 * * * * *
 
 With one click, a full IT system is set up for the business which will allow the business owner and employees to
-interact with familiar software to make sure the work that needs done for their job gets done.
+interact with familiar software to make sure the work that needs to be completed for their job gets done.
 
 ### How does it do this?
 
